@@ -20,6 +20,7 @@ import TextCaseConverter from "./pages/TextCaseConverter";
 import JSONFormatter from "./pages/JSONFormatter";
 import ScriptGenerator from "./pages/ScriptGenerator";
 import ImageResizer from "./pages/ImageResizer";
+import Base64Tool from "./pages/Base64Tool";
 
 
 function App(){
@@ -33,6 +34,8 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/base64-tool" element={<Base64Tool/>}/>
 
 <Route path="/tools/image-resizer" element={<ImageResizer/>}/>
 

@@ -83,6 +83,15 @@ description:"Resize images online easily",
 path:"/tools/image-resizer"
 },
 
+{
+id:"base64-tool",
+icon:"🔐",
+title:"Base64 Encoder Decoder",
+category:"Developer",
+description:"Encode and decode Base64 text easily",
+path:"/tools/base64-tool"
+},
+
 ];
 
 
