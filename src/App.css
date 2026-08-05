@@ -110,12 +110,6 @@ body{
 
 
 
-.tools-section{
-
- padding:40px;
-
-}
-
 
 
 .tools-section h2{
@@ -197,15 +191,9 @@ body{
 }
 
 
-.tools-section{
-
- padding:20px;
-
 }
 
-}
-
-/* Navbar */
+/*Navbar */
 
 .nav{
 
@@ -456,7 +444,7 @@ color:white;
 .hero,
 .tools-section{
 
-padding:50px;
+padding:50px 40px;
 
 }
 
@@ -1292,5 +1280,16 @@ background:#38bdf8;
 
 background:#38bdf8;
 color:#001;
+
+}
+
+
+@media(max-width:600px){
+
+.tools-section{
+
+padding:20px;
+
+}
 
 }
