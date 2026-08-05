@@ -5,14 +5,45 @@ import SEO from "../components/SEO";
 function UnitConverter(){
 
 const [value,setValue] = useState(1);
-const [result,setResult] = useState(0);
+const [from,setFrom] = useState("meter");
+const [to,setTo] = useState("centimeter");
+const [result,setResult] = useState("");
+
 
 
 function convert(){
 
-setResult(Number(value) * 100);
+let meters;
+
+
+if(from==="meter")
+meters = Number(value);
+
+if(from==="centimeter")
+meters = Number(value) / 100;
+
+if(from==="kilometer")
+meters = Number(value) * 1000;
+
+
+
+let output;
+
+
+if(to==="meter")
+output = meters;
+
+if(to==="centimeter")
+output = meters * 100;
+
+if(to==="kilometer")
+output = meters / 1000;
+
+
+setResult(output);
 
 }
+
 
 
 return(
@@ -23,7 +54,7 @@ return(
 
 title="Free Unit Converter - AUQAB Tools"
 
-description="Convert units quickly and easily with AUQAB Unit Converter."
+description="Convert length units quickly between meters, centimeters and kilometers."
 
 />
 
@@ -40,7 +71,7 @@ description="Convert units quickly and easily with AUQAB Unit Converter."
 
 
 <p className="tool-description">
-Convert measurements quickly between common units.
+Convert length units quickly and easily.
 </p>
 
 
@@ -57,9 +88,63 @@ onChange={(e)=>setValue(e.target.value)}
 
 
 
-<p>
-Meters to Centimeters
-</p>
+<div className="options">
+
+
+<select
+
+value={from}
+
+onChange={(e)=>setFrom(e.target.value)}
+
+>
+
+<option value="meter">
+Meter
+</option>
+
+<option value="centimeter">
+Centimeter
+</option>
+
+<option value="kilometer">
+Kilometer
+</option>
+
+</select>
+
+
+
+<span>
+to
+</span>
+
+
+
+<select
+
+value={to}
+
+onChange={(e)=>setTo(e.target.value)}
+
+>
+
+<option value="meter">
+Meter
+</option>
+
+<option value="centimeter">
+Centimeter
+</option>
+
+<option value="kilometer">
+Kilometer
+</option>
+
+</select>
+
+
+</div>
 
 
 
@@ -75,14 +160,15 @@ Convert
 
 
 
+{
+
+result !== "" &&
+
 <h2>
-Result:
+Result: {result}
 </h2>
 
-
-<h3>
-{result} cm
-</h3>
+}
 
 
 
@@ -90,24 +176,28 @@ Result:
 
 
 <h2>
-How to use Unit Converter?
-</h2>
-
-
-<p>
-Enter a value and click convert to get the result instantly.
-</p>
-
-
-<h2>
-Why use AUQAB Unit Converter?
+Supported conversions
 </h2>
 
 
 <ul>
-<li>Fast and simple</li>
-<li>Works on mobile and desktop</li>
-<li>No registration required</li>
+
+<li>
+Meters to Centimeters
+</li>
+
+<li>
+Centimeters to Meters
+</li>
+
+<li>
+Kilometers to Meters
+</li>
+
+<li>
+Meters to Kilometers
+</li>
+
 </ul>
 
 
@@ -118,11 +208,11 @@ Frequently Asked Questions
 
 
 <h3>
-Is this converter free?
+Is AUQAB Unit Converter free?
 </h3>
 
 <p>
-Yes, AUQAB Unit Converter is completely free.
+Yes, it is completely free and works directly in your browser.
 </p>
 
 
