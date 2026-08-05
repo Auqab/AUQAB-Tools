@@ -8,18 +8,33 @@ const [text,setText] = useState("");
 
 
 
-const words = text.trim()
-? text.trim().split(/\s+/).length
-: 0;
+const countWords = () => {
+
+if(text.trim() === "")
+return 0;
+
+return text.trim().split(/\s+/).length;
+
+};
 
 
-const characters = text.length;
+const countCharacters = () => {
+
+return text.length;
+
+};
 
 
-const sentences = text.split(/[.!?]+/)
-.filter(sentence => sentence.trim() !== "")
+const countSentences = () => {
+
+if(text.trim() === "")
+return 0;
+
+return text.split(/[.!?]+/)
+.filter(s => s.trim().length > 0)
 .length;
 
+};
 
 
 return(
@@ -72,17 +87,17 @@ onChange={(e)=>setText(e.target.value)}
 
 
 <h3>
-Words: {words}
+Words: {countWords()}
 </h3>
 
 
 <h3>
-Characters: {characters}
+Characters: {countCharacters()}
 </h3>
 
 
 <h3>
-Sentences: {sentences}
+Sentences: {countSentences()}
 </h3>
 
 
