@@ -19,6 +19,8 @@ import WordCounter from "./pages/WordCounter";
 import TextCaseConverter from "./pages/TextCaseConverter";
 import JSONFormatter from "./pages/JSONFormatter";
 import ScriptGenerator from "./pages/ScriptGenerator";
+import ImageResizer from "./pages/ImageResizer";
+
 
 function App(){
 
@@ -31,6 +33,8 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/image-resizer" element={<ImageResizer/>}/>
 
 <Route path="/tools/script-generator" element={<ScriptGenerator/>}/>
 

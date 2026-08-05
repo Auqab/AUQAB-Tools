@@ -74,6 +74,15 @@ description:"Generate PC scripts for Windows and Linux",
 path:"/tools/script-generator"
 },
 
+{
+id:"image-resizer",
+icon:"📷",
+title:"Image Resizer",
+category:"Image",
+description:"Resize images online easily",
+path:"/tools/image-resizer"
+},
+
 ];
 
 
