@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ToolCard from "../components/ToolCard";
 import toolsData from "../tools/toolsData";
+import popularTools from "../tools/popularTools";
 
 
 function Tools(){
@@ -44,10 +45,45 @@ return(
 <section className="tools-section">
 <h1 style={{color:"red"}}>TEST TOOLS PAGE</h1>
 
+<div className="tools-header">
+<div className="popular-section">
+
+<h2>
+Popular Tools
+</h2>
+
+<div className="cards">
+
+{
+toolsData
+.filter(tool=>popularTools.includes(tool.id))
+.map(tool=>(
+
+<ToolCard
+
+key={tool.id}
+
+{...tool}
+
+/>
+
+))
+
+}
+
+</div>
+
+</div>
+
 <h1>
 All Tools
 </h1>
 
+<p>
+{toolsData.length} Free Online Tools Available
+</p>
+
+</div>
 
 
 <input
@@ -104,6 +140,12 @@ onClick={()=>setCategory(cat)}
 <h2 style={{color:"white"}}>
 عدد الأدوات: {filteredTools.length}
 </h2>
+
+<p className="results-count">
+
+Showing {filteredTools.length} tools
+
+</p>
 
 <div className="cards">
 

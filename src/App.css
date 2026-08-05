@@ -1246,7 +1246,6 @@ font-size:18px;
 /* Categories */
 
 .categories{
-
 display:flex;
 justify-content:center;
 gap:12px;
@@ -1289,6 +1288,59 @@ color:#001;
 .tools-section{
 
 padding:20px;
+
+}
+
+
+
+/* Tools Header */
+
+.tools-header{
+
+text-align:center;
+margin-bottom:30px;
+
+}
+
+
+.tools-header h1{
+
+font-size:42px;
+margin-bottom:10px;
+
+}
+
+
+.tools-header p{
+
+color:#cbd5e1;
+font-size:18px;
+
+}
+
+
+.results-count{
+
+text-align:center;
+color:#38bdf8;
+margin-bottom:25px;
+font-size:18px;
+
+}
+
+
+.popular-section{
+
+margin-bottom:60px;
+
+}
+
+
+.popular-section h2{
+
+text-align:center;
+font-size:32px;
+margin-bottom:25px;
 
 }
 
