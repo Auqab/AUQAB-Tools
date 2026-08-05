@@ -17,6 +17,7 @@ import Cookies from "./pages/Cookies";
 import UnitConverter from "./pages/UnitConverter";
 import WordCounter from "./pages/WordCounter";
 import TextCaseConverter from "./pages/TextCaseConverter";
+import JSONFormatter from "./pages/JSONFormatter";
 
 
 function App(){
@@ -30,6 +31,8 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/json-formatter" element={<JSONFormatter/>}/>
 
 <Route path="/tools/text-case-converter" element={<TextCaseConverter/>}/>
 

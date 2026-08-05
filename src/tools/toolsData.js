@@ -56,6 +56,15 @@ description:"Convert text between different cases",
 path:"/tools/text-case-converter"
 },
 
+{
+id:"json-formatter",
+icon:"{}",
+title:"JSON Formatter",
+category:"Developer",
+description:"Format and minify JSON data easily",
+path:"/tools/json-formatter"
+},
+
 ];
 
 
