@@ -40,7 +40,7 @@ if(to==="kilometer")
 output = meters / 1000;
 
 
-setResult(output);
+setResult(Number(output).toFixed(4));
 
 }
 
@@ -152,7 +152,13 @@ Kilometer
 
 className="generate"
 
-onClick={convert}
+onClick={()=>{
+
+console.log("Convert clicked");
+
+convert();
+
+}}
 
 >
 Convert
