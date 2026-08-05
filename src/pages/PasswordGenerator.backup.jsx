@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import SEO from "../components/SEO";
 
-
 function PasswordGenerator(){
 
 const [showPassword,setShowPassword] = useState(false);
@@ -11,7 +10,6 @@ const [length,setLength] = useState(12);
 const [password,setPassword] = useState("");
 
 const [copied,setCopied] = useState(false);
-
 
 const [options,setOptions] = useState({
 
@@ -28,18 +26,14 @@ function generatePassword(){
 
 let chars="";
 
-
 if(options.upper)
 chars+="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 
 if(options.lower)
 chars+="abcdefghijklmnopqrstuvwxyz";
 
-
 if(options.numbers)
 chars+="0123456789";
-
 
 if(options.symbols)
 chars+="!@#$%^&*()_+{}[]";
@@ -61,15 +55,11 @@ setCopied(false);
 
 }
 
-
-
 useEffect(()=>{
 
-generatePassword();
+    generatePassword();
 
 },[]);
-
-
 
 function copyPassword(){
 
@@ -88,10 +78,8 @@ function strength(){
 if(password.length < 8)
 return "Weak";
 
-
 if(password.length < 14)
 return "Medium";
-
 
 return "Strong";
 
@@ -100,19 +88,15 @@ return "Strong";
 
 
 return(
-
 <>
-
 
 <SEO
 
-title="Free Password Generator - Create Strong Secure Passwords"
+title="Free Password Generator - AUQAB Tools"
 
-description="Generate strong random passwords online with AUQAB Password Generator. Create secure passwords instantly."
+description="Generate strong secure passwords online with AUQAB Password Generator."
 
 />
-
-
 
 <section className="tool-page">
 
@@ -125,9 +109,8 @@ description="Generate strong random passwords online with AUQAB Password Generat
 </h1>
 
 
-<p className="tool-description">
-Create strong and secure random passwords instantly.
-Customize length and characters to generate safer passwords.
+<p>
+Create strong and secure passwords instantly
 </p>
 
 
@@ -147,13 +130,11 @@ placeholder="Your secure password"
 
 />
 
-
 <button
 onClick={()=>setShowPassword(!showPassword)}
 >
-{showPassword ? "Hide" : "Show"}
+{showPassword ? "🙈" : "👁"}
 </button>
-
 
 
 <button onClick={copyPassword}>
@@ -217,7 +198,7 @@ max="32"
 
 value={length}
 
-onChange={(e)=>setLength(Number(e.target.value))}
+onChange={(e)=>setLength(e.target.value)}
 
 />
 
@@ -316,92 +297,10 @@ Generate Password
 </button>
 
 
-
-<div className="info-section">
-
-
-<h2>
-How to create a secure password?
-</h2>
-
-
-<p>
-1. Choose a suitable password length.
-</p>
-
-<p>
-2. Enable uppercase, lowercase, numbers and symbols.
-</p>
-
-<p>
-3. Copy and save your generated password securely.
-</p>
-
-
-
-<h2>
-Why use AUQAB Password Generator?
-</h2>
-
-
-<ul>
-
-<li>
-Free and easy to use
-</li>
-
-<li>
-No registration required
-</li>
-
-<li>
-Generate passwords instantly in your browser
-</li>
-
-<li>
-Your passwords are not stored
-</li>
-
-</ul>
-
-
-
-<h2>
-Frequently Asked Questions
-</h2>
-
-
-<h3>
-Are generated passwords saved?
-</h3>
-
-
-<p>
-No. Passwords are created locally in your browser and are not stored.
-</p>
-
-
-
-<h3>
-What is a strong password?
-</h3>
-
-
-<p>
-A strong password usually contains a mix of letters, numbers and symbols with enough length.
-</p>
-
-
-
-</div>
-
-
-
 </div>
 
 
 </section>
-
 
 </>
 
