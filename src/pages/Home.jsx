@@ -1,5 +1,4 @@
-import ToolCard from "../components/ToolCard";
-import toolsData from "../tools/toolsData";
+import { Link } from "react-router-dom";
 
 
 function Home(){
@@ -12,32 +11,18 @@ return(
 AUQAB Tools
 </h1>
 
+
 <p>
-أدوات رقمية مجانية وسريعة
+أدوات رقمية مجانية وسريعة تساعدك في إنجاز مهامك اليومية بسهولة.
 </p>
 
 
-<div className="cards">
-
-{
-toolsData.map((tool,index)=>(
-
-<ToolCard
-
-key={index}
-
-icon={tool.icon}
-
-title={tool.title}
-
-description={tool.description}
-
-/>
-
-))
-}
-
-</div>
+<Link
+to="/tools"
+className="generate"
+>
+Explore Tools
+</Link>
 
 
 </section>
