@@ -10,6 +10,9 @@ import Tools from "./pages/Tools";
 import About from "./pages/About";
 import QRGenerator from "./pages/QRGenerator";
 import PasswordGenerator from "./pages/PasswordGenerator";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
 
 
 function App(){
@@ -23,9 +26,16 @@ return(
 
 
 <Routes>
+<Route path="/privacy" element={<Privacy/>} />
+
+<Route path="/terms" element={<Terms/>} />
+
+<Route path="/contact" element={<Contact/>} />
 
 <Route path="/url-shortener" element={<URLShortener />} />
+
 <Route path="/text-counter" element={<TextCounter />} />
+
 <Route 
 path="/tools/password-generator"
 element={<PasswordGenerator/>}
