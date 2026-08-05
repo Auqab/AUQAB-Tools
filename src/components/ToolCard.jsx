@@ -6,10 +6,7 @@ function ToolCard({icon,title,description,path,category}){
 
 return(
 
-<Link 
-to={path}
-className="tool-card"
->
+<article className="tool-card">
 
 
 <div className="tool-icon">
@@ -32,12 +29,21 @@ className="tool-card"
 </p>
 
 
-<button>
-Open Tool
-</button>
 
+<Link
+
+to={path}
+
+className="open-tool"
+
+>
+
+Open Tool
 
 </Link>
+
+
+</article>
 
 );
 
