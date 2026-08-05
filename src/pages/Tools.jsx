@@ -185,8 +185,98 @@ No tools found.
 
 
 
-</section>
+<div className="info-section">
 
+
+<h2>
+About AUQAB Tools
+</h2>
+
+
+<p>
+AUQAB Tools provides free online utilities designed to help you
+complete everyday digital tasks quickly and easily.
+</p>
+
+
+<p>
+Our tools include image utilities, text tools, security tools,
+developer tools and more. All tools are simple to use and work
+directly in your browser.
+</p>
+
+
+
+<h2>
+Why use AUQAB Tools?
+</h2>
+
+
+<ul>
+
+<li>
+Free online tools with no registration required
+</li>
+
+<li>
+Fast and simple user experience
+</li>
+
+<li>
+Works on desktop and mobile devices
+</li>
+
+<li>
+Privacy-focused browser based processing
+</li>
+
+</ul>
+
+
+
+<h2>
+Frequently Asked Questions
+</h2>
+
+
+
+<h3>
+Are AUQAB Tools free?
+</h3>
+
+
+<p>
+Yes. All available tools can be used for free.
+</p>
+
+
+
+<h3>
+Do I need to create an account?
+</h3>
+
+
+<p>
+No. You can use the tools without registration.
+</p>
+
+
+
+<h3>
+Are my files uploaded?
+</h3>
+
+
+<p>
+Many tools process your data directly in your browser,
+helping keep your information private.
+</p>
+
+
+
+</div>
+
+</section>
 
 );
 

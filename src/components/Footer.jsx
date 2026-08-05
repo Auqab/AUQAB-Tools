@@ -15,7 +15,8 @@ AUQAB Tools
 </h3>
 
 <p>
-Free online digital tools designed to be fast, simple and secure.
+Free online tools for image editing, text processing,
+security, and developer utilities. Fast, simple and secure.
 </p>
 
 </div>
@@ -82,7 +83,7 @@ Cookie Policy
 <div className="footer-bottom">
 
 <small>
-© 2026 AUQAB Tools. All rights reserved.
+© {new Date().getFullYear()} AUQAB Tools. All rights reserved.
 </small>
 
 </div>
