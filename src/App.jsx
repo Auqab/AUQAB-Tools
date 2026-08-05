@@ -13,7 +13,7 @@ import PasswordGenerator from "./pages/PasswordGenerator";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
-
+import Cookies from "./pages/Cookies";
 
 function App(){
 
@@ -26,6 +26,8 @@ return(
 
 
 <Routes>
+<Route path="/cookies" element={<Cookies/>}/>
+
 <Route path="/privacy" element={<Privacy/>} />
 
 <Route path="/terms" element={<Terms/>} />

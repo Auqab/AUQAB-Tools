@@ -1176,3 +1176,40 @@ transform:translateY(0);
 }
 
 }
+
+.footer{
+padding:40px 30px;
+background:#101522;
+color:white;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+
+.footer h3,
+.footer h4{
+margin-bottom:15px;
+}
+
+
+.footer a{
+display:block;
+color:#b9c7ff;
+text-decoration:none;
+margin:8px 0;
+}
+
+
+.footer a:hover{
+color:white;
+}
+
+
+.footer-bottom{
+grid-column:1/-1;
+text-align:center;
+padding-top:20px;
+border-top:1px solid #333;
+}
