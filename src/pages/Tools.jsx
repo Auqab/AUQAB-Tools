@@ -1,11 +1,45 @@
+import { useState } from "react";
 import ToolCard from "../components/ToolCard";
 import toolsData from "../tools/toolsData";
 
 
 function Tools(){
 
+const [search,setSearch] = useState("");
+
+const [category,setCategory] = useState("All");
+
+
+
+const categories = [
+"All",
+...new Set(toolsData.map(tool=>tool.category))
+];
+
+
+
+const filteredTools = toolsData.filter((tool)=>{
+
+
+const matchSearch =
+tool.title.toLowerCase()
+.includes(search.toLowerCase());
+
+
+const matchCategory =
+category==="All" ||
+tool.category===category;
+
+
+return matchSearch && matchCategory;
+
+
+});
+
+
 
 return(
+
 
 <section className="tools-section">
 
@@ -15,12 +49,66 @@ All Tools
 </h1>
 
 
+
+<input
+
+className="tool-search"
+
+type="text"
+
+placeholder="Search tools..."
+
+value={search}
+
+onChange={(e)=>setSearch(e.target.value)}
+
+/>
+
+
+
+<div className="categories">
+
+
+{
+
+categories.map((cat)=>(
+
+
+<button
+
+key={cat}
+
+className={
+category===cat
+?"active-category"
+:""
+}
+
+onClick={()=>setCategory(cat)}
+
+>
+
+{cat}
+
+</button>
+
+
+))
+
+}
+
+
+</div>
+
+
+
+
 <div className="cards">
 
 
 {
 
-toolsData.map((tool)=>(
+filteredTools.map((tool)=>(
 
 
 <ToolCard
@@ -40,10 +128,23 @@ key={tool.id}
 </div>
 
 
+
+{
+
+filteredTools.length===0 &&
+
+<p>
+No tools found.
+</p>
+
+}
+
+
+
 </section>
 
-);
 
+);
 
 }
 
