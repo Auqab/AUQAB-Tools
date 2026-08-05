@@ -14,6 +14,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
 import Cookies from "./pages/Cookies";
+import UnitConverter from "./pages/UnitConverter";
 
 function App(){
 
@@ -26,6 +27,9 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/unit-converter" element={<UnitConverter/>}/>
+
 <Route path="/cookies" element={<Cookies/>}/>
 
 <Route path="/privacy" element={<Privacy/>} />
