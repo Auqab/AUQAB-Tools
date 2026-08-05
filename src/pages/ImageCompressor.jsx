@@ -195,6 +195,11 @@ description="Compress images online while keeping quality."
 🖼️ Image Compressor
 </h1>
 
+<p className="tool-description">
+Compress JPG and PNG images online for free.
+Reduce image size while keeping good quality.
+Your images are processed securely in your browser.
+</p>
 
 <p>
 Reduce image size quickly and securely
@@ -281,6 +286,61 @@ Download Image
 
 </section>
 
+<div className="info-section">
+
+<h2>
+How to compress an image?
+</h2>
+
+<p>
+1. Select an image from your device.
+</p>
+
+<p>
+2. Click the Compress Image button.
+</p>
+
+<p>
+3. Preview the compressed result and download it.
+</p>
+
+
+<h2>
+Why use AUQAB Image Compressor?
+</h2>
+
+<ul>
+<li>No registration required</li>
+<li>Fast browser-based processing</li>
+<li>Works on mobile and desktop</li>
+<li>Your images stay private</li>
+</ul>
+
+
+<h2>
+Frequently Asked Questions
+</h2>
+
+
+<h3>
+Are my images uploaded to a server?
+</h3>
+
+<p>
+No. Image compression happens directly in your browser.
+</p>
+
+
+<h3>
+Which formats are supported?
+</h3>
+
+<p>
+Currently JPG and PNG images are supported.
+</p>
+
+
+</div>
 
 </>
 
