@@ -18,7 +18,7 @@ import UnitConverter from "./pages/UnitConverter";
 import WordCounter from "./pages/WordCounter";
 import TextCaseConverter from "./pages/TextCaseConverter";
 import JSONFormatter from "./pages/JSONFormatter";
-
+import ScriptGenerator from "./pages/ScriptGenerator";
 
 function App(){
 
@@ -31,6 +31,8 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/script-generator" element={<ScriptGenerator/>}/>
 
 <Route path="/tools/json-formatter" element={<JSONFormatter/>}/>
 

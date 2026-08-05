@@ -65,6 +65,15 @@ description:"Format and minify JSON data easily",
 path:"/tools/json-formatter"
 },
 
+{
+id:"script-generator",
+icon:"💻",
+title:"Script Generator",
+category:"Developer",
+description:"Generate PC scripts for Windows and Linux",
+path:"/tools/script-generator"
+},
+
 ];
 
 
