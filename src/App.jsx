@@ -15,6 +15,7 @@ import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
 import Cookies from "./pages/Cookies";
 import UnitConverter from "./pages/UnitConverter";
+import WordCounter from "./pages/WordCounter";
 
 function App(){
 
@@ -27,6 +28,8 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/word-counter" element={<WordCounter/>}/>
 
 <Route path="/tools/unit-converter" element={<UnitConverter/>}/>
 

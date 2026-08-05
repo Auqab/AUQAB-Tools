@@ -38,6 +38,14 @@ description:"Convert units quickly",
 path:"/tools/unit-converter"
 },
 
+{
+id:"word-counter",
+icon:"📝",
+title:"Word Counter",
+category:"Text",
+description:"Count words and characters instantly",
+path:"/tools/word-counter"
+},
 
 ];
 
