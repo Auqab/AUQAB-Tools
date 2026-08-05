@@ -47,6 +47,15 @@ description:"Count words and characters instantly",
 path:"/tools/word-counter"
 },
 
+{
+id:"text-case-converter",
+icon:"🔤",
+title:"Text Case Converter",
+category:"Text",
+description:"Convert text between different cases",
+path:"/tools/text-case-converter"
+},
+
 ];
 
 

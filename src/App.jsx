@@ -16,6 +16,8 @@ import Contact from "./pages/Contact";
 import Cookies from "./pages/Cookies";
 import UnitConverter from "./pages/UnitConverter";
 import WordCounter from "./pages/WordCounter";
+import TextCaseConverter from "./pages/TextCaseConverter";
+
 
 function App(){
 
@@ -28,6 +30,8 @@ return(
 
 
 <Routes>
+
+<Route path="/tools/text-case-converter" element={<TextCaseConverter/>}/>
 
 <Route path="/tools/word-counter" element={<WordCounter/>}/>
 
