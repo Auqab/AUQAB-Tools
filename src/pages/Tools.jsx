@@ -22,9 +22,9 @@ const filteredTools = toolsData.filter((tool)=>{
 
 
 const matchSearch =
-tool.title.toLowerCase()
+(tool.title || "")
+.toLowerCase()
 .includes(search.toLowerCase());
-
 
 const matchCategory =
 category==="All" ||
@@ -42,7 +42,7 @@ return(
 
 
 <section className="tools-section">
-
+<h1 style={{color:"red"}}>TEST TOOLS PAGE</h1>
 
 <h1>
 All Tools
@@ -101,7 +101,9 @@ onClick={()=>setCategory(cat)}
 </div>
 
 
-
+<h2 style={{color:"white"}}>
+عدد الأدوات: {filteredTools.length}
+</h2>
 
 <div className="cards">
 

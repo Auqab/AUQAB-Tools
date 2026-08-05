@@ -29,10 +29,10 @@ description:"Compress images easily",
 path:"/tools/image-compressor"
 },
 
-
 {
 id:"unit-converter",
 icon:"📏",
+title:"Unit Converter",
 category:"Converter",
 description:"Convert units quickly",
 path:"/tools/unit-converter"
