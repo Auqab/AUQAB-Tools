@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import SEO from "../components/SEO";
+import { trackEvent } from "../utils/analytics";
+
 
 
 function PasswordGenerator(){
@@ -57,6 +59,10 @@ result += chars[Math.floor(Math.random()*chars.length)];
 
 setPassword(result);
 
+trackEvent("password_generate",{
+tool:"password_generator"
+});
+
 setCopied(false);
 
 }
@@ -75,12 +81,15 @@ function copyPassword(){
 
 navigator.clipboard.writeText(password);
 
+trackEvent("password_copy",{
+tool:"password_generator"
+});
+
 setCopied(true);
 
 setTimeout(()=>setCopied(false),2000);
 
 }
-
 
 
 function strength(){
