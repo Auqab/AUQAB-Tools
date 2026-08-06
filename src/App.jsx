@@ -23,7 +23,7 @@ import ImageResizer from "./pages/ImageResizer";
 import Base64Tool from "./pages/Base64Tool";
 import Premium from "./pages/Premium";
 import Services from "./pages/Services";
-
+import RequestService from "./pages/RequestService";
 
 
 
@@ -38,6 +38,11 @@ return(
 
 
 <Routes>
+
+<Route
+path="/request-service"
+element={<RequestService/>}
+/>
 
 <Route path="/services" element={<Services/>}/>
 

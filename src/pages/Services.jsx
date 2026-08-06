@@ -121,7 +121,7 @@ How it works
 
 
 <a
-href="/contact"
+href="/request-service"
 className="service-btn"
 >
 Request Service

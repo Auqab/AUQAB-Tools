@@ -1707,4 +1707,93 @@ font-size:18px;
 }
 
 
+.request-page{
+
+padding:60px 20px;
+text-align:center;
+
+}
+
+
+.request-subtitle{
+
+color:#cbd5e1;
+font-size:20px;
+margin-bottom:40px;
+
+}
+
+
+
+.request-form{
+
+max-width:600px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:20px;
+
+}
+
+
+
+.request-form input,
+.request-form select,
+.request-form textarea{
+
+width:100%;
+padding:18px;
+border-radius:15px;
+border:none;
+font-size:16px;
+background:white;
+color:#111;
+
+}
+
+
+
+.request-form textarea{
+
+height:180px;
+resize:none;
+
+}
+
+
+
+.request-form button{
+
+padding:18px;
+border:none;
+border-radius:20px;
+background:#38bdf8;
+color:#001;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+
+}
+
+
+
+.request-form button:hover{
+
+transform:translateY(-3px);
+
+}
+
+.success-message{
+
+margin-top:20px;
+padding:15px;
+border-radius:15px;
+background:#22c55e;
+color:white;
+font-size:18px;
+animation:fadeUp .4s ease;
+
+}
+
+
 }
