@@ -118,7 +118,46 @@ How it works
 
 </div>
 
+<div className="why-auqab">
 
+<h2>
+Why choose AUQAB?
+</h2>
+
+<p>
+Fast, lightweight and customized digital solutions built for your needs.
+</p>
+
+<ul>
+
+<li>
+Custom solutions instead of unnecessary complex software.
+</li>
+
+<li>
+Modern web technologies and automation tools.
+</li>
+
+<li>
+Direct communication and personalized support.
+</li>
+
+</ul>
+
+</div>
+
+
+<div className="service-note">
+
+<h2>
+Need a custom idea?
+</h2>
+
+<p>
+Tell us what you need and we will evaluate your project.
+</p>
+
+</div>
 
 <a
 href="/request-service"
