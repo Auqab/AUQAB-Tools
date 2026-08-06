@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState,useEffect } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import SEO from "../components/SEO";
 import { trackEvent } from "../utils/analytics";
@@ -8,6 +8,18 @@ import { trackEvent } from "../utils/analytics";
 function QRGenerator(){
 
 const [text,setText] = useState("");
+
+useEffect(()=>{
+
+if(text){
+
+trackEvent("qr_generate",{
+tool:"qr_generator"
+});
+
+}
+
+},[text]);
 
 const [size,setSize] = useState(220);
 
@@ -132,15 +144,19 @@ ref={qrRef}
 {
 text &&
 
+<>
+
 <QRCodeCanvas
-
 value={text}
-
-size={size}
-
-fgColor={color}
-
 />
+
+{
+trackEvent("qr_generate",{
+tool:"qr_generator"
+})
+}
+
+</>
 
 }
 
