@@ -2,36 +2,110 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+
 <url>
 <loc>https://auqab-tools.vercel.app/</loc>
 </url>
+
 
 <url>
 <loc>https://auqab-tools.vercel.app/tools</loc>
 </url>
 
-<url>
-<loc>https://auqab-tools.vercel.app/tools/qr-generator</loc>
-</url>
 
 <url>
-<loc>https://auqab-tools.vercel.app/tools/password-generator</loc>
+<loc>https://auqab-tools.vercel.app/about</loc>
 </url>
 
+
 <url>
-<loc>https://auqab-tools.vercel.app/tools/image-compressor</loc>
+<loc>https://auqab-tools.vercel.app/services</loc>
 </url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/request-service</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/contact</loc>
+</url>
+
 
 <url>
 <loc>https://auqab-tools.vercel.app/privacy</loc>
 </url>
 
+
 <url>
 <loc>https://auqab-tools.vercel.app/terms</loc>
 </url>
 
+
 <url>
-<loc>https://auqab-tools.vercel.app/contact</loc>
+<loc>https://auqab-tools.vercel.app/cookies</loc>
 </url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/qr-generator</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/password-generator</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/image-compressor</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/image-resizer</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/unit-converter</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/word-counter</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/text-case-converter</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/json-formatter</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/script-generator</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/tools/base64-tool</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/text-counter</loc>
+</url>
+
+
+<url>
+<loc>https://auqab-tools.vercel.app/url-shortener</loc>
+</url>
+
 
 </urlset>
