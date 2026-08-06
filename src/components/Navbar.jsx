@@ -44,6 +44,9 @@ Premium
 Services
 </Link>
 
+<Link to="/pricing">
+Pricing
+</Link>
 
 <Link to="/request-service">
 Request Service
