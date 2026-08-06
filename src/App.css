@@ -1795,5 +1795,74 @@ animation:fadeUp .4s ease;
 
 }
 
+.pricing-page{
+
+padding:60px 20px;
+text-align:center;
+
+}
+
+
+.pricing-subtitle{
+
+color:#cbd5e1;
+font-size:18px;
+margin-bottom:40px;
+
+}
+
+
+.pricing-grid{
+
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+
+}
+
+
+.pricing-card{
+
+background:#1e293b;
+color:white;
+width:280px;
+padding:30px;
+border-radius:20px;
+transition:.3s;
+}
+
+
+.pricing-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+.pricing-card h3{
+
+font-size:30px;
+color:#38bdf8;
+
+}
+
+
+.pricing-card ul{
+
+text-align:left;
+line-height:2;
+
+}
+
+
+.pricing-card.featured{
+
+border:2px solid #38bdf8;
+transform:scale(1.05);
+
+}
+
+
 
 }
