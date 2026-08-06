@@ -1,3 +1,5 @@
+import { trackEvent } from "../utils/analytics";
+
 function Pricing(){
 
 return(
@@ -107,10 +109,14 @@ Business solutions
 <a
 href="/request-service"
 className="service-btn"
+onClick={()=>
+trackEvent("pricing_request_click",{
+plan:"custom"
+})
+}
 >
 Request Service
 </a>
-
 
 </div>
 

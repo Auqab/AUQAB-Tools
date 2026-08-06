@@ -1,5 +1,6 @@
-function Services(){
+import { trackEvent } from "../utils/analytics";
 
+function Services(){
 return(
 
 <section className="services-page">
@@ -162,10 +163,14 @@ Tell us what you need and we will evaluate your project.
 <a
 href="/request-service"
 className="service-btn"
+onClick={()=>
+trackEvent("request_service_click",{
+page:"services"
+})
+}
 >
 Request Service
 </a>
-
 
 
 </section>
