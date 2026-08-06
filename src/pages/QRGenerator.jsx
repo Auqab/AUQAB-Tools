@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import SEO from "../components/SEO";
+import { trackEvent } from "../utils/analytics";
+
 
 
 function QRGenerator(){
@@ -158,7 +160,15 @@ text &&
 
 <button
 className="download-btn"
-onClick={downloadQR}
+onClick={()=>{
+
+trackEvent("qr_download",{
+tool:"qr_generator"
+});
+
+downloadQR();
+
+}}
 >
 Download QR
 </button>
