@@ -21,6 +21,10 @@ import JSONFormatter from "./pages/JSONFormatter";
 import ScriptGenerator from "./pages/ScriptGenerator";
 import ImageResizer from "./pages/ImageResizer";
 import Base64Tool from "./pages/Base64Tool";
+import Premium from "./pages/Premium";
+import Services from "./pages/Services";
+
+
 
 
 function App(){
@@ -34,6 +38,8 @@ return(
 
 
 <Routes>
+
+<Route path="/services" element={<Services/>}/>
 
 <Route path="/tools/base64-tool" element={<Base64Tool/>}/>
 
@@ -82,6 +88,7 @@ path="/tools/image-compressor"
 element={<ImageCompressor />}
 />
 
+<Route path="/premium" element={<Premium/>}/>
 </Routes>
 
 

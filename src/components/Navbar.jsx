@@ -36,6 +36,14 @@ Tools
 About
 </Link>
 
+<Link to="/premium">
+Premium
+</Link>
+
+<Link to="/services">
+Services
+</Link>
+
 
 </nav>
 
