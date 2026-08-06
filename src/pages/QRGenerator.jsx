@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect,useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import SEO from "../components/SEO";
 import { trackEvent } from "../utils/analytics";

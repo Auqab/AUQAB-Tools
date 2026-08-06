@@ -92,6 +92,15 @@ description:"Encode and decode Base64 text easily",
 path:"/tools/base64-tool"
 },
 
+{
+id:"book-scanner",
+icon:"📷",
+title:"Book Scanner",
+category:"Utility",
+description:"Scan book pages using your camera and convert them to text or PDF",
+path:"/tools/book-scanner"
+},
+
 ];
 
 

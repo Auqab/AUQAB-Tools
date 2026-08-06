@@ -25,6 +25,8 @@ import Premium from "./pages/Premium";
 import Services from "./pages/Services";
 import RequestService from "./pages/RequestService";
 import Pricing from "./pages/Pricing";
+import BookScanner from "./pages/BookScanner";
+
 
 
 function App(){
@@ -38,6 +40,11 @@ return(
 
 
 <Routes>
+
+<Route 
+path="/tools/book-scanner" 
+element={<BookScanner/>}
+/>
 
 <Route path="/pricing" element={<Pricing/>}/>
 
