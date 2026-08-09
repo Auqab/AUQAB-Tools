@@ -43,7 +43,7 @@ return(
 
 
 <section className="tools-section">
-<h1 style={{color:"red"}}>TEST TOOLS PAGE</h1>
+
 
 <div className="tools-header">
 <div className="popular-section">

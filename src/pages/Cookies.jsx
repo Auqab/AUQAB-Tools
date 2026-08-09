@@ -1,75 +1,64 @@
-function Cookies(){
+import SEO from "../components/SEO";
 
-return(
+function Cookies() {
+  return (
+    <>
+      <SEO
+        title="Cookie Policy - AUQAB Tools"
+        description="Learn how AUQAB Tools uses cookies and similar technologies to improve your experience."
+      />
 
-<section className="legal-page">
+      <section className="tool-page">
+        <div className="password-card policy-page">
+          <h1>🍪 Cookie Policy</h1>
+          <p className="last-updated">Last updated: 2025</p>
 
-<h1>
-Cookie Policy
-</h1>
+          <div className="policy-section">
+            <h2>What are cookies?</h2>
+            <p>
+              Cookies are small text files stored on your device when you visit a website.
+              They help websites remember your preferences and understand how you use the site.
+            </p>
+          </div>
 
-<p>
-At AUQAB Tools, we use cookies and similar technologies to improve your experience and provide better services.
-</p>
+          <div className="policy-section">
+            <h2>How we use cookies</h2>
+            <p>We may use cookies for:</p>
+            <ul>
+              <li>Improving website performance and speed</li>
+              <li>Understanding visitor behaviour and usage patterns</li>
+              <li>Providing a smoother user experience</li>
+              <li>Supporting advertising services (e.g. Google AdSense)</li>
+            </ul>
+          </div>
 
+          <div className="policy-section">
+            <h2>Third‑party cookies</h2>
+            <p>
+              Third‑party services, including advertising and analytics providers,
+              may place cookies on your device to display relevant ads and measure their effectiveness.
+            </p>
+          </div>
 
-<h2>
-What are cookies?
-</h2>
+          <div className="policy-section">
+            <h2>Managing cookies</h2>
+            <p>
+              You can disable cookies through your browser settings.
+              Note that some features of the website may not function properly if cookies are blocked.
+            </p>
+          </div>
 
-<p>
-Cookies are small text files stored on your device when you visit a website.
-They help websites remember preferences and understand how visitors use the site.
-</p>
-
-
-<h2>
-How we use cookies
-</h2>
-
-<p>
-We may use cookies for:
-</p>
-
-<ul>
-<li>Improving website performance</li>
-<li>Understanding visitor usage</li>
-<li>Providing better user experience</li>
-<li>Supporting advertising services such as Google AdSense</li>
-</ul>
-
-
-<h2>
-Third-party cookies
-</h2>
-
-<p>
-Third-party services, including advertising providers, may use cookies to display relevant advertisements and measure their effectiveness.
-</p>
-
-
-<h2>
-Managing cookies
-</h2>
-
-<p>
-You can disable cookies through your browser settings. However, some features of the website may not work properly.
-</p>
-
-
-<h2>
-Contact
-</h2>
-
-<p>
-If you have questions about this Cookie Policy, please contact us.
-</p>
-
-
-</section>
-
-);
-
+          <div className="policy-section">
+            <h2>Contact</h2>
+            <p>
+              If you have any questions about this Cookie Policy, please{' '}
+              <a href="/contact">contact us</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
 
 export default Cookies;

@@ -1,352 +1,199 @@
 import { useState } from "react";
 import SEO from "../components/SEO";
+import { trackEvent } from "../utils/analytics";
 
-function ImageCompressor(){
+function ImageCompressor() {
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState("");
+  const [originalSize, setOriginalSize] = useState(0);
+  const [compressed, setCompressed] = useState("");
+  const [compressedSize, setCompressedSize] = useState(0);
 
-const [image,setImage] = useState(null);
-const [preview,setPreview] = useState("");
-const [size,setSize] = useState(0);
-const [compressed,setCompressed] = useState("");
-const [newSize,setNewSize] = useState(0);
+  // خيارات المستخدم
+  const [quality, setQuality] = useState(75); // 10-100
+  const [format, setFormat] = useState("image/jpeg");
+  const [maxWidth, setMaxWidth] = useState(1920); // أقصى عرض
 
+  function handleImage(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImage(file);
+    setOriginalSize(file.size);
 
-function compressImage(){
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
 
-if(!image) return;
+    // إعادة تعيين النتيجة السابقة
+    setCompressed("");
+    setCompressedSize(0);
+  }
 
+  function compressImage() {
+    if (!image || !preview) return;
 
-const img = new Image();
+    trackEvent("image_compress", { tool: "image_compressor" });
 
-img.src = preview;
+    const img = new Image();
+    img.src = preview;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
 
+      let width = img.width;
+      let height = img.height;
 
-img.onload = ()=>{
+      // تصغير الأبعاد إذا تجاوزت الحد الأقصى
+      if (width > maxWidth) {
+        height = Math.round(height * (maxWidth / width));
+        width = maxWidth;
+      }
 
-const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
 
-const ctx = canvas.getContext("2d");
+      // تحديد mimeType
+      const mimeType = format === "image/png" ? "image/png" : format === "image/webp" ? "image/webp" : "image/jpeg";
+      const qualityValue = mimeType === "image/png" ? undefined : quality / 100;
 
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) return;
+          const url = URL.createObjectURL(blob);
+          setCompressed(url);
+          setCompressedSize(blob.size);
+        },
+        mimeType,
+        qualityValue
+      );
+    };
+  }
 
-canvas.width = img.width;
+  const reductionPercent = originalSize > 0 ? Math.round((1 - compressedSize / originalSize) * 100) : 0;
 
-canvas.height = img.height;
+  return (
+    <>
+      <SEO
+        title="Free Image Compressor - AUQAB Tools"
+        description="Compress JPG, PNG and WebP images online while keeping quality. Fast, private, browser-based."
+      />
 
+      <section className="tool-page">
+        <div className="password-card">
+          <h1>🖼️ Image Compressor</h1>
+          <p className="tool-description">
+            Compress JPG, PNG and WebP images online for free.
+            Reduce file size while keeping good visual quality.
+            Your images are processed securely in your browser.
+          </p>
 
-ctx.drawImage(
-img,
-0,
-0,
-canvas.width,
-canvas.height
-);
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImage}
+            className="file-input"
+          />
 
+          {preview && (
+            <div className="compressor-preview">
+              <div className="preview-box">
+                <img src={preview} alt="Original" />
+                <span className="size-badge">
+                  Original: {(originalSize / 1024).toFixed(1)} KB
+                </span>
+              </div>
 
-canvas.toBlob(
-(blob)=>{
+              {compressed && (
+                <div className="preview-box">
+                  <img src={compressed} alt="Compressed" />
+                  <span className="size-badge compressed-badge">
+                    Compressed: {(compressedSize / 1024).toFixed(1)} KB
+                    {reductionPercent > 0 && (
+                      <span className="reduction"> (-{reductionPercent}%)</span>
+                    )}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
 
-const url = URL.createObjectURL(blob);
+          {preview && (
+            <div className="compressor-controls">
+              {/* جودة الضغط */}
+              <div className="setting">
+                <label>
+                  Quality: <strong>{quality}%</strong>
+                </label>
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  value={quality}
+                  onChange={(e) => setQuality(Number(e.target.value))}
+                />
+              </div>
 
-setCompressed(url);
+              {/* تنسيق الإخراج */}
+              <div className="option-group">
+                <label>Output Format:</label>
+                <select value={format} onChange={(e) => setFormat(e.target.value)}>
+                  <option value="image/jpeg">JPEG (smaller)</option>
+                  <option value="image/png">PNG (lossless)</option>
+                  <option value="image/webp">WebP (modern)</option>
+                </select>
+              </div>
 
-setNewSize(blob.size);
+              {/* الحجم الأقصى */}
+              <div className="option-group">
+                <label>Max Width (px):</label>
+                <select value={maxWidth} onChange={(e) => setMaxWidth(Number(e.target.value))}>
+                  <option value="800">800px</option>
+                  <option value="1200">1200px</option>
+                  <option value="1920">1920px</option>
+                  <option value="3840">Original</option>
+                </select>
+              </div>
 
-},
+              <button className="generate" onClick={compressImage}>
+                🗜️ Compress Image
+              </button>
 
-image.type === "image/png"
-? "image/png"
-: "image/jpeg",
+              {compressed && (
+                <a href={compressed} download={`compressed.${format.split("/")[1]}`} className="download-btn">
+                  ⬇ Download Compressed Image
+                </a>
+              )}
+            </div>
+          )}
+        </div>
 
-image.type === "image/png"
-? undefined
-: 0.65
+        {/* معلومات إضافية */}
+        <div className="info-section">
+          <h2>How to compress an image?</h2>
+          <p>1. Select an image from your device.</p>
+          <p>2. Adjust quality, format and maximum width if needed.</p>
+          <p>3. Click "Compress Image" and download the result.</p>
 
-);
+          <h2>Why use AUQAB Image Compressor?</h2>
+          <ul>
+            <li>No registration required</li>
+            <li>Fast browser‑based processing</li>
+            <li>Your images stay private (never uploaded)</li>
+            <li>Works on mobile and desktop</li>
+          </ul>
 
-};
-
+          <h2>Frequently Asked Questions</h2>
+          <h3>Are my images uploaded to a server?</h3>
+          <p>No. Compression happens directly in your browser. Your files never leave your device.</p>
+          <h3>Which formats are supported?</h3>
+          <p>You can upload any image format (JPG, PNG, WebP, etc.) and choose your preferred output format.</p>
+        </div>
+      </section>
+    </>
+  );
 }
-
-function handleImage(e){
-
-const file = e.target.files[0];
-
-if(!file) return;
-
-
-setImage(file);
-
-setSize(file.size);
-
-
-const reader = new FileReader();
-
-
-reader.onload = ()=>{
-
-setPreview(reader.result);
-
-};
-
-
-reader.readAsDataURL(file);
-
-}
-
-
-
-function compressImage(){
-
-if(!image) return;
-
-
-const img = new Image();
-
-img.src = preview;
-
-
-img.onload = ()=>{
-
-const canvas = document.createElement("canvas");
-
-const ctx = canvas.getContext("2d");
-
-
-const maxWidth = 1200;
-const maxHeight = 1200;
-
-let width = img.width;
-let height = img.height;
-
-
-if(width > maxWidth || height > maxHeight){
-
-if(width > height){
-
-height = Math.round(height * maxWidth / width);
-width = maxWidth;
-
-}else{
-
-width = Math.round(width * maxHeight / height);
-height = maxHeight;
-
-}
-
-}
-
-
-canvas.width = width;
-canvas.height = height;
-
-
-ctx.drawImage(
-img,
-0,
-0,
-width,
-height
-);
-
-
-
-canvas.toBlob(
-
-(blob)=>{
-
-const url = URL.createObjectURL(blob);
-
-setCompressed(url);
-
-setNewSize(blob.size);
-
-},
-
-"image/jpeg",
-
-0.6
-
-);
-
-
-};
-
-}
-
-
-
-return(
-<>
-
-<SEO
-
-title="Free Image Compressor - AUQAB Tools"
-
-description="Compress images online while keeping quality."
-
-/>
-
-
-<section className="tool-page">
-
-<div className="password-card">
-
-
-<h1>
-🖼️ Image Compressor
-</h1>
-
-<p className="tool-description">
-Compress JPG and PNG images online for free.
-Reduce image size while keeping good quality.
-Your images are processed securely in your browser.
-</p>
-
-<p>
-Reduce image size quickly and securely
-</p>
-
-
-<input
-
-type="file"
-
-accept="image/*"
-
-onChange={handleImage}
-
-/>
-
-
-{
-preview &&
-
-<div>
-
-<img
-
-src={preview}
-
-width="250"
-
-/>
-
-
-<p>
-Original Size: {(size/1024).toFixed(2)} KB
-</p>
-
-<button
-className="generate"
-onClick={compressImage}
->
-Compress Image
-</button>
-
-
-</div>
-
-}
-
-{
-compressed &&
-
-<div>
-
-<h3>
-Compressed Result
-</h3>
-
-
-<img
-
-src={compressed}
-
-width="250"
-
-/>
-
-
-<p>
-New Size: {(newSize/1024).toFixed(2)} KB
-</p>
-
-<a
-href={compressed}
-download="auqab-compressed-image.jpg"
-className="generate"
->
-Download Image
-</a>
-
-</div>
-
-}
-
-</div>
-
-</section>
-
-<div className="info-section">
-
-<h2>
-How to compress an image?
-</h2>
-
-<p>
-1. Select an image from your device.
-</p>
-
-<p>
-2. Click the Compress Image button.
-</p>
-
-<p>
-3. Preview the compressed result and download it.
-</p>
-
-
-<h2>
-Why use AUQAB Image Compressor?
-</h2>
-
-<ul>
-<li>No registration required</li>
-<li>Fast browser-based processing</li>
-<li>Works on mobile and desktop</li>
-<li>Your images stay private</li>
-</ul>
-
-
-<h2>
-Frequently Asked Questions
-</h2>
-
-
-<h3>
-Are my images uploaded to a server?
-</h3>
-
-<p>
-No. Image compression happens directly in your browser.
-</p>
-
-
-<h3>
-Which formats are supported?
-</h3>
-
-<p>
-Currently JPG and PNG images are supported.
-</p>
-
-
-</div>
-
-</>
-
-)
-
-}
-
 
 export default ImageCompressor;

@@ -15,7 +15,6 @@ import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
 import Cookies from "./pages/Cookies";
 import UnitConverter from "./pages/UnitConverter";
-import WordCounter from "./pages/WordCounter";
 import TextCaseConverter from "./pages/TextCaseConverter";
 import JSONFormatter from "./pages/JSONFormatter";
 import ScriptGenerator from "./pages/ScriptGenerator";
@@ -26,94 +25,47 @@ import Services from "./pages/Services";
 import RequestService from "./pages/RequestService";
 import Pricing from "./pages/Pricing";
 import BookScanner from "./pages/BookScanner";
+import ParticlesBackground from "./components/ParticlesBackground";
 
+function App() {
+  return (
+    <div className="app">
+      <ParticlesBackground />
+      <Navbar />
 
+      <main className="main-content">
+        <Routes>
+          <Route path="/tools/url-shortener" element={<URLShortener />} />
+          <Route path="/tools/book-scanner" element={<BookScanner />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/request-service" element={<RequestService />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/tools/base64-tool" element={<Base64Tool />} />
+          <Route path="/tools/image-resizer" element={<ImageResizer />} />
+          <Route path="/tools/script-generator" element={<ScriptGenerator />} />
+          <Route path="/tools/json-formatter" element={<JSONFormatter />} />
+          <Route path="/tools/text-case-converter" element={<TextCaseConverter />} />
+          <Route path="/tools/word-counter" element={<TextCounter />} />
+          <Route path="/tools/unit-converter" element={<UnitConverter />} />
+          <Route path="/cookies" element={<Cookies />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/url-shortener" element={<URLShortener />} />
+          <Route path="/text-counter" element={<TextCounter />} />
+          <Route path="/tools/password-generator" element={<PasswordGenerator />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/tools" element={<Tools />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/tools/qr-generator" element={<QRGenerator />} />
+          <Route path="/tools/image-compressor" element={<ImageCompressor />} />
+          <Route path="/premium" element={<Premium />} />
+        </Routes>
+      </main>
 
-function App(){
-
-return(
-
-<div className="app">
-
-
-<Navbar/>
-
-
-<Routes>
-
-<Route 
-path="/tools/book-scanner" 
-element={<BookScanner/>}
-/>
-
-<Route path="/pricing" element={<Pricing/>}/>
-
-<Route
-path="/request-service"
-element={<RequestService/>}
-/>
-
-<Route path="/services" element={<Services/>}/>
-
-<Route path="/tools/base64-tool" element={<Base64Tool/>}/>
-
-<Route path="/tools/image-resizer" element={<ImageResizer/>}/>
-
-<Route path="/tools/script-generator" element={<ScriptGenerator/>}/>
-
-<Route path="/tools/json-formatter" element={<JSONFormatter/>}/>
-
-<Route path="/tools/text-case-converter" element={<TextCaseConverter/>}/>
-
-<Route path="/tools/word-counter" element={<WordCounter/>}/>
-
-<Route path="/tools/unit-converter" element={<UnitConverter/>}/>
-
-<Route path="/cookies" element={<Cookies/>}/>
-
-<Route path="/privacy" element={<Privacy/>} />
-
-<Route path="/terms" element={<Terms/>} />
-
-<Route path="/contact" element={<Contact/>} />
-
-<Route path="/url-shortener" element={<URLShortener />} />
-
-<Route path="/text-counter" element={<TextCounter />} />
-
-<Route 
-path="/tools/password-generator"
-element={<PasswordGenerator/>}
-/>
-
-<Route path="/" element={<Home/>}/>
-
-<Route path="/tools" element={<Tools/>}/>
-
-<Route path="/about" element={<About/>}/>
-
-<Route 
-path="/tools/qr-generator"
-element={<QRGenerator/>}
-/>
-
-<Route
-path="/tools/image-compressor"
-element={<ImageCompressor />}
-/>
-
-<Route path="/premium" element={<Premium/>}/>
-</Routes>
-
-
-<Footer/>
-
-
-</div>
-
-);
-
+      <Footer />
+    </div>
+  );
 }
-
 
 export default App;
