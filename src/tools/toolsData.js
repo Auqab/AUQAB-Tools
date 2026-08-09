@@ -95,7 +95,128 @@ const toolsData = [
   category: "Utility",
   description: "Save, manage and generate QR codes for your links",
   path: "/tools/url-shortener"
-}
+},
+
+{
+  id: "color-picker",
+  icon: "🎨",
+  title: "Color Picker & Palette",
+  category: "Design",
+  description: "Pick colors and generate beautiful palettes",
+  path: "/tools/color-picker"
+},
+
+{
+  id: "uuid-generator",
+  icon: "🆔",
+  title: "UUID Generator",
+  category: "Developer",
+  description: "Generate random UUIDs for your projects",
+  path: "/tools/uuid-generator"
+},
+
+{
+  id: "markdown-previewer",
+  icon: "📝",
+  title: "Markdown Previewer",
+  category: "Text",
+  description: "Write and preview Markdown in real time",
+  path: "/tools/markdown-previewer"
+},
+{
+  id: "diff-checker",
+  icon: "🔍",
+  title: "Diff Checker",
+  category: "Text",
+  description: "Compare two texts and highlight differences",
+  path: "/tools/diff-checker"
+},
+
+{
+  id: "regex-tester",
+  icon: "🧪",
+  title: "Regex Tester",
+  category: "Developer",
+  description: "Test regular expressions and see matches",
+  path: "/tools/regex-tester"
+},
+{
+  id: "text-to-slug",
+  icon: "🔗",
+  title: "Text to Slug",
+  category: "Text",
+  description: "Convert text into URL-friendly slug",
+  path: "/tools/text-to-slug"
+},
+
+{
+  id: "lorem-generator",
+  icon: "📜",
+  title: "Lorem Ipsum Generator",
+  category: "Text",
+  description: "Generate placeholder dummy text",
+  path: "/tools/lorem-generator"
+},
+{
+  id: "char-frequency-counter",
+  icon: "🔢",
+  title: "Character Frequency Counter",
+  category: "Text",
+  description: "Count character and word occurrences",
+  path: "/tools/char-frequency-counter"
+},
+
+{
+  id: "image-cropper",
+  icon: "✂️",
+  title: "Image Cropper",
+  category: "Image",
+  description: "Crop images with mouse and download",
+  path: "/tools/image-cropper"
+},
+{
+  id: "image-to-base64",
+  icon: "🔣",
+  title: "Image to Base64",
+  category: "Image",
+  description: "Convert image to Base64 data URI",
+  path: "/tools/image-to-base64"
+},
+
+{
+ id: "image-filters",
+ icon: "🎨",
+ title: "Image Filters",
+ category: "Image",
+ description: "Apply artistic filters to images",
+ path: "/tools/image-filters"
+ },
+
+{
+ id: "qr-scanner",
+ icon: "📷",
+ title: "QR Code Scanner",
+ category: "Utility",
+ description: "Scan QR codes with camera",
+ path: "/tools/qr-scanner" 
+},
+
+{
+ id: "jwt-debugger",
+ icon: "🛡️", 
+title: "JWT Debugger",
+ category: "Developer",
+ description: "Decode JWT tokens",
+ path: "/tools/jwt-debugger" 
+},
+{
+ id: "cron-generator",
+ icon: "⏱️", 
+title: "Cron Generator",
+ category: "Developer",
+ description: "Build cron expressions visually",
+ path: "/tools/cron-generator" 
+},
 
 ];
 

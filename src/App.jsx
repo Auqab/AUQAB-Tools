@@ -26,6 +26,26 @@ import RequestService from "./pages/RequestService";
 import Pricing from "./pages/Pricing";
 import BookScanner from "./pages/BookScanner";
 import ParticlesBackground from "./components/ParticlesBackground";
+import ColorPicker from "./pages/ColorPicker";
+import UUIDGenerator from "./pages/UUIDGenerator";
+import MarkdownPreviewer from "./pages/MarkdownPreviewer";
+import DiffChecker from "./pages/DiffChecker";
+import RegexTester from "./pages/RegexTester";
+import TextToSlug from "./pages/TextToSlug";
+import LoremIpsumGenerator from "./pages/LoremIpsumGenerator";
+import CharFrequencyCounter from "./pages/CharFrequencyCounter";
+import ImageCropper from "./pages/ImageCropper";
+import ImageToBase64 from "./pages/ImageToBase64";
+import ImageFilters from "./pages/ImageFilters";
+import QRCodeScanner from "./pages/QRCodeScanner";
+import JWTDecoder from "./pages/JWTDecoder";
+import CronGenerator from "./pages/CronGenerator";
+
+
+
+
+
+
 
 function App() {
   return (
@@ -35,6 +55,19 @@ function App() {
 
       <main className="main-content">
         <Routes>
+	  <Route path="/tools/jwt-debugger" element={<JWTDecoder />} />
+	  <Route path="/tools/cron-generator" element={<CronGenerator />} />
+	  <Route path="/tools/image-filters" element={<ImageFilters />} />
+	  <Route path="/tools/qr-scanner" element={<QRCodeScanner />} />	  <Route path="/tools/image-cropper" element={<ImageCropper />} />
+	  <Route path="/tools/image-to-base64" element={<ImageToBase64 />} />
+	  <Route path="/tools/lorem-generator" element={<LoremIpsumGenerator />} />
+	  <Route path="/tools/char-frequency-counter" element={<CharFrequencyCounter />} />
+          <Route path="/tools/regex-tester" element={<RegexTester />} />
+          <Route path="/tools/text-to-slug" element={<TextToSlug />} />
+	  <Route path="/tools/markdown-previewer" element={<MarkdownPreviewer />} />
+          <Route path="/tools/diff-checker" element={<DiffChecker />} />
+          <Route path="/tools/uuid-generator" element={<UUIDGenerator />} />
+          <Route path="/tools/color-picker" element={<ColorPicker />} />
           <Route path="/tools/url-shortener" element={<URLShortener />} />
           <Route path="/tools/book-scanner" element={<BookScanner />} />
           <Route path="/pricing" element={<Pricing />} />
