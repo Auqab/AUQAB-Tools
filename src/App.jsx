@@ -109,7 +109,14 @@ const NumberToWords = lazy(() => import("./pages/NumberToWords"));
 const TipCalculator = lazy(() => import("./pages/TipCalculator"));
 const PercentageCalculator = lazy(() => import("./pages/PercentageCalculator"));
 const PasswordMemeInfo = lazy(() => import("./pages/PasswordMemeInfo"));
+const AIGrammarCheck = lazy(() => import("./pages/AIGrammarCheck"));
+const AITextSummarizer = lazy(() => import("./pages/AITextSummarizer"));
+const AIChatbot = lazy(() => import("./pages/AIChatbot"));
+
+
+
 const NotFound = lazy(() => import("./pages/NotFound"));
+
 
 function App() {
   return (
@@ -213,7 +220,11 @@ function App() {
             <Route path="/tools/tip-calculator" element={<TipCalculator />} />
             <Route path="/tools/percentage-calculator" element={<PercentageCalculator />} />
             <Route path="/tools/password-meme" element={<PasswordMemeInfo />} />
+	    <Route path="/tools/ai-grammar-check" element={<AIGrammarCheck />} />
+	    <Route path="/tools/ai-text-summarizer" element={<AITextSummarizer />} />
+	    <Route path="/tools/ai-chatbot" element={<AIChatbot />} />
             <Route path="*" element={<NotFound />} />
+
           </Routes>
         </Suspense>
       </main>

@@ -515,6 +515,10 @@ title: "Scientific Calculator",
 { id: "percentage-calculator", icon: "📊", title: "Percentage Calculator", category: "Math", description: "Advanced percentage calculations", path: "/tools/percentage-calculator" },
 { id: "password-meme", icon: "🔐", title: "Password Meme Info", category: "Fun", description: "Funny password strength meme", path: "/tools/password-meme" },
 
+{ id: "ai-grammar-check", icon: "🧠", title: "AI Grammar Check", category: "AI", description: "Check grammar with AI", path: "/tools/ai-grammar-check" },
+{ id: "ai-text-summarizer", icon: "📝", title: "AI Text Summarizer", category: "AI", description: "Summarize text with AI", path: "/tools/ai-text-summarizer" },
+{ id: "ai-chatbot", icon: "🤖", title: "AI Chatbot", category: "AI", description: "Chat with GPT AI", path: "/tools/ai-chatbot" },
+
 ];
 
 export default toolsData;
