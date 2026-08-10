@@ -494,7 +494,6 @@ title: "Scientific Calculator",
 { id: "stopwatch-timer", icon: "⏱️", title: "Stopwatch & Timer", category: "Utility", description: "Stopwatch and countdown timer", path: "/tools/stopwatch-timer" },
 { id: "pomodoro-timer", icon: "🍅", title: "Pomodoro Timer", category: "Utility", description: "Pomodoro technique timer", path: "/tools/pomodoro-timer" },
 { id: "checklist", icon: "✅", title: "Checklist / To‑Do", category: "Utility", description: "A simple browser checklist", path: "/tools/checklist" }
-
 ];
 
 export default toolsData;
