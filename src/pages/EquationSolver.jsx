@@ -13,7 +13,7 @@ function EquationSolver() {
       const left = parts[0].trim();
       const right = parts[1]?.trim() || "0";
       const expr = math.parse(`(${left}) - (${right})`);
-      const roots = math.solve(expr, "x");
+      const roots = math.simplify(expr);
       setSolution(Array.isArray(roots) ? roots.join(", ") : String(roots));
       trackEvent("equation_solve", { tool: "equation_solver" });
     } catch {
