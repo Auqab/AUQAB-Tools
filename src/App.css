@@ -2795,4 +2795,79 @@ textarea {
   margin-top: 20px;
 }
 
+/* Dice Roller */
+.dice-results {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 40px;
+}
+.picker-panel textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  border-radius: 12px;
+  padding: 12px;
+  resize: vertical;
+}
+
+/* Fake Data */
+.fake-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+.fake-controls select {
+  padding: 10px 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: none;
+}
+.fake-results {
+  margin-top: 20px;
+}
+
+/* PDF Tools */
+.pdf-list {
+  margin: 15px 0;
+  text-align: left;
+}
+
+/* PDF Tools */
+.image-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+.image-item {
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 10px;
+}
+.compressed-info {
+  color: #22c55e;
+  margin-top: 10px;
+}
+/* Audio Recorder */
+.recorder-controls {
+  margin: 20px 0;
+}
+.audio-preview {
+  margin-top: 20px;
+}
+
+/* Scientific Calculator */
+.calc-display { margin-bottom: 20px; }
+.calc-display h2 { color: #38bdf8; }
+.calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.calc-btn { padding: 15px; border-radius: 15px; border: none; background: rgba(255,255,255,0.1); color: white; font-size: 18px; cursor: pointer; }
+.calc-btn:hover { background: rgba(255,255,255,0.2); }
+
 }

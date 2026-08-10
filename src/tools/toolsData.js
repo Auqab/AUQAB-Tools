@@ -337,6 +337,164 @@ id: "json-yaml-converter",
   path: "/tools/random-number-generator"
 },
 
+{
+  id: "dice-roller",
+  icon: "🎲",
+  title: "Dice Roller & Picker",
+  category: "Utility",
+  description: "Roll dice or pick a random winner",
+  path: "/tools/dice-roller"
+},
+{
+  id: "fake-data-generator",
+  icon: "👤",
+  title: "Fake Data Generator",
+  category: "Developer",
+  description: "Generate realistic fake test data",
+  path: "/tools/fake-data-generator"
+},
+
+{
+  id: "pdf-merger",
+  icon: "📄",
+  title: "PDF Merger",
+  category: "PDF",
+  description: "Combine multiple PDFs into one",
+  path: "/tools/pdf-merger"
+},
+{
+  id: "pdf-splitter",
+  icon: "✂️",
+  title: "PDF Splitter",
+  category: "PDF",
+  description: "Extract pages from a PDF",
+  path: "/tools/pdf-splitter"
+},
+
+{
+  id: "pdf-compressor",
+  icon: "🗜️",
+  title: "PDF Compressor",
+  category: "PDF",
+  description: "Reduce PDF file size",
+  path: "/tools/pdf-compressor"
+},
+{
+  id: "pdf-to-image",
+  icon: "🖼️",
+  title: "PDF to Image",
+  category: "PDF",
+  description: "Convert PDF pages to images",
+  path: "/tools/pdf-to-image"
+},
+
+{
+  id: "images-to-pdf",
+  icon: "🖼️",
+  title: "Images to PDF",
+  category: "PDF",
+  description: "Combine images into a PDF file",
+  path: "/tools/images-to-pdf"
+},
+{
+  id: "audio-recorder",
+  icon: "🎙️",
+  title: "Audio Recorder",
+  category: "Media",
+  description: "Record audio in your browser",
+  path: "/tools/audio-recorder"
+},
+
+{
+  id: "video-to-gif",
+  icon: "🎥",
+  title: "Video to GIF",
+  category: "Media",
+  description: "Convert short videos to animated GIFs",
+  path: "/tools/video-to-gif"
+},
+{
+  id: "text-to-speech",
+  icon: "🔊",
+  title: "Text to Speech",
+  category: "Media",
+  description: "Hear your text spoken aloud",
+  path: "/tools/text-to-speech"
+},
+
+{
+  id: "voice-to-text",
+  icon: "🎤",
+  title: "Voice to Text",
+  category: "Media",
+  description: "Convert speech to text in real-time",
+  path: "/tools/voice-to-text"
+},
+{
+  id: "audio-visualizer",
+  icon: "🎵",
+  title: "Audio Visualizer",
+  category: "Media",
+  description: "Visualize live audio frequencies",
+  path: "/tools/audio-visualizer"
+},
+
+{
+ id: "ip-lookup",
+ icon: "🌍",
+ title: "IP Lookup",
+ category: "Network", 
+description: "Get IP address details",
+ path: "/tools/ip-lookup" 
+},
+{
+ id: "whois-lookup",
+ icon: "📋",
+ title: "Whois Lookup",
+ category: "Network",
+ description: "Domain registration info",
+ path: "/tools/whois-lookup"
+ },
+{
+ id: "ping-tool",
+ icon: "📶", 
+title: "Ping Tool",
+ category: "Network",
+ description: "Test website response time",
+ path: "/tools/ping-tool" 
+},
+{
+ id: "dns-lookup",
+ icon: "📚",
+ title: "DNS Lookup", 
+category: "Network",
+ description: "Retrieve DNS records",
+ path: "/tools/dns-lookup" 
+},
+{
+ id: "url-encoder-decoder",
+ icon: "🔗",
+ title: "URL Encoder/Decoder",
+ category: "Developer",
+ description: "Encode or decode URLs",
+ path: "/tools/url-encoder-decoder"
+ },
+{
+ id: "scientific-calculator",
+ icon: "🔢", 
+title: "Scientific Calculator",
+ category: "Utility",
+ description: "Advanced math calculator",
+ path: "/tools/scientific-calculator"
+ },
+
+{ id: "graph-plotter", icon: "📈", title: "Graph Plotter", category: "Math", description: "Plot mathematical functions", path: "/tools/graph-plotter" },
+{ id: "equation-solver", icon: "🧮", title: "Equation Solver", category: "Math", description: "Solve algebraic equations", path: "/tools/equation-solver" },
+{ id: "matrix-calculator", icon: "🔲", title: "Matrix Calculator", category: "Math", description: "Matrix multiplication/add/inverse", path: "/tools/matrix-calculator" },
+{ id: "stopwatch-timer", icon: "⏱️", title: "Stopwatch & Timer", category: "Utility", description: "Stopwatch and countdown timer", path: "/tools/stopwatch-timer" },
+{ id: "pomodoro-timer", icon: "🍅", title: "Pomodoro Timer", category: "Utility", description: "Pomodoro technique timer", path: "/tools/pomodoro-timer" },
+{ id: "checklist", icon: "✅", title: "Checklist / To‑Do", category: "Utility", description: "A simple browser checklist", path: "/tools/checklist" }
+
 ];
 
 export default toolsData;

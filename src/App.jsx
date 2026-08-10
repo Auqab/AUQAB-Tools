@@ -54,6 +54,36 @@ import TimeZoneConverter from "./pages/TimeZoneConverter";
 import BaseConverter from "./pages/BaseConverter";
 import RomanNumerals from "./pages/RomanNumerals";
 import RandomNumberGenerator from "./pages/RandomNumberGenerator";
+import DiceRoller from "./pages/DiceRoller";
+import FakeDataGenerator from "./pages/FakeDataGenerator";
+import PDFMerger from "./pages/PDFMerger";
+import PDFSplitter from "./pages/PDFSplitter";
+import PDFCompressor from "./pages/PDFCompressor";
+import PDFToImage from "./pages/PDFToImage";
+import ImagesToPDF from "./pages/ImagesToPDF";
+import AudioRecorder from "./pages/AudioRecorder";
+import VideoToGIF from "./pages/VideoToGIF";
+import TextToSpeech from "./pages/TextToSpeech";
+import VoiceToText from "./pages/VoiceToText";
+import AudioVisualizer from "./pages/AudioVisualizer";
+import IPLookup from "./pages/IPLookup";
+import WhoisLookup from "./pages/WhoisLookup";
+import PingTool from "./pages/PingTool";
+import DNSLookup from "./pages/DNSLookup";
+import URLEncoderDecoder from "./pages/URLEncoderDecoder";
+import ScientificCalculator from "./pages/ScientificCalculator";
+import GraphPlotter from "./pages/GraphPlotter";
+import EquationSolver from "./pages/EquationSolver";
+import MatrixCalculator from "./pages/MatrixCalculator";
+import StopwatchTimer from "./pages/StopwatchTimer";
+import PomodoroTimer from "./pages/PomodoroTimer";
+import Checklist from "./pages/Checklist";
+
+
+
+
+
+
 
 
 
@@ -67,6 +97,30 @@ function App() {
 
       <main className="main-content">
         <Routes>
+	  <Route path="/tools/graph-plotter" element={<GraphPlotter />} />
+	  <Route path="/tools/equation-solver" element={<EquationSolver />} />
+	  <Route path="/tools/matrix-calculator" element={<MatrixCalculator />} />
+	  <Route path="/tools/stopwatch-timer" element={<StopwatchTimer />} />
+	  <Route path="/tools/pomodoro-timer" element={<PomodoroTimer />} />
+	  <Route path="/tools/checklist" element={<Checklist />} />
+	  <Route path="/tools/ip-lookup" element={<IPLookup />} />
+	  <Route path="/tools/whois-lookup" element={<WhoisLookup />} />
+	  <Route path="/tools/ping-tool" element={<PingTool />} />
+	  <Route path="/tools/dns-lookup" element={<DNSLookup />} />
+	  <Route path="/tools/url-encoder-decoder" element={<URLEncoderDecoder />} />
+	  <Route path="/tools/scientific-calculator" element={<ScientificCalculator />} />
+	  <Route path="/tools/voice-to-text" element={<VoiceToText />} />
+	  <Route path="/tools/audio-visualizer" element={<AudioVisualizer />} />
+	  <Route path="/tools/video-to-gif" element={<VideoToGIF />} />
+	  <Route path="/tools/text-to-speech" element={<TextToSpeech />} />
+	  <Route path="/tools/images-to-pdf" element={<ImagesToPDF />} />
+	  <Route path="/tools/audio-recorder" element={<AudioRecorder />} />
+	  <Route path="/tools/pdf-compressor" element={<PDFCompressor />} />
+	  <Route path="/tools/pdf-to-image" element={<PDFToImage />} />
+	  <Route path="/tools/pdf-merger" element={<PDFMerger />} />
+	  <Route path="/tools/pdf-splitter" element={<PDFSplitter />} />
+	  <Route path="/tools/dice-roller" element={<DiceRoller />} />
+	  <Route path="/tools/fake-data-generator" element={<FakeDataGenerator />} />
 	  <Route path="/tools/roman-numerals" element={<RomanNumerals />} />
 	  <Route path="/tools/random-number-generator" element={<RandomNumberGenerator />} />
 	  <Route path="/tools/timezone-converter" element={<TimeZoneConverter />} />
