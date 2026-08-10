@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ParticlesBackground from "./components/ParticlesBackground";
 import { ToastProvider } from "./components/Toast";
-
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 // مكون تحميل مؤقت يظهر أثناء تحميل الأداة
 const Loading = () => (
