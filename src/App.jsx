@@ -48,6 +48,14 @@ import CSVtoJSON from "./pages/CSVtoJSON";
 import HashGenerator from "./pages/HashGenerator";
 import AESEncryption from "./pages/AESEncryption";
 import PasswordStrengthMeter from "./pages/PasswordStrengthMeter";
+import SSLChecker from "./pages/SSLChecker";
+import CurrencyConverter from "./pages/CurrencyConverter";
+import TimeZoneConverter from "./pages/TimeZoneConverter";
+import BaseConverter from "./pages/BaseConverter";
+import RomanNumerals from "./pages/RomanNumerals";
+import RandomNumberGenerator from "./pages/RandomNumberGenerator";
+
+
 
 
 
@@ -59,6 +67,12 @@ function App() {
 
       <main className="main-content">
         <Routes>
+	  <Route path="/tools/roman-numerals" element={<RomanNumerals />} />
+	  <Route path="/tools/random-number-generator" element={<RandomNumberGenerator />} />
+	  <Route path="/tools/timezone-converter" element={<TimeZoneConverter />} />
+	  <Route path="/tools/base-converter" element={<BaseConverter />} />
+	  <Route path="/tools/ssl-checker" element={<SSLChecker />} />
+	  <Route path="/tools/currency-converter" element={<CurrencyConverter />} />
 	  <Route path="/tools/aes-encryption" element={<AESEncryption />} />
 	  <Route path="/tools/password-strength-meter" element={<PasswordStrengthMeter />} />
 	  <Route path="/tools/csv-to-json" element={<CSVtoJSON />} />

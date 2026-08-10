@@ -286,6 +286,57 @@ id: "json-yaml-converter",
   path: "/tools/password-strength-meter"
 },
 
+{
+  id: "ssl-checker",
+  icon: "🔒",
+  title: "SSL Checker",
+  category: "Security",
+  description: "Inspect SSL certificate of any domain",
+  path: "/tools/ssl-checker"
+},
+{
+  id: "currency-converter",
+  icon: "💱",
+  title: "Currency Converter",
+  category: "Converter",
+  description: "Live exchange rate conversion",
+  path: "/tools/currency-converter"
+},
+
+{
+  id: "timezone-converter",
+  icon: "🕒",
+  title: "Time Zone Converter",
+  category: "Converter",
+  description: "Convert time between different time zones",
+  path: "/tools/timezone-converter"
+},
+{
+  id: "base-converter",
+  icon: "🔢",
+  title: "Number Base Converter",
+  category: "Converter",
+  description: "Convert numbers between binary, hex, octal, decimal",
+  path: "/tools/base-converter"
+},
+
+{
+  id: "roman-numerals",
+  icon: "🏛️",
+  title: "Roman Numerals Converter",
+  category: "Converter",
+  description: "Convert numbers to/from Roman numerals",
+  path: "/tools/roman-numerals"
+},
+{
+  id: "random-number-generator",
+  icon: "🎲",
+  title: "Random Number Generator",
+  category: "Utility",
+  description: "Generate random numbers in a range",
+  path: "/tools/random-number-generator"
+},
+
 ];
 
 export default toolsData;

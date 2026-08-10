@@ -2764,4 +2764,35 @@ textarea {
   transition: width 0.4s ease;
 }
 
+/* SSL Checker */
+.ssl-result {
+  text-align: left;
+  margin-top: 15px;
+}
+.ssl-result ul {
+  list-style: none;
+  padding: 0;
+}
+.ssl-result li {
+  margin-bottom: 8px;
+}
+
+/* Currency Converter */
+.currency-form {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+/* Random Number Generator */
+.random-fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+.random-results {
+  margin-top: 20px;
+}
+
 }
