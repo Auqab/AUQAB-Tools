@@ -78,6 +78,13 @@ import MatrixCalculator from "./pages/MatrixCalculator";
 import StopwatchTimer from "./pages/StopwatchTimer";
 import PomodoroTimer from "./pages/PomodoroTimer";
 import Checklist from "./pages/Checklist";
+import NotePad from "./pages/NotePad";
+import InvoiceGenerator from "./pages/InvoiceGenerator";
+import QRBusinessCard from "./pages/QRBusinessCard";
+import PeriodicTable from "./pages/PeriodicTable";
+import MorseConverter from "./pages/MorseConverter";
+import ChessTimer from "./pages/ChessTimer";
+
 
 
 
@@ -94,6 +101,12 @@ function App() {
 
       <main className="main-content">
         <Routes>
+	  <Route path="/tools/notepad" element={<NotePad />} />
+	  <Route path="/tools/invoice-generator" element={<InvoiceGenerator />} />
+	  <Route path="/tools/qr-business-card" element={<QRBusinessCard />} />
+	  <Route path="/tools/periodic-table" element={<PeriodicTable />} />
+	  <Route path="/tools/morse-converter" element={<MorseConverter />} />
+	  <Route path="/tools/chess-timer" element={<ChessTimer />} />
 	  <Route path="/tools/graph-plotter" element={<GraphPlotter />} />
 	  <Route path="/tools/equation-solver" element={<EquationSolver />} />
 	  <Route path="/tools/matrix-calculator" element={<MatrixCalculator />} />

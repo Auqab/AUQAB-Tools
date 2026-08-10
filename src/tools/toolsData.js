@@ -493,7 +493,15 @@ title: "Scientific Calculator",
 { id: "matrix-calculator", icon: "🔲", title: "Matrix Calculator", category: "Math", description: "Matrix multiplication/add/inverse", path: "/tools/matrix-calculator" },
 { id: "stopwatch-timer", icon: "⏱️", title: "Stopwatch & Timer", category: "Utility", description: "Stopwatch and countdown timer", path: "/tools/stopwatch-timer" },
 { id: "pomodoro-timer", icon: "🍅", title: "Pomodoro Timer", category: "Utility", description: "Pomodoro technique timer", path: "/tools/pomodoro-timer" },
-{ id: "checklist", icon: "✅", title: "Checklist / To‑Do", category: "Utility", description: "A simple browser checklist", path: "/tools/checklist" }
+{ id: "checklist", icon: "✅", title: "Checklist / To‑Do", category: "Utility", description: "A simple browser checklist", path: "/tools/checklist" },
+
+{ id: "notepad", icon: "📝", title: "Note Pad", category: "Utility", description: "Simple browser notepad", path: "/tools/notepad" },
+{ id: "invoice-generator", icon: "🧾", title: "Invoice Generator", category: "Utility", description: "Generate simple invoices", path: "/tools/invoice-generator" },
+{ id: "qr-business-card", icon: "📇", title: "QR Business Card", category: "Utility", description: "Create a vCard QR code", path: "/tools/qr-business-card" },
+{ id: "periodic-table", icon: "🧪", title: "Periodic Table", category: "Education", description: "Interactive periodic table", path: "/tools/periodic-table" },
+{ id: "morse-converter", icon: "🆘", title: "Morse Code Converter", category: "Text", description: "Text ↔ Morse code", path: "/tools/morse-converter" },
+{ id: "chess-timer", icon: "♟️", title: "Chess Timer", category: "Utility", description: "Two-player chess clock", path: "/tools/chess-timer" },
+
 ];
 
 export default toolsData;
