@@ -40,10 +40,14 @@ import ImageFilters from "./pages/ImageFilters";
 import QRCodeScanner from "./pages/QRCodeScanner";
 import JWTDecoder from "./pages/JWTDecoder";
 import CronGenerator from "./pages/CronGenerator";
-
-
-
-
+import CodeMinifier from "./pages/CodeMinifier";
+import SQLFormatterPage from "./pages/SQLFormatter";
+import HTTPTester from "./pages/HTTPTester";
+import JSONYAMLConverter from "./pages/JSONYAMLConverter";
+import CSVtoJSON from "./pages/CSVtoJSON";
+import HashGenerator from "./pages/HashGenerator";
+import AESEncryption from "./pages/AESEncryption";
+import PasswordStrengthMeter from "./pages/PasswordStrengthMeter";
 
 
 
@@ -55,6 +59,14 @@ function App() {
 
       <main className="main-content">
         <Routes>
+	  <Route path="/tools/aes-encryption" element={<AESEncryption />} />
+	  <Route path="/tools/password-strength-meter" element={<PasswordStrengthMeter />} />
+	  <Route path="/tools/csv-to-json" element={<CSVtoJSON />} />
+	  <Route path="/tools/hash-generator" element={<HashGenerator />} />
+	  <Route path="/tools/http-tester" element={<HTTPTester />} />
+	  <Route path="/tools/json-yaml-converter" element={<JSONYAMLConverter />} />
+	  <Route path="/tools/code-minifier" element={<CodeMinifier />} />
+	  <Route path="/tools/sql-formatter" element={<SQLFormatterPage />} />
 	  <Route path="/tools/jwt-debugger" element={<JWTDecoder />} />
 	  <Route path="/tools/cron-generator" element={<CronGenerator />} />
 	  <Route path="/tools/image-filters" element={<ImageFilters />} />

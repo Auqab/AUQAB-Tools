@@ -218,6 +218,74 @@ title: "Cron Generator",
  path: "/tools/cron-generator" 
 },
 
+{
+ id: "code-minifier",
+ icon: "🧹",
+ title: "Code Minifier",
+ category: "Developer",
+ description: "Minify HTML, CSS & JS",
+ path: "/tools/code-minifier" 
+},
+{
+ id: "sql-formatter",
+ icon: "🗄️",
+ title: "SQL Formatter",
+ category: "Developer",
+ description: "Format SQL queries",
+ path: "/tools/sql-formatter" 
+},
+
+{
+ id: "http-tester",
+ icon: "🌐",
+ title: "HTTP Request Tester",
+ category: "Developer",
+ description: "Test HTTP requests",
+ path: "/tools/http-tester" 
+},
+{ 
+id: "json-yaml-converter",
+ icon: "🔄",
+ title: "JSON ↔ YAML Converter",
+ category: "Developer",
+ description: "Convert JSON to YAML and vice versa",
+ path: "/tools/json-yaml-converter" 
+},
+
+{
+  id: "csv-to-json",
+  icon: "📊",
+  title: "CSV to JSON",
+  category: "Developer",
+  description: "Convert CSV data to JSON format",
+  path: "/tools/csv-to-json"
+},
+{
+  id: "hash-generator",
+  icon: "🔐",
+  title: "Hash Generator",
+  category: "Security",
+  description: "Generate MD5, SHA1, SHA256, SHA512 hashes",
+  path: "/tools/hash-generator"
+},
+
+{
+  id: "aes-encryption",
+  icon: "🔐",
+  title: "AES Encryption",
+  category: "Security",
+  description: "Encrypt and decrypt text with AES",
+  path: "/tools/aes-encryption"
+},
+{
+  id: "password-strength-meter",
+  icon: "🟢",
+  title: "Password Strength Meter",
+  category: "Security",
+  description: "Check how strong your password is",
+  path: "/tools/password-strength-meter"
+},
+
 ];
 
 export default toolsData;

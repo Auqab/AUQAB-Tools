@@ -2732,4 +2732,36 @@ textarea {
   margin: 15px 0;
 }
 
+/* === CSV / Hash === */
+.hash-options {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 15px 0;
+  align-items: center;
+}
+.hash-options select {
+  padding: 10px 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: none;
+}
+.hash-result {
+  margin-top: 15px;
+}
+
+/* تم إضافته سابقاً */
+.strength-bar-bg {
+  height: 10px;
+  background: #334155;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.strength-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
 }
