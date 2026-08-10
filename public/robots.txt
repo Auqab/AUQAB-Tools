@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://auqab-tools.vercel.app/sitemap.xml

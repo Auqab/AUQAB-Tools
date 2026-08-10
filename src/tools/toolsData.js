@@ -502,6 +502,19 @@ title: "Scientific Calculator",
 { id: "morse-converter", icon: "🆘", title: "Morse Code Converter", category: "Text", description: "Text ↔ Morse code", path: "/tools/morse-converter" },
 { id: "chess-timer", icon: "♟️", title: "Chess Timer", category: "Utility", description: "Two-player chess clock", path: "/tools/chess-timer" },
 
+{ id: "binary-hex-viewer", icon: "🔢", title: "Binary/Hex Viewer", category: "Developer", description: "View file hex content", path: "/tools/binary-hex-viewer" },
+{ id: "weather-app", icon: "🌦️", title: "Weather App", category: "Utility", description: "Current weather by city", path: "/tools/weather-app" },
+{ id: "bmi-calculator", icon: "⚖️", title: "BMI Calculator", category: "Health", description: "Body Mass Index", path: "/tools/bmi-calculator" },
+{ id: "age-calculator", icon: "🎂", title: "Age Calculator", category: "Utility", description: "Calculate exact age", path: "/tools/age-calculator" },
+{ id: "day-of-week", icon: "📅", title: "Day of Week", category: "Utility", description: "Find weekday for a date", path: "/tools/day-of-week" },
+{ id: "random-quote", icon: "💬", title: "Random Quote", category: "Fun", description: "Inspirational quotes", path: "/tools/random-quote" },
+
+{ id: "emoji-board", icon: "🎭", title: "Emoji Copy Board", category: "Fun", description: "Click to copy emojis", path: "/tools/emoji-board" },
+{ id: "number-to-words", icon: "🔢", title: "Number to Words", category: "Text", description: "Convert numbers to English words", path: "/tools/number-to-words" },
+{ id: "tip-calculator", icon: "💵", title: "Tip Calculator", category: "Utility", description: "Calculate tips and split bills", path: "/tools/tip-calculator" },
+{ id: "percentage-calculator", icon: "📊", title: "Percentage Calculator", category: "Math", description: "Advanced percentage calculations", path: "/tools/percentage-calculator" },
+{ id: "password-meme", icon: "🔐", title: "Password Meme Info", category: "Fun", description: "Funny password strength meme", path: "/tools/password-meme" },
+
 ];
 
 export default toolsData;

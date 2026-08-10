@@ -2868,6 +2868,13 @@ textarea {
 .calc-display h2 { color: #38bdf8; }
 .calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .calc-btn { padding: 15px; border-radius: 15px; border: none; background: rgba(255,255,255,0.1); color: white; font-size: 18px; cursor: pointer; }
-.calc-btn:hover { background: rgba(255,255,255,0.2); }
+.calc-btn:hover { background: rgba(255,255,255,0.2);
+ }
 
+
+.nav a.active {
+  color: #38bdf8;
+  font-weight: bold;
+  border-bottom: 2px solid #38bdf8;
+}
 }

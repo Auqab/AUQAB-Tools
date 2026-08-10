@@ -84,6 +84,19 @@ import QRBusinessCard from "./pages/QRBusinessCard";
 import PeriodicTable from "./pages/PeriodicTable";
 import MorseConverter from "./pages/MorseConverter";
 import ChessTimer from "./pages/ChessTimer";
+import BinaryHexViewer from "./pages/BinaryHexViewer";
+import WeatherApp from "./pages/WeatherApp";
+import BMICalculator from "./pages/BMICalculator";
+import AgeCalculator from "./pages/AgeCalculator";
+import DayOfWeekCalculator from "./pages/DayOfWeekCalculator";
+import RandomQuoteGenerator from "./pages/RandomQuoteGenerator";
+import EmojiBoard from "./pages/EmojiBoard";
+import NumberToWords from "./pages/NumberToWords";
+import TipCalculator from "./pages/TipCalculator";
+import PercentageCalculator from "./pages/PercentageCalculator";
+import PasswordMemeInfo from "./pages/PasswordMemeInfo";
+import NotFound from "./pages/NotFound";
+
 
 
 
@@ -101,6 +114,17 @@ function App() {
 
       <main className="main-content">
         <Routes>
+	  <Route path="/tools/emoji-board" element={<EmojiBoard />} />
+	  <Route path="/tools/number-to-words" element={<NumberToWords />} />
+	  <Route path="/tools/tip-calculator" element={<TipCalculator />} />
+	  <Route path="/tools/percentage-calculator" element={<PercentageCalculator />} />
+	  <Route path="/tools/password-meme" element={<PasswordMemeInfo />} />
+	  <Route path="/tools/binary-hex-viewer" element={<BinaryHexViewer />} />
+	  <Route path="/tools/weather-app" element={<WeatherApp />} />
+	  <Route path="/tools/bmi-calculator" element={<BMICalculator />} />
+	  <Route path="/tools/age-calculator" element={<AgeCalculator />} />
+	  <Route path="/tools/day-of-week" element={<DayOfWeekCalculator />} />
+	  <Route path="/tools/random-quote" element={<RandomQuoteGenerator />} />
 	  <Route path="/tools/notepad" element={<NotePad />} />
 	  <Route path="/tools/invoice-generator" element={<InvoiceGenerator />} />
 	  <Route path="/tools/qr-business-card" element={<QRBusinessCard />} />
@@ -183,6 +207,7 @@ function App() {
           <Route path="/tools/qr-generator" element={<QRGenerator />} />
           <Route path="/tools/image-compressor" element={<ImageCompressor />} />
           <Route path="/premium" element={<Premium />} />
+	  <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

@@ -1,111 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- الصفحات الرئيسية -->
+  <url><loc>https://auqab-tools.vercel.app/</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/about</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/services</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/pricing</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/premium</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/contact</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/request-service</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/privacy</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/terms</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/cookies</loc></url>
 
-<url>
-<loc>https://auqab-tools.vercel.app/</loc>
-</url>
+  <!-- أدوات المجموعة الأولى (الموجودة سابقاً) -->
+  <url><loc>https://auqab-tools.vercel.app/tools/qr-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/password-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/image-compressor</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/image-resizer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/unit-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/word-counter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/text-case-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/json-formatter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/script-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/base64-tool</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/book-scanner</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/url-shortener</loc></url>
 
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/about</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/services</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/request-service</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/contact</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/privacy</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/terms</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/cookies</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/qr-generator</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/password-generator</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/image-compressor</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/image-resizer</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/unit-converter</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/word-counter</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/text-case-converter</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/json-formatter</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/script-generator</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/tools/base64-tool</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/text-counter</loc>
-</url>
-
-
-<url>
-<loc>https://auqab-tools.vercel.app/url-shortener</loc>
-</url>
-
+  <!-- أدوات أضيفت حديثاً (موجودة في toolsData.js) -->
+  <url><loc>https://auqab-tools.vercel.app/tools/color-picker</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/uuid-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/markdown-previewer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/diff-checker</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/regex-tester</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/text-to-slug</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/lorem-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/char-frequency-counter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/image-cropper</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/image-to-base64</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/image-filters</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/qr-scanner</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/jwt-debugger</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/cron-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/code-minifier</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/sql-formatter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/http-tester</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/json-yaml-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/csv-to-json</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/hash-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/aes-encryption</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/password-strength-meter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/ssl-checker</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/currency-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/timezone-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/base-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/roman-numerals</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/random-number-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/dice-roller</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/fake-data-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/pdf-merger</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/pdf-splitter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/pdf-compressor</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/pdf-to-image</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/images-to-pdf</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/audio-recorder</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/video-to-gif</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/text-to-speech</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/voice-to-text</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/audio-visualizer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/ip-lookup</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/whois-lookup</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/ping-tool</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/dns-lookup</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/url-encoder-decoder</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/scientific-calculator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/graph-plotter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/equation-solver</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/matrix-calculator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/stopwatch-timer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/pomodoro-timer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/checklist</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/notepad</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/invoice-generator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/qr-business-card</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/periodic-table</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/morse-converter</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/chess-timer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/binary-hex-viewer</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/weather-app</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/bmi-calculator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/age-calculator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/day-of-week</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/random-quote</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/emoji-board</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/number-to-words</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/tip-calculator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/percentage-calculator</loc></url>
+  <url><loc>https://auqab-tools.vercel.app/tools/password-meme</loc></url>
 
 </urlset>
