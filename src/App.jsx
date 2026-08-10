@@ -77,7 +77,6 @@ import EquationSolver from "./pages/EquationSolver";
 import MatrixCalculator from "./pages/MatrixCalculator";
 import StopwatchTimer from "./pages/StopwatchTimer";
 import PomodoroTimer from "./pages/PomodoroTimer";
-import Checklist from "./pages/Checklist";
 
 
 
@@ -102,7 +101,6 @@ function App() {
 	  <Route path="/tools/matrix-calculator" element={<MatrixCalculator />} />
 	  <Route path="/tools/stopwatch-timer" element={<StopwatchTimer />} />
 	  <Route path="/tools/pomodoro-timer" element={<PomodoroTimer />} />
-	  <Route path="/tools/checklist" element={<Checklist />} />
 	  <Route path="/tools/ip-lookup" element={<IPLookup />} />
 	  <Route path="/tools/whois-lookup" element={<WhoisLookup />} />
 	  <Route path="/tools/ping-tool" element={<PingTool />} />

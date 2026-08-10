@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { solve } from "mathjs";
+import * as math from "mathjs";
 import SEO from "../components/SEO";
 import { trackEvent } from "../utils/analytics";
 
@@ -12,8 +12,8 @@ function EquationSolver() {
       const parts = equation.split("=");
       const left = parts[0].trim();
       const right = parts[1]?.trim() || "0";
-      const expr = `(${left}) - (${right})`;
-      const roots = solve(expr, "x");
+      const expr = math.parse(`(${left}) - (${right})`);
+      const roots = math.solve(expr, "x");
       setSolution(Array.isArray(roots) ? roots.join(", ") : String(roots));
       trackEvent("equation_solve", { tool: "equation_solver" });
     } catch {
