@@ -4,6 +4,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ParticlesBackground from "./components/ParticlesBackground";
+import { ToastProvider } from "./components/Toast";
+
 
 // مكون تحميل مؤقت يظهر أثناء تحميل الأداة
 const Loading = () => (
@@ -117,6 +119,8 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
   return (
+      <ToastProvider>
+	<LanguageProvider>
     <div className="app">
       <ParticlesBackground />
       <Navbar />
@@ -228,6 +232,8 @@ function App() {
 
       <Footer />
     </div>
+</LanguageProvider>
+ </ToastProvider>
   );
 }
 

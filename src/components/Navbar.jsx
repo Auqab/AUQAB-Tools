@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const navRef = useRef();
+  const { t, lang, toggleLang } = useLanguage();
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -25,18 +27,37 @@ function Navbar() {
         <small>Tools</small>
       </div>
 
-      <button className="menu-btn" onClick={() => setOpen(!open)}>
-        ☰
-      </button>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        {/* زر تغيير اللغة */}
+        <button
+          onClick={toggleLang}
+          style={{
+            background: "transparent",
+            color: "#38bdf8",
+            border: "1px solid #38bdf8",
+            borderRadius: 8,
+            padding: "4px 10px",
+            cursor: "pointer",
+            fontSize: 14,
+          }}
+        >
+          {lang === "en" ? "AR" : "EN"}
+        </button>
+
+        {/* زر الهامبرغر */}
+        <button className="menu-btn" onClick={() => setOpen(!open)}>
+          ☰
+        </button>
+      </div>
 
       <nav className={open ? "nav active" : "nav"}>
-        <Link to="/" className={isActive("/")} onClick={() => setOpen(false)}>Home</Link>
-        <Link to="/tools" className={isActive("/tools")} onClick={() => setOpen(false)}>Tools</Link>
-        <Link to="/about" className={isActive("/about")} onClick={() => setOpen(false)}>About</Link>
-        <Link to="/premium" className={isActive("/premium")} onClick={() => setOpen(false)}>Premium</Link>
-        <Link to="/services" className={isActive("/services")} onClick={() => setOpen(false)}>Services</Link>
-        <Link to="/pricing" className={isActive("/pricing")} onClick={() => setOpen(false)}>Pricing</Link>
-        <Link to="/request-service" className={isActive("/request-service")} onClick={() => setOpen(false)}>Request Service</Link>
+        <Link to="/" className={isActive("/")} onClick={() => setOpen(false)}>{t.home}</Link>
+        <Link to="/tools" className={isActive("/tools")} onClick={() => setOpen(false)}>{t.tools}</Link>
+        <Link to="/about" className={isActive("/about")} onClick={() => setOpen(false)}>{t.about}</Link>
+        <Link to="/premium" className={isActive("/premium")} onClick={() => setOpen(false)}>{t.premium}</Link>
+        <Link to="/services" className={isActive("/services")} onClick={() => setOpen(false)}>{t.services}</Link>
+        <Link to="/pricing" className={isActive("/pricing")} onClick={() => setOpen(false)}>{t.pricing}</Link>
+        <Link to="/request-service" className={isActive("/request-service")} onClick={() => setOpen(false)}>{t.requestService}</Link>
       </nav>
     </header>
   );

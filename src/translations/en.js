@@ -1,9 +1,11 @@
 const en = {
-  title: "AUQAB Tools",
-  subtitle: "Free and fast online tools",
-  language: "Language",
-  tools: "Tools",
   home: "Home",
+  tools: "Tools",
+  about: "About",
+  contact: "Contact",
+  premium: "Premium",
+  services: "Services",
+  pricing: "Pricing",
+  requestService: "Request Service",
 };
-
 export default en;
