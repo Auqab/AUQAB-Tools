@@ -14,7 +14,6 @@ import BackToTop from "./components/BackToTop";
 
 
 
-
 // مكون تحميل مؤقت يظهر أثناء تحميل الأداة
 const Loading = () => (
   <div className="tool-page">
@@ -133,7 +132,6 @@ const Backgrounds = lazy(() => import("./pages/Backgrounds"));
 
 
 
-
 function App() {
   return (
       <ToastProvider>
@@ -148,6 +146,7 @@ function App() {
 	<PageProgress />
       <main className="main-content">
         <Suspense fallback={<Loading />}>
+import ScrollToTop from "./components/ScrollToTop";
           <Routes>
 	    <Route path="/games" element={<Games />} />
 	    <Route path="/backgrounds" element={<Backgrounds />} />
