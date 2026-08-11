@@ -8,6 +8,8 @@ import { ToastProvider } from "./components/Toast";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import PageProgress from "./components/PageProgress";
+import BackToTop from "./components/BackToTop";
+
 
 
 
@@ -247,6 +249,7 @@ function App() {
       </main>
 
       <Footer />
+    <BackToTop />
     </div>
     </FavoritesProvider>
 </LanguageProvider>
