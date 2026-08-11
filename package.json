@@ -19,6 +19,7 @@
     "lorem-ipsum": "^3.0.0",
     "marked": "^18.0.9",
     "mathjs": "^15.2.0",
+    "nprogress": "^0.2.0",
     "papaparse": "^5.5.4",
     "pdf-lib": "^1.17.1",
     "qrcode.react": "^4.2.0",
