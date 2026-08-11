@@ -1,18 +1,19 @@
 import { useRef, useState } from "react";
+import Tesseract from "tesseract.js";
 import SEO from "../components/SEO";
+import { showToast } from "../components/Toast";
 import { trackEvent } from "../utils/analytics";
 
 function BookScanner() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // الخطوة الحالية: home | camera | crop | result
   const [step, setStep] = useState("home");
   const [capturedImage, setCapturedImage] = useState(null);
   const [processedImage, setProcessedImage] = useState(null);
   const [extractedText, setExtractedText] = useState("");
   const [stream, setStream] = useState(null);
-  const [copied, setCopied] = useState(false);
+  const [loadingOCR, setLoadingOCR] = useState(false);
 
   // 1. فتح الكاميرا
   async function openCamera() {
@@ -24,7 +25,7 @@ function BookScanner() {
       setStream(mediaStream);
       setStep("camera");
     } catch (err) {
-      alert("⚠️ Unable to access camera. Please allow camera permissions.");
+      showToast("⚠️ Unable to access camera. Please allow camera permissions.", "error");
     }
   }
 
@@ -36,7 +37,7 @@ function BookScanner() {
     }
   }
 
-  // 3. التقاط صورة من الكاميرا
+  // 3. التقاط صورة
   function capturePhoto() {
     const video = videoRef.current;
     const canvas = canvasRef.current;
@@ -79,7 +80,6 @@ function BookScanner() {
 
       for (let i = 0; i < data.length; i += 4) {
         const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-        // عتبة 140 للحصول على تباين واضح للنصوص
         const value = avg > 140 ? 255 : 30;
         data[i] = value;
         data[i + 1] = value;
@@ -94,12 +94,21 @@ function BookScanner() {
     };
   }
 
-  // 6. استخراج النص يدوياً (لأن OCR الحقيقي يحتاج Backend أو مكتبة كبيرة)
-  // هنا نعرض الصورة المحسنة فقط ويمكن للمستخدم نسخ النص يدوياً أو إضافته
-  // هذه الخطوة ستتحسن لاحقاً عند إضافة Tesseract.js أو API حقيقي
-  function simulateTextExtraction() {
-    setExtractedText("");
-    trackEvent("book_scanner_extract", { tool: "book_scanner" });
+  // 6. استخراج النص باستخدام Tesseract.js (OCR حقيقي)
+  async function extractText() {
+    if (!processedImage) return;
+    setLoadingOCR(true);
+    try {
+      const { data: { text } } = await Tesseract.recognize(processedImage, "eng+ara", {
+        logger: (m) => console.log(m),
+      });
+      setExtractedText(text.trim());
+      showToast("Text extracted successfully!");
+      trackEvent("book_scanner_ocr", { tool: "book_scanner" });
+    } catch (error) {
+      showToast("OCR failed. Try again with a clearer image.", "error");
+    }
+    setLoadingOCR(false);
   }
 
   // 7. تحميل TXT
@@ -112,16 +121,16 @@ function BookScanner() {
     link.download = "AUQAB-Scan.txt";
     link.click();
     URL.revokeObjectURL(url);
+    showToast("Text file downloaded!");
   }
 
   function copyText() {
     if (!extractedText) return;
     navigator.clipboard.writeText(extractedText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    showToast("Text copied!");
+    trackEvent("book_scanner_copy", { tool: "book_scanner" });
   }
 
-  // إعادة ضبط
   function reset() {
     setCapturedImage(null);
     setProcessedImage(null);
@@ -134,15 +143,14 @@ function BookScanner() {
     <>
       <SEO
         title="Book Scanner - AUQAB Tools"
-        description="Scan book pages with your camera, enhance image quality, and extract text."
+        description="Scan book pages with your camera, enhance image, and extract text using AI."
       />
 
       <section className="tool-page">
         <div className="password-card">
           <h1>📖 Book Scanner</h1>
           <p className="tool-description">
-            Scan book pages using your camera or upload an image.
-            Enhance contrast and extract readable text.
+            Scan book pages using your camera or upload an image. Enhance, then extract text with AI.
           </p>
 
           {/* الخطوة: الصفحة الرئيسية */}
@@ -180,7 +188,7 @@ function BookScanner() {
               <img src={capturedImage} alt="Captured" className="scanner-media" />
               <div className="scanner-actions">
                 <button className="generate" onClick={() => enhanceImage(capturedImage)}>
-                  ✨ Enhance & Extract
+                  ✨ Enhance Image
                 </button>
                 <button className="clear-btn" onClick={reset}>
                   📷 Retake
@@ -189,20 +197,24 @@ function BookScanner() {
             </div>
           )}
 
-          {/* الخطوة: النتيجة */}
+          {/* الخطوة: النتيجة مع OCR */}
           {step === "result" && processedImage && (
             <div className="scanner-result">
               <h3>🔍 Enhanced Image</h3>
               <img src={processedImage} alt="Enhanced" className="scanner-media" />
 
-              <p className="ocr-note">
-                💡 <strong>Text extraction</strong> will be available soon with full OCR support.
-                For now, you can manually copy text from the enhanced image above.
-              </p>
+              <button
+                className="generate"
+                onClick={extractText}
+                disabled={loadingOCR}
+                style={{ margin: "15px 0" }}
+              >
+                {loadingOCR ? "⏳ Extracting Text..." : "🧠 Extract Text with AI"}
+              </button>
 
               <textarea
                 rows="6"
-                placeholder="You can type or paste text here..."
+                placeholder="Extracted text will appear here..."
                 value={extractedText}
                 onChange={(e) => setExtractedText(e.target.value)}
               />
@@ -210,7 +222,7 @@ function BookScanner() {
               {extractedText && (
                 <div className="scanner-actions">
                   <button className="generate" onClick={copyText}>
-                    {copied ? "✅ Copied!" : "📋 Copy Text"}
+                    📋 Copy Text
                   </button>
                   <button className="download-btn" onClick={downloadTXT}>
                     ⬇ Download TXT
@@ -224,16 +236,14 @@ function BookScanner() {
             </div>
           )}
 
-          {/* Canvas مخفي */}
           <canvas ref={canvasRef} style={{ display: "none" }} />
 
-          {/* معلومات */}
           <div className="info-section">
             <h2>How to use Book Scanner?</h2>
             <p>1. Open your camera or upload a book page image.</p>
             <p>2. Capture the page and click "Enhance" to improve contrast.</p>
-            <p>3. The enhanced image will help you read text more clearly.</p>
-            <p>4. Full OCR text extraction coming soon!</p>
+            <p>3. Click "Extract Text with AI" to get the text.</p>
+            <p>4. Copy or download the extracted text.</p>
 
             <h2>Why use AUQAB Book Scanner?</h2>
             <ul>

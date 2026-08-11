@@ -1,12 +1,13 @@
 const toolsData = [
-  {
-    id: "qr-generator",
-    icon: "🔳",
-    title: "QR Generator",
-    category: "Utility",
-    description: "Create QR codes from text and URLs",
-    path: "/tools/qr-generator",
-  },
+{
+  id: "qr-generator",
+  icon: "🔳",
+  title: "QR Generator & Scanner",
+  category: "Utility",
+  description: "Create and scan QR codes instantly",
+  path: "/tools/qr-generator"
+},
+
   {
     id: "password-generator",
     icon: "🔐",
@@ -79,14 +80,14 @@ const toolsData = [
     description: "Encode and decode Base64 text easily",
     path: "/tools/base64-tool",
   },
-  {
-    id: "book-scanner",
-    icon: "📖",
-    title: "Book Scanner",
-    category: "Utility",
-    description: "Scan book pages using your camera and convert them to text or PDF",
-    path: "/tools/book-scanner",
-  },
+{
+  id: "book-scanner",
+  icon: "📖",
+  title: "Book Scanner",
+  category: "Utility",
+  description: "Scan pages, enhance, and extract text with AI",
+  path: "/tools/book-scanner"
+},
 
 {
   id: "url-shortener",
