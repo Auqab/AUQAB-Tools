@@ -142,50 +142,26 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== الأقسام الثلاثة الجديدة ========== */}
-      <section className="home-sections">
-        {/* قسم الأدوات */}
-        <div className="home-section">
-          <h2 className="section-title">🛠️ Tools</h2>
-          <p className="section-desc">Professional utilities for everyday tasks.</p>
-          <div className="cards">
-            {toolsData.slice(0, 4).map((tool) => (
-              <ToolCard key={tool.id} {...tool} />
-            ))}
-          </div>
-          <div className="center-btn">
-            <Link to="/tools" className="open-tool">View All Tools →</Link>
-          </div>
-        </div>
+{/* ========== البطاقات الثلاثة الكبيرة ========== */}
+<section className="big-cards-section">
+  <div className="big-card" onClick={() => navigate("/tools")}>
+    <span className="big-card-icon">🛠️</span>
+    <h2>Tools</h2>
+    <p>85+ professional utilities for images, text, security, developers, and more.</p>
+  </div>
 
-        {/* قسم الألعاب */}
-        <div className="home-section">
-          <h2 className="section-title">🎮 Games</h2>
-          <p className="section-desc">Fun mini-games to relax or challenge yourself.</p>
-          <div className="cards">
-            {gamesData.map((game) => (
-              <ToolCard key={game.id} {...game} />
-            ))}
-          </div>
-          <div className="center-btn">
-            <Link to="/tools" className="open-tool">Explore Games →</Link>
-          </div>
-        </div>
+  <div className="big-card" onClick={() => navigate("/games")}>
+    <span className="big-card-icon">🎮</span>
+    <h2>Games</h2>
+    <p>Fun mini‑games to relax or challenge your brain. More coming soon!</p>
+  </div>
 
-        {/* قسم الخلفيات */}
-        <div className="home-section">
-          <h2 className="section-title">🎨 Backgrounds</h2>
-          <p className="section-desc">Beautiful backgrounds and gradients for your projects.</p>
-          <div className="cards">
-            {backgroundsData.map((bg) => (
-              <ToolCard key={bg.id} {...bg} />
-            ))}
-          </div>
-          <div className="center-btn">
-            <Link to="/tools/color-picker" className="open-tool">Get Started →</Link>
-          </div>
-        </div>
-      </section>
+  <div className="big-card" onClick={() => navigate("/backgrounds")}>
+    <span className="big-card-icon">🎨</span>
+    <h2>Backgrounds</h2>
+    <p>Beautiful CSS backgrounds, gradients, and patterns for your projects.</p>
+  </div>
+</section>
 
       {/* ========== Call to Action ========== */}
       <section className="cta-section">

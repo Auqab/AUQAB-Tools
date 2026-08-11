@@ -126,6 +126,11 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivacyVault = lazy(() => import("./pages/PrivacyVault"));
 const Favorites = lazy(() => import("./pages/Favorites"));
 const Changelog = lazy(() => import("./pages/Changelog"));
+const Games = lazy(() => import("./pages/Games"));
+const Backgrounds = lazy(() => import("./pages/Backgrounds"));
+
+
+
 
 
 
@@ -144,6 +149,8 @@ function App() {
       <main className="main-content">
         <Suspense fallback={<Loading />}>
           <Routes>
+	    <Route path="/games" element={<Games />} />
+	    <Route path="/backgrounds" element={<Backgrounds />} />
 	    <Route path="/changelog" element={<Changelog />} />
 	    <Route path="/favorites" element={<Favorites />} />
 	    <Route path="/tools/privacy-vault" element={<PrivacyVault />} />
