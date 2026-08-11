@@ -125,7 +125,7 @@ const PasswordMemeInfo = lazy(() => import("./pages/PasswordMemeInfo"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivacyVault = lazy(() => import("./pages/PrivacyVault"));
 const Favorites = lazy(() => import("./pages/Favorites"));
-
+const Changelog = lazy(() => import("./pages/Changelog"));
 
 
 
@@ -144,6 +144,7 @@ function App() {
       <main className="main-content">
         <Suspense fallback={<Loading />}>
           <Routes>
+	    <Route path="/changelog" element={<Changelog />} />
 	    <Route path="/favorites" element={<Favorites />} />
 	    <Route path="/tools/privacy-vault" element={<PrivacyVault />} />
 	    <Route path="/tools/ai-grammar-check" element={<AIGrammarCheck />} />

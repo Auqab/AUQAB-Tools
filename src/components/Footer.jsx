@@ -20,6 +20,7 @@ function Footer() {
         <Link to="/services">Services</Link>
         <Link to="/pricing">Pricing</Link>
         <Link to="/contact">Contact</Link>
+	<Link to="/changelog">Changelog</Link>
       </div>
       <div>
         <h4>Legal</h4>
