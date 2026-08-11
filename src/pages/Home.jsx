@@ -1,17 +1,41 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toolsData from "../tools/toolsData";
 import ToolCard from "../components/ToolCard";
 import SEO from "../components/SEO";
 
 function Home() {
-  // عرض 6 أدوات مميزة بدلاً من 4 لإظهار تنوع أكبر
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const navigate = useNavigate();
   const featuredTools = toolsData.slice(0, 6);
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    if (!value.trim()) {
+      setResults([]);
+      return;
+    }
+    const filtered = toolsData.filter(
+      (tool) =>
+        tool.title.toLowerCase().includes(value.toLowerCase()) ||
+        tool.description.toLowerCase().includes(value.toLowerCase())
+    );
+    setResults(filtered.slice(0, 8)); // عرض 8 نتائج كحد أقصى
+  };
+
+  const goToTool = (path) => {
+    setQuery("");
+    setResults([]);
+    navigate(path);
+  };
 
   return (
     <>
       <SEO
         title="AUQAB Tools - Free Online Tools for Everyone"
-        description="Free online tools for images, text, security and developers. Use our tools directly in your browser, no registration required."
+        description="Free online tools for images, text, security and developers."
       />
 
       {/* ========== Hero Section ========== */}
@@ -22,6 +46,35 @@ function Home() {
           <p className="hero-subtitle">
             Free online tools for images, text, security and developers. All tools work directly in your browser — no sign‑up needed.
           </p>
+
+          {/* شريط البحث الذكي */}
+          <div className="smart-search">
+            <input
+              type="text"
+              placeholder="🔍 Search for a tool... (e.g. QR, PDF, AI)"
+              value={query}
+              onChange={handleSearch}
+              className="smart-search-input"
+              autoComplete="off"
+            />
+            {results.length > 0 && (
+              <div className="smart-results">
+                {results.map((tool) => (
+                  <div
+                    key={tool.id}
+                    className="smart-result-item"
+                    onClick={() => goToTool(tool.path)}
+                  >
+                    <span className="tool-icon">{tool.icon}</span>
+                    <div>
+                      <strong>{tool.title}</strong>
+                      <p>{tool.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
           <div className="hero-actions">
             <Link to="/tools" className="generate">
@@ -34,7 +87,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== Why Choose Section ========== */}
+      {/* باقي الأقسام بدون تغيير */}
       <section className="features-section">
         <h2 className="section-title">Why Choose AUQAB Tools?</h2>
         <div className="features">
@@ -61,7 +114,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== Stats Banner ========== */}
       <section className="stats-banner">
         <div className="stat">
           <strong>{toolsData.length}+</strong>
@@ -77,7 +129,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== Popular Tools Section ========== */}
       <section className="featured-tools">
         <h2 className="section-title">🔥 Popular Tools</h2>
         <div className="cards">
@@ -92,7 +143,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== Call to Action ========== */}
       <section className="cta-section">
         <h2>Need a Custom Tool?</h2>
         <p>We build custom web utilities and automations for businesses and individuals.</p>

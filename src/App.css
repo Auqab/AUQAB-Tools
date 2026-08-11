@@ -2877,4 +2877,75 @@ textarea {
   font-weight: bold;
   border-bottom: 2px solid #38bdf8;
 }
+
+/* Smart Search */
+.smart-search {
+  position: relative;
+  max-width: 500px;
+  margin: 25px auto 5px;
+}
+
+.smart-search-input {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 30px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.smart-search-input:focus {
+  background: rgba(255,255,255,0.15);
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56,189,248,0.3);
+}
+
+.smart-results {
+  position: absolute;
+  top: 55px;
+  left: 0;
+  width: 100%;
+  background: rgba(15,23,42,0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 100;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.smart-result-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.smart-result-item:hover {
+  background: rgba(56,189,248,0.1);
+}
+
+.smart-result-item .tool-icon {
+  font-size: 24px;
+}
+
+.smart-result-item strong {
+  display: block;
+  color: white;
+}
+
+.smart-result-item p {
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
 }
