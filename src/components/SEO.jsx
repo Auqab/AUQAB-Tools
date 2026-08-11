@@ -1,106 +1,42 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
+function SEO({ title, description, image, url }) {
+  const location = useLocation();
+  const siteUrl = "https://auqab-tools.vercel.app";
+  const currentUrl = url || `${siteUrl}${location.pathname}`;
+  const ogImage = image || `${siteUrl}/og-image.png`; // يمكنك إضافة صورة 1200x630 لاحقاً
+  const defaultTitle = "AUQAB Tools - Free Online Tools for Everyone";
+  const defaultDesc = "70+ free online tools. QR, PDF, AI, Security, Media, Developer, and more.";
 
-function SEO({
-title="AUQAB Tools - Free Online Digital Tools",
-description="Free online tools for productivity, security, images and developers.",
-keywords="online tools, QR generator, password generator, image compressor, AUQAB Tools"
-}){
+  useEffect(() => {
+    document.title = title || defaultTitle;
+    
+    // تعيين أو تحديث وسوم meta
+    const setMeta = (name, content, isProperty = false) => {
+      const attr = isProperty ? "property" : "name";
+      let el = document.querySelector(`meta[${attr}="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
 
+    setMeta("description", description || defaultDesc);
+    setMeta("og:title", title || defaultTitle, true);
+    setMeta("og:description", description || defaultDesc, true);
+    setMeta("og:image", ogImage, true);
+    setMeta("og:url", currentUrl, true);
+    setMeta("og:type", "website", true);
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", title || defaultTitle);
+    setMeta("twitter:description", description || defaultDesc);
+    setMeta("twitter:image", ogImage);
+  }, [title, description, image, currentUrl, ogImage]);
 
-return(
-
-<Helmet>
-
-
-<title>
-{title}
-</title>
-
-
-
-<meta
-name="description"
-content={description}
-/>
-
-
-
-<meta
-name="keywords"
-content={keywords}
-/>
-
-
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-/>
-
-
-
-<meta
-name="google-site-verification"
-content="uB2mNeZn8rdB0CAauiQ10SSqV9Hbc3KOlRWeAn57RQc"
-/>
-
-
-
-<meta
-property="og:title"
-content={title}
-/>
-
-
-
-<meta
-property="og:description"
-content={description}
-/>
-
-
-
-<meta
-property="og:type"
-content="website"
-/>
-
-
-
-<meta
-property="og:url"
-content="https://auqab-tools.vercel.app"
-/>
-
-
-
-<meta
-name="twitter:card"
-content="summary"
-/>
-
-
-
-<meta
-name="twitter:title"
-content={title}
-/>
-
-
-
-<meta
-name="twitter:description"
-content={description}
-/>
-
-
-
-</Helmet>
-
-);
-
+  return null;
 }
-
 
 export default SEO;
