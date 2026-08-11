@@ -2948,4 +2948,38 @@ textarea {
   font-size: 13px;
 }
 
+/* Favorites Star Button */
+.tool-card {
+  position: relative;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  z-index: 5;
+}
+
+.fav-btn.active {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.fav-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
 }

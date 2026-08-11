@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import ParticlesBackground from "./components/ParticlesBackground";
 import { ToastProvider } from "./components/Toast";
 import { LanguageProvider } from "./contexts/LanguageContext";
-
+import { FavoritesProvider } from "./contexts/FavoritesContext";
 // مكون تحميل مؤقت يظهر أثناء تحميل الأداة
 const Loading = () => (
   <div className="tool-page">
@@ -116,6 +116,7 @@ const PercentageCalculator = lazy(() => import("./pages/PercentageCalculator"));
 const PasswordMemeInfo = lazy(() => import("./pages/PasswordMemeInfo"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivacyVault = lazy(() => import("./pages/PrivacyVault"));
+const Favorites = lazy(() => import("./pages/Favorites"));
 
 
 
@@ -124,6 +125,8 @@ function App() {
   return (
       <ToastProvider>
 	<LanguageProvider>
+    <FavoritesProvider>
+
     <div className="app">
       <ParticlesBackground />
       <Navbar />
@@ -131,6 +134,7 @@ function App() {
       <main className="main-content">
         <Suspense fallback={<Loading />}>
           <Routes>
+	    <Route path="/favorites" element={<Favorites />} />
 	    <Route path="/tools/privacy-vault" element={<PrivacyVault />} />
 	    <Route path="/tools/ai-grammar-check" element={<AIGrammarCheck />} />
 	    <Route path="/tools/ai-text-summarizer" element={<AITextSummarizer />} />
@@ -236,6 +240,7 @@ function App() {
 
       <Footer />
     </div>
+    </FavoritesProvider>
 </LanguageProvider>
  </ToastProvider>
   );
