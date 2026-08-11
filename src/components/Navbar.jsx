@@ -59,6 +59,8 @@ function Navbar() {
         <Link to="/pricing" className={isActive("/pricing")} onClick={() => setOpen(false)}>{t.pricing}</Link>
         <Link to="/request-service" className={isActive("/request-service")} onClick={() => setOpen(false)}>{t.requestService}</Link>
 	<Link to="/favorites" className={isActive("/favorites")} onClick={() => setOpen(false)}>⭐ Favorites</Link>
+	<Link to="/games" className={isActive("/games")} onClick={() => setOpen(false)}>Games</Link>
+	<Link to="/backgrounds" className={isActive("/backgrounds")} onClick={() => setOpen(false)}>Backgrounds</Link>
       </nav>
     </header>
   );
