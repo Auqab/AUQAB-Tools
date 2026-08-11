@@ -115,6 +115,9 @@ const TipCalculator = lazy(() => import("./pages/TipCalculator"));
 const PercentageCalculator = lazy(() => import("./pages/PercentageCalculator"));
 const PasswordMemeInfo = lazy(() => import("./pages/PasswordMemeInfo"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const PrivacyVault = lazy(() => import("./pages/PrivacyVault"));
+
+
 
 
 function App() {
@@ -128,6 +131,7 @@ function App() {
       <main className="main-content">
         <Suspense fallback={<Loading />}>
           <Routes>
+	    <Route path="/tools/privacy-vault" element={<PrivacyVault />} />
 	    <Route path="/tools/ai-grammar-check" element={<AIGrammarCheck />} />
 	    <Route path="/tools/ai-text-summarizer" element={<AITextSummarizer />} />
 	    <Route path="/tools/ai-chatbot" element={<AIChatbot />} />

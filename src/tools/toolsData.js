@@ -519,6 +519,15 @@ title: "Scientific Calculator",
 { id: "ai-text-summarizer", icon: "📝", title: "AI Text Summarizer", category: "AI", description: "Summarize text with AI", path: "/tools/ai-text-summarizer" },
 { id: "ai-chatbot", icon: "🤖", title: "AI Chatbot", category: "AI", description: "Chat with GPT AI", path: "/tools/ai-chatbot" },
 
+{
+  id: "privacy-vault",
+  icon: "🔐",
+  title: "Privacy Vault",
+  category: "Security",
+  description: "Encrypted secret storage",
+  path: "/tools/privacy-vault"
+}
+
 ];
 
 export default toolsData;
