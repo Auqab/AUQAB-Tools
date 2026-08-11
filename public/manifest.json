@@ -1,0 +1,21 @@
+{
+  "name": "AUQAB Tools",
+  "short_name": "AUQAB",
+  "description": "70+ Free Online Tools – QR, PDF, AI, Security & More",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
