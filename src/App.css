@@ -407,3 +407,49 @@ textarea { width: 100%; height: 220px; padding: 20px; border-radius: 20px; borde
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
 }
+/*-----------------------*/
+/* ========== Background Generator ========== */
+.bg-preview {
+  width: 100%;
+  height: 180px;
+  border-radius: 20px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.bg-preview-text {
+  background: rgba(0,0,0,0.3);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.bg-templates {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.bg-templates h3 {
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.bg-template-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bg-code {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.bg-code h3 {
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
