@@ -9,7 +9,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import PageProgress from "./components/PageProgress";
 import BackToTop from "./components/BackToTop";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 
 
@@ -146,7 +146,7 @@ function App() {
 	<PageProgress />
       <main className="main-content">
         <Suspense fallback={<Loading />}>
-import ScrollToTop from "./components/ScrollToTop";
+	<ScrollToTop />
           <Routes>
 	    <Route path="/games" element={<Games />} />
 	    <Route path="/backgrounds" element={<Backgrounds />} />
