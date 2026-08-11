@@ -2982,4 +2982,13 @@ textarea {
   transform: scale(1.1);
 }
 
+/* NProgress override */
+#nprogress .bar {
+  background: #38bdf8 !important;
+  height: 3px !important;
+}
+#nprogress .peg {
+  box-shadow: 0 0 10px #38bdf8, 0 0 5px #38bdf8 !important;
+}
+
 }

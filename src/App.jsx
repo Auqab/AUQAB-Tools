@@ -7,6 +7,12 @@ import ParticlesBackground from "./components/ParticlesBackground";
 import { ToastProvider } from "./components/Toast";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
+import PageProgress from "./components/PageProgress";
+
+
+
+
+
 // مكون تحميل مؤقت يظهر أثناء تحميل الأداة
 const Loading = () => (
   <div className="tool-page">
@@ -129,8 +135,10 @@ function App() {
 
     <div className="app">
       <ParticlesBackground />
-      <Navbar />
-
+      
+	<Navbar />
+	  
+	<PageProgress />
       <main className="main-content">
         <Suspense fallback={<Loading />}>
           <Routes>
