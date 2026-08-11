@@ -4,11 +4,23 @@ import toolsData from "../tools/toolsData";
 import ToolCard from "../components/ToolCard";
 import SEO from "../components/SEO";
 
+// بيانات الألعاب والخلفيات (يمكنك توسيعها لاحقاً)
+const gamesData = [
+  { id: "chess-timer", icon: "♟️", title: "Chess Timer", description: "Two-player chess clock", path: "/tools/chess-timer" },
+  { id: "dice-roller", icon: "🎲", title: "Dice Roller", description: "Roll virtual dice", path: "/tools/dice-roller" },
+  { id: "pomodoro-timer", icon: "🍅", title: "Pomodoro Timer", description: "Boost focus with timed sessions", path: "/tools/pomodoro-timer" },
+];
+
+const backgroundsData = [
+  { id: "particles", icon: "✨", title: "Particle Background", description: "Live animated particles", path: "/" },
+  { id: "gradient-gen", icon: "🎨", title: "Gradient Generator", description: "Create beautiful CSS gradients", path: "/tools/color-picker" },
+  { id: "patterns", icon: "🖼️", title: "Pattern Gallery", description: "Background pattern library", path: "/" },
+];
+
 function Home() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
-  const featuredTools = toolsData.slice(0, 6);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -22,7 +34,7 @@ function Home() {
         tool.title.toLowerCase().includes(value.toLowerCase()) ||
         tool.description.toLowerCase().includes(value.toLowerCase())
     );
-    setResults(filtered.slice(0, 8)); // عرض 8 نتائج كحد أقصى
+    setResults(filtered.slice(0, 8));
   };
 
   const goToTool = (path) => {
@@ -34,17 +46,17 @@ function Home() {
   return (
     <>
       <SEO
-        title="AUQAB Tools - Free Online Tools for Everyone"
-        description="Free online tools for images, text, security and developers."
+        title="AUQAB - Free Tools, Games & Backgrounds"
+        description="85+ free online tools, fun games, and beautiful backgrounds. QR, PDF, AI, Security, Media, Developer, and more."
       />
 
       {/* ========== Hero Section ========== */}
       <section className="hero">
         <div className="hero-content">
-          <h1>AUQAB Tools</h1>
-          <p>أدوات رقمية مجانية وسريعة تساعدك في إنجاز مهامك اليومية بسهولة.</p>
+          <h1>AUQAB</h1>
+          <p>أدوات رقمية، ألعاب، وخلفيات – مجاناً وسريعة.</p>
           <p className="hero-subtitle">
-            Free online tools for images, text, security and developers. All tools work directly in your browser — no sign‑up needed.
+            Free online tools, games, and backgrounds. All directly in your browser — no sign‑up needed.
           </p>
 
           {/* شريط البحث الذكي */}
@@ -78,7 +90,7 @@ function Home() {
 
           <div className="hero-actions">
             <Link to="/tools" className="generate">
-              🚀 Explore All Tools
+              🚀 Explore All
             </Link>
             <Link to="/services" className="service-btn">
               💼 Custom Services
@@ -87,9 +99,9 @@ function Home() {
         </div>
       </section>
 
-      {/* باقي الأقسام بدون تغيير */}
+      {/* ========== Why Choose Section ========== */}
       <section className="features-section">
-        <h2 className="section-title">Why Choose AUQAB Tools?</h2>
+        <h2 className="section-title">Why Choose AUQAB?</h2>
         <div className="features">
           <div className="feature-card">
             <span className="feature-icon">⚡</span>
@@ -114,35 +126,68 @@ function Home() {
         </div>
       </section>
 
+      {/* ========== Stats Banner ========== */}
       <section className="stats-banner">
         <div className="stat">
           <strong>{toolsData.length}+</strong>
           <span>Free Tools</span>
         </div>
         <div className="stat">
-          <strong>100%</strong>
-          <span>Browser-based</span>
+          <strong>🎮</strong>
+          <span>Games</span>
         </div>
         <div className="stat">
-          <strong>📱💻</strong>
-          <span>All Devices</span>
+          <strong>🎨</strong>
+          <span>Backgrounds</span>
         </div>
       </section>
 
-      <section className="featured-tools">
-        <h2 className="section-title">🔥 Popular Tools</h2>
-        <div className="cards">
-          {featuredTools.map((tool) => (
-            <ToolCard key={tool.id} {...tool} />
-          ))}
+      {/* ========== الأقسام الثلاثة الجديدة ========== */}
+      <section className="home-sections">
+        {/* قسم الأدوات */}
+        <div className="home-section">
+          <h2 className="section-title">🛠️ Tools</h2>
+          <p className="section-desc">Professional utilities for everyday tasks.</p>
+          <div className="cards">
+            {toolsData.slice(0, 4).map((tool) => (
+              <ToolCard key={tool.id} {...tool} />
+            ))}
+          </div>
+          <div className="center-btn">
+            <Link to="/tools" className="open-tool">View All Tools →</Link>
+          </div>
         </div>
-        <div className="center-btn">
-          <Link to="/tools" className="open-tool">
-            View All Tools →
-          </Link>
+
+        {/* قسم الألعاب */}
+        <div className="home-section">
+          <h2 className="section-title">🎮 Games</h2>
+          <p className="section-desc">Fun mini-games to relax or challenge yourself.</p>
+          <div className="cards">
+            {gamesData.map((game) => (
+              <ToolCard key={game.id} {...game} />
+            ))}
+          </div>
+          <div className="center-btn">
+            <Link to="/tools" className="open-tool">Explore Games →</Link>
+          </div>
+        </div>
+
+        {/* قسم الخلفيات */}
+        <div className="home-section">
+          <h2 className="section-title">🎨 Backgrounds</h2>
+          <p className="section-desc">Beautiful backgrounds and gradients for your projects.</p>
+          <div className="cards">
+            {backgroundsData.map((bg) => (
+              <ToolCard key={bg.id} {...bg} />
+            ))}
+          </div>
+          <div className="center-btn">
+            <Link to="/tools/color-picker" className="open-tool">Get Started →</Link>
+          </div>
         </div>
       </section>
 
+      {/* ========== Call to Action ========== */}
       <section className="cta-section">
         <h2>Need a Custom Tool?</h2>
         <p>We build custom web utilities and automations for businesses and individuals.</p>
