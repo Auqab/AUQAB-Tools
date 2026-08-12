@@ -350,3 +350,126 @@ textarea { width: 100%; height: 220px; padding: 20px; border-radius: 20px; borde
   color: #94a3b8;
   font-size: 15px;
 }
+
+/* ========== أزرار دائرية (Tools, Games, Backgrounds) ========== */
+.btn-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.1);
+  border: 2px solid rgba(56, 189, 248, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.3s;
+  margin: 0 10px;
+}
+
+.btn-circle:hover {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+}
+
+.circle-icon {
+  font-size: 16px;
+  font-weight: 700;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ========== Tools Page (بدون إيموجي) ========== */
+.tools-section-new {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tools-header-new {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tools-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.tools-subtitle {
+  font-size: 18px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.tools-search-wrapper {
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.tools-search-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.tools-search-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.tools-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.cat-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: #94a3b8;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.cat-btn:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.cat-btn.active {
+  background: #38bdf8;
+  color: #020617;
+  border-color: #38bdf8;
+}
+
+.tools-count {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.tools-empty {
+  text-align: center;
+  color: #94a3b8;
+  margin-top: 40px;
+  font-size: 16px;
+}
