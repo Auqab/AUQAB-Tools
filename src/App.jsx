@@ -144,7 +144,6 @@ function App() {
                 <Routes>
 		  <Route path="/backgrounds" element={<BackgroundGenerator />} />
                   <Route path="/games" element={<Games />} />
-                  <Route path="/backgrounds" element={<Backgrounds />} />
                   <Route path="/changelog" element={<Changelog />} />
                   <Route path="/favorites" element={<Favorites />} />
                   <Route path="/tools/privacy-vault" element={<PrivacyVault />} />
