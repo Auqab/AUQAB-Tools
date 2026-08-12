@@ -7,24 +7,34 @@ const ParticlesBackground = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let animationId;
-    let particles = [];
+    let bubbles = [];
+
+    const colors = [
+      "rgba(56, 189, 248, 0.15)",   // أزرق فاتح
+      "rgba(129, 140, 248, 0.15)",  // بنفسجي
+      "rgba(34, 197, 94, 0.1)",     // أخضر
+      "rgba(245, 158, 11, 0.1)",    // برتقالي
+      "rgba(236, 72, 153, 0.1)",    // وردي
+    ];
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
 
-    const createParticles = () => {
-      particles = [];
-      const count = Math.floor(window.innerWidth / 8); // كثافة أعلى
+    const createBubbles = () => {
+      bubbles = [];
+      const count = Math.floor((window.innerWidth * window.innerHeight) / 25000); // كثافة منخفضة للسرعة
       for (let i = 0; i < count; i++) {
-        particles.push({
+        const radius = Math.random() * 80 + 20;
+        bubbles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          length: Math.random() * 60 + 20,
-          speed: Math.random() * 1.2 + 0.6,
-          opacity: Math.random() * 0.6 + 0.2,
-          hue: 195 + Math.random() * 30, // لون أزرق-سماوي
+          radius,
+          speedX: (Math.random() - 0.5) * 0.3,
+          speedY: (Math.random() - 0.5) * 0.3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          opacity: Math.random() * 0.5 + 0.1,
         });
       }
     };
@@ -32,37 +42,39 @@ const ParticlesBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (let p of particles) {
+      // رسم الدوائر
+      for (let b of bubbles) {
         ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x, p.y + p.length);
+        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+        ctx.fillStyle = b.color.replace("0.15", b.opacity.toString()).replace("0.1", b.opacity.toString());
+        ctx.fill();
 
-        // تأثير توهج
-        ctx.strokeStyle = `hsla(${p.hue}, 90%, 70%, ${p.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.shadowColor = `hsla(${p.hue}, 90%, 70%, 0.8)`;
-        ctx.shadowBlur = 8;
+        // حدود زجاجية رقيقة
+        ctx.strokeStyle = `rgba(255, 255, 255, 0.08)`;
+        ctx.lineWidth = 1;
         ctx.stroke();
 
-        p.y += p.speed;
-        if (p.y > canvas.height + p.length) {
-          p.y = -p.length;
-          p.x = Math.random() * canvas.width;
-        }
+        // تحريك الدوائر ببطء
+        b.x += b.speedX;
+        b.y += b.speedY;
+
+        // إعادة الدائرة إلى الجانب الآخر إذا خرجت
+        if (b.x > canvas.width + b.radius) b.x = -b.radius;
+        if (b.x < -b.radius) b.x = canvas.width + b.radius;
+        if (b.y > canvas.height + b.radius) b.y = -b.radius;
+        if (b.y < -b.radius) b.y = canvas.height + b.radius;
       }
 
-      // إعادة تعيين shadowBlur بعد الرسم حتى لا يؤثر على عناصر أخرى
-      ctx.shadowBlur = 0;
       animationId = requestAnimationFrame(animate);
     };
 
     resize();
-    createParticles();
+    createBubbles();
     animate();
 
     window.addEventListener("resize", () => {
       resize();
-      createParticles();
+      createBubbles();
     });
 
     return () => {
@@ -80,8 +92,8 @@ const ParticlesBackground = () => {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: -1,
-        background: "#020617",
+        zIndex: -2,
+        background: "#020617", // الخلفية الأساسية (سيتم تغطيتها بالتدرج من CSS)
       }}
     />
   );
