@@ -6,10 +6,32 @@ import { useTheme } from "../contexts/ThemeContext";
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const navRef = useRef();
   const { t, lang, toggleLang } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
+  // منطق إخفاء/إظهار الشريط عند التمرير
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 100 && currentScrollY > lastScrollY.current) {
+        // سحب لأسفل -> إخفاء
+        setHidden(true);
+        setOpen(false);
+      } else {
+        // سحب لأعلى أو في القمة -> إظهار
+        setHidden(false);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // إغلاق القائمة عند النقر خارجها
   useEffect(() => {
     function handleClickOutside(e) {
       if (navRef.current && !navRef.current.contains(e.target)) {
@@ -23,7 +45,7 @@ function Navbar() {
   const isActive = (path) => (location.pathname === path ? "active" : "");
 
   return (
-    <header className="header" ref={navRef}>
+    <header className={`header ${hidden ? "nav-hidden" : ""}`} ref={navRef}>
       <div className="logo">
         <span>AUQAB</span>
         <small>Tools</small>

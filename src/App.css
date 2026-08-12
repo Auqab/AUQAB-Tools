@@ -444,3 +444,24 @@ textarea { width: 100%; height: 220px; padding: 20px; border-radius: 20px; borde
   background: #38bdf8;
   color: white;
 }
+
+/* ========== سلوك الشريط عند التمرير ========== */
+.header {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+.header.nav-hidden {
+  transform: translateY(-150%);
+}
+
+
+/* مسافة علوية للمحتوى بعد تثبيت الهيدر */
+.main-content {
+  padding-top: 100px;
+}
