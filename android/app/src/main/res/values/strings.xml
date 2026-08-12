@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AUQAB-Tools</string>
+    <string name="title_activity_main">AUQAB-Tools</string>
+    <string name="package_name">com.auqab.tools</string>
+    <string name="custom_url_scheme">com.auqab.tools</string>
+</resources>
