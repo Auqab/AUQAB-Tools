@@ -1,14 +1,14 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { format } from "sql-formatter";
 import { trackEvent } from "../../utils/analytics";
 
 function SQLFormatterPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
 
-  const formatSQL = () => {
+  const formatSQL = async () => {
     try {
+      const { format } = await import("sql-formatter");
       const formatted = format(input);
       setOutput(formatted);
       trackEvent("sql_format", { tool: "sql_formatter" });

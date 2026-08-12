@@ -1,15 +1,15 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import * as yaml from "js-yaml";
 import { trackEvent } from "../../utils/analytics";
 
 function JSONYAMLConverter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [mode, setMode] = useState("json2yaml"); // أو yaml2json
+  const [mode, setMode] = useState("json2yaml");
 
-  const convert = () => {
+  const convert = async () => {
     try {
+      const yaml = await import("js-yaml");
       let result = "";
       if (mode === "json2yaml") {
         const obj = JSON.parse(input);

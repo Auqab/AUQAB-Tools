@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Papa from "papaparse";
 import SEO from "../../components/SEO";
 import { trackEvent } from "../../utils/analytics";
 
@@ -8,11 +7,12 @@ function CSVtoJSON() {
   const [json, setJson] = useState("");
   const [error, setError] = useState("");
 
-  const convert = () => {
+  const convert = async () => {
     setError("");
     setJson("");
     if (!csv.trim()) return;
     try {
+      const Papa = (await import("papaparse")).default;
       const result = Papa.parse(csv, { header: true, skipEmptyLines: true });
       if (result.errors.length) {
         setError("Invalid CSV format.");

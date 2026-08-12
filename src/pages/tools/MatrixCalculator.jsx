@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { matrix, multiply, add, inv } from "mathjs";
 import SEO from "../../components/SEO";
 import { trackEvent } from "../../utils/analytics";
 
@@ -9,14 +8,15 @@ function MatrixCalculator() {
   const [operation, setOperation] = useState("multiply");
   const [result, setResult] = useState("");
 
-  const compute = () => {
+  const compute = async () => {
     try {
-      const A = matrix(JSON.parse(m1));
-      const B = matrix(JSON.parse(m2));
+      const math = await import("mathjs");
+      const A = math.matrix(JSON.parse(m1));
+      const B = math.matrix(JSON.parse(m2));
       let res;
-      if (operation === "multiply") res = multiply(A, B);
-      else if (operation === "add") res = add(A, B);
-      else if (operation === "inverse") res = inv(A);
+      if (operation === "multiply") res = math.multiply(A, B);
+      else if (operation === "add") res = math.add(A, B);
+      else if (operation === "inverse") res = math.inv(A);
       setResult(JSON.stringify(res.toArray(), null, 2));
       trackEvent("matrix_calc", { tool: "matrix_calculator" });
     } catch {

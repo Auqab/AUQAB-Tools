@@ -1,7 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { trackEvent } from "../../utils/analytics";
-import { marked } from "marked";
 
 function MarkdownPreviewer() {
   const [markdown, setMarkdown] = useState(`# Welcome to AUQAB Markdown Previewer
@@ -13,14 +12,23 @@ function MarkdownPreviewer() {
 
 [AUQAB Tools](https://auqab.tools)`);
 
-  const [html, setHtml] = useState(marked(markdown));
+  const [html, setHtml] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const value = e.target.value;
     setMarkdown(value);
+    const { marked } = await import("marked");
     setHtml(marked(value));
     trackEvent("markdown_preview", { tool: "markdown_previewer" });
   };
+
+  // تهيئة أولية
+  useState(() => {
+    (async () => {
+      const { marked } = await import("marked");
+      setHtml(marked(markdown));
+    })();
+  }, []);
 
   const copyHtml = () => {
     navigator.clipboard.writeText(html);
@@ -29,17 +37,11 @@ function MarkdownPreviewer() {
 
   return (
     <>
-      <SEO
-        title="Free Markdown Previewer - AUQAB Tools"
-        description="Write Markdown and see the live preview instantly. Free online Markdown editor."
-      />
-
+      <SEO title="Free Markdown Previewer - AUQAB Tools" description="Write Markdown and see the live preview instantly." />
       <section className="tool-page">
         <div className="password-card">
           <h1>📝 Markdown Previewer</h1>
-          <p className="tool-description">
-            Write Markdown on the left and see the HTML preview on the right.
-          </p>
+          <p className="tool-description">Write Markdown on the left and see the HTML preview on the right.</p>
 
           <div className="markdown-container">
             <textarea
@@ -55,9 +57,7 @@ function MarkdownPreviewer() {
           </div>
 
           <div className="markdown-actions">
-            <button className="generate" onClick={copyHtml}>
-              📋 Copy HTML
-            </button>
+            <button className="generate" onClick={copyHtml}>📋 Copy HTML</button>
           </div>
         </div>
       </section>

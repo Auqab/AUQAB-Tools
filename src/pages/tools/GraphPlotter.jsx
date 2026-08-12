@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import Chart from "chart.js/auto";
+import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
 import { trackEvent } from "../../utils/analytics";
 
@@ -8,9 +7,11 @@ function GraphPlotter() {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
-  const plot = () => {
+  const plot = async () => {
     const ctx = canvasRef.current.getContext("2d");
     if (chartRef.current) chartRef.current.destroy();
+
+    const { default: Chart } = await import("chart.js/auto");
 
     const data = [];
     for (let i = -10; i <= 10; i += 0.2) {

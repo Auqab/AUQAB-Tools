@@ -1,5 +1,4 @@
 import { useState } from "react";
-import * as math from "mathjs";
 import SEO from "../../components/SEO";
 import { trackEvent } from "../../utils/analytics";
 
@@ -7,13 +6,14 @@ function EquationSolver() {
   const [equation, setEquation] = useState("x^2 + 2*x + 1 = 0");
   const [solution, setSolution] = useState("");
 
-  const resolve = () => {
+  const resolve = async () => {
     try {
+      const math = await import("mathjs");
       const parts = equation.split("=");
       const left = parts[0].trim();
       const right = parts[1]?.trim() || "0";
       const expr = math.parse(`(${left}) - (${right})`);
-      const roots = math.simplify(expr);
+      const roots = math.solve(expr, "x");
       setSolution(Array.isArray(roots) ? roots.join(", ") : String(roots));
       trackEvent("equation_solve", { tool: "equation_solver" });
     } catch {
