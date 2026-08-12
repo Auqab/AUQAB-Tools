@@ -22,8 +22,15 @@ function Home() {
           </p>
 
           <div className="hero-actions-new">
-            <Link to="/tools" className="btn-primary">Explore Tools</Link>
-            <Link to="/services" className="btn-outline">Custom Services</Link>
+            <Link to="/tools" className="btn-circle">
+              <span className="circle-icon">Tools</span>
+            </Link>
+            <Link to="/games" className="btn-circle">
+              <span className="circle-icon">Games</span>
+            </Link>
+            <Link to="/backgrounds" className="btn-circle">
+              <span className="circle-icon">Art</span>
+            </Link>
           </div>
         </div>
 
@@ -35,21 +42,18 @@ function Home() {
 
       <section className="big-cards-section">
         <div className="big-card">
-          <span className="big-card-icon">TOOLS</span>
           <h2>Utilities</h2>
           <p>85+ professional utilities for all your digital tasks.</p>
           <Link to="/tools" className="big-card-open-btn">Open</Link>
         </div>
 
         <div className="big-card">
-          <span className="big-card-icon">GAMES</span>
           <h2>Play</h2>
           <p>Fun mini-games to relax or challenge your brain.</p>
           <Link to="/games" className="big-card-open-btn">Open</Link>
         </div>
 
         <div className="big-card">
-          <span className="big-card-icon">ART</span>
           <h2>Backgrounds</h2>
           <p>Beautiful backgrounds and gradients for your projects.</p>
           <Link to="/backgrounds" className="big-card-open-btn">Open</Link>

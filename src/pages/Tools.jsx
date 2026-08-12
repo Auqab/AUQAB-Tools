@@ -15,25 +15,27 @@ function Tools() {
   });
 
   return (
-    <section className="tools-section">
-      <div className="tools-header">
-        <h1>All Tools</h1>
-        <p>{toolsData.length} Free Online Tools Available</p>
+    <section className="tools-section-new">
+      <div className="tools-header-new">
+        <h1 className="tools-title">All Tools</h1>
+        <p className="tools-subtitle">{toolsData.length} free online tools available</p>
       </div>
 
-      <input
-        className="tool-search"
-        type="text"
-        placeholder="Search tools..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="tools-search-wrapper">
+        <input
+          type="text"
+          placeholder="Search tools..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="tools-search-input"
+        />
+      </div>
 
-      <div className="categories">
+      <div className="tools-categories">
         {categories.map((cat) => (
           <button
             key={cat}
-            className={category === cat ? "active-category" : ""}
+            className={`cat-btn ${category === cat ? "active" : ""}`}
             onClick={() => setCategory(cat)}
           >
             {cat}
@@ -41,7 +43,7 @@ function Tools() {
         ))}
       </div>
 
-      <p className="results-count">Showing {filteredTools.length} tools</p>
+      <p className="tools-count">Showing {filteredTools.length} tools</p>
 
       <div className="cards">
         {filteredTools.map((tool) => (
@@ -49,7 +51,9 @@ function Tools() {
         ))}
       </div>
 
-      {filteredTools.length === 0 && <p>No tools found.</p>}
+      {filteredTools.length === 0 && (
+        <p className="tools-empty">No tools found. Try a different search or category.</p>
+      )}
     </section>
   );
 }
