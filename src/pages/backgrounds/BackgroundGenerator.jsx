@@ -1,63 +1,104 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import SEO from "../../components/SEO";
 import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
-const templates = [
-  { name: "Sunset", value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)" },
-  { name: "Ocean", value: "linear-gradient(135deg, #0c3483 0%, #a2b6df 100%)" },
-  { name: "Forest", value: "linear-gradient(135deg, #134e5e 0%, #71b280 100%)" },
-  { name: "Midnight", value: "linear-gradient(135deg, #232526 0%, #414345 100%)" },
+const types = [
+  { label: "Linear Gradient", value: "linear" },
+  { label: "Radial Gradient", value: "radial" },
 ];
 
 function BackgroundGenerator() {
-  const [gradient, setGradient] = useState(templates[0].value);
-  const [copied, setCopied] = useState(false);
+  const [type, setType] = useState("linear");
+  const [color1, setColor1] = useState("#667eea");
+  const [color2, setColor2] = useState("#764ba2");
+  const [angle, setAngle] = useState(135);
 
-  const applyTemplate = (value) => {
-    setGradient(value);
-    trackEvent("bg_template", { tool: "background_generator" });
-  };
+  // توليد كود CSS بناءً على الاختيارات
+  const generateCSS = useCallback(() => {
+    if (type === "linear") {
+      return `linear-gradient(${angle}deg, ${color1} 0%, ${color2} 100%)`;
+    } else if (type === "radial") {
+      return `radial-gradient(circle, ${color1} 0%, ${color2} 100%)`;
+    }
+    return "";
+  }, [type, color1, color2, angle]);
+
+  const cssCode = generateCSS();
 
   const copyCSS = () => {
-    navigator.clipboard.writeText(`background: ${gradient};`);
-    setCopied(true);
+    navigator.clipboard.writeText(`background: ${cssCode};`);
     showToast("CSS copied!");
-    setTimeout(() => setCopied(false), 1500);
+    trackEvent("bg_copy", { tool: "background_generator" });
+  };
+
+  const randomize = () => {
+    const randomColor = () => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0");
+    setColor1(randomColor());
+    setColor2(randomColor());
+    setAngle(Math.floor(Math.random() * 360));
+    trackEvent("bg_randomize", { tool: "background_generator" });
   };
 
   return (
     <>
-      <SEO title="CSS Background Generator - AUQAB" description="Create beautiful CSS backgrounds, gradients, and patterns." />
+      <SEO title="CSS Background Generator - AUQAB" description="Create beautiful CSS gradients interactively." />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🎨 CSS Background Generator</h1>
-          <p className="tool-description">Choose a background template or create your own. Copy the CSS instantly.</p>
+          <h1>🎨 Background Generator</h1>
+          <p className="tool-description">Design your own CSS gradient background. Choose colors, type, and angle.</p>
 
-          {/* المعاينة */}
-          <div className="bg-preview" style={{ background: gradient }}>
+          {/* معاينة حية */}
+          <div className="bg-preview" style={{ background: cssCode }}>
             <span className="bg-preview-text">Preview</span>
           </div>
 
-          {/* القوالب */}
-          <div className="bg-templates">
-            <h3>Templates</h3>
-            <div className="bg-template-buttons">
-              {templates.map((t) => (
-                <button key={t.name} className="preset-btn" onClick={() => applyTemplate(t.value)}>
-                  {t.name}
-                </button>
-              ))}
+          {/* عناصر التحكم */}
+          <div className="bg-controls">
+            <div className="bg-control-row">
+              <label>Type</label>
+              <select value={type} onChange={(e) => setType(e.target.value)}>
+                {types.map((t) => (
+                  <option key={t.value} value={t.value}>{t.label}</option>
+                ))}
+              </select>
             </div>
+
+            <div className="bg-control-row">
+              <label>Color 1</label>
+              <input type="color" value={color1} onChange={(e) => setColor1(e.target.value)} />
+            </div>
+
+            <div className="bg-control-row">
+              <label>Color 2</label>
+              <input type="color" value={color2} onChange={(e) => setColor2(e.target.value)} />
+            </div>
+
+            {type === "linear" && (
+              <div className="bg-control-row">
+                <label>Angle: {angle}°</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  value={angle}
+                  onChange={(e) => setAngle(Number(e.target.value))}
+                />
+              </div>
+            )}
+
+            <button className="preset-btn" onClick={randomize}>
+              🎲 Randomize
+            </button>
           </div>
 
           {/* كود CSS */}
           <div className="bg-code">
             <h3>CSS Code</h3>
             <div className="uuid-row">
-              <code>background: {gradient};</code>
+              <code>background: {cssCode};</code>
               <button className="copy-btn-mini" onClick={copyCSS}>
-                {copied ? "✅" : "📋"}
+                📋
               </button>
             </div>
           </div>
