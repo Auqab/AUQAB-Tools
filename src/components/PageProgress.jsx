@@ -28,4 +28,3 @@ function PageProgress() {
 }
 
 export default PageProgress;
-
