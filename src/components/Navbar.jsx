@@ -1,12 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
+
+
+
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const navRef = useRef();
   const { t, lang, toggleLang } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -26,6 +31,10 @@ function Navbar() {
         <span>AUQAB</span>
         <small>Tools</small>
       </div>
+
+	<button onClick={toggleTheme} className="theme-btn-nav">
+  	  {theme === "dark" ? "L" : "D"}
+	</button>
 
       <div className="nav-controls">
         <button onClick={toggleLang} className="lang-btn-nav">

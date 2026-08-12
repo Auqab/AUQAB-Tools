@@ -1,87 +1,82 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "../contexts/ThemeContext";
 
 const ParticlesBackground = () => {
   const canvasRef = useRef(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let animationId;
-    let bubbles = [];
+    let circles = [];
 
-    const colors = [
-      "rgba(56, 189, 248, 0.15)",   // أزرق فاتح
-      "rgba(129, 140, 248, 0.15)",  // بنفسجي
-      "rgba(34, 197, 94, 0.1)",     // أخضر
-      "rgba(245, 158, 11, 0.1)",    // برتقالي
-      "rgba(236, 72, 153, 0.1)",    // وردي
-    ];
+    const colorsDark = ["#38bdf8", "#818cf8", "#ec4899", "#22c55e", "#f59e0b", "#06b6d4"];
+    const colorsLight = ["#1e40af", "#7c3aed", "#be185d", "#15803d", "#b45309", "#0e7490"];
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
 
-    const createBubbles = () => {
-      bubbles = [];
-      const count = Math.floor((window.innerWidth * window.innerHeight) / 25000); // كثافة منخفضة للسرعة
+    const createCircles = () => {
+      circles = [];
+      const count = Math.floor((window.innerWidth * window.innerHeight) / 40000);
       for (let i = 0; i < count; i++) {
-        const radius = Math.random() * 80 + 20;
-        bubbles.push({
+        const radius = Math.random() * 120 + 30; // 30 - 150px
+        const colors = theme === "dark" ? colorsDark : colorsLight;
+        circles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.3,
+          speedX: (Math.random() - 0.5) * 0.4,
+          speedY: (Math.random() - 0.5) * 0.4,
           color: colors[Math.floor(Math.random() * colors.length)],
-          opacity: Math.random() * 0.5 + 0.1,
+          opacity: Math.random() * 0.3 + 0.2,
         });
       }
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // رسم الدوائر
-      for (let b of bubbles) {
+      
+      for (let c of circles) {
         ctx.beginPath();
-        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-        ctx.fillStyle = b.color.replace("0.15", b.opacity.toString()).replace("0.1", b.opacity.toString());
-        ctx.fill();
-
-        // حدود زجاجية رقيقة
-        ctx.strokeStyle = `rgba(255, 255, 255, 0.08)`;
-        ctx.lineWidth = 1;
+        ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = c.color;
+        ctx.globalAlpha = c.opacity;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // تحريك الدوائر ببطء
-        b.x += b.speedX;
-        b.y += b.speedY;
+        // حركة عائمة خفيفة
+        c.x += c.speedX;
+        c.y += c.speedY;
 
-        // إعادة الدائرة إلى الجانب الآخر إذا خرجت
-        if (b.x > canvas.width + b.radius) b.x = -b.radius;
-        if (b.x < -b.radius) b.x = canvas.width + b.radius;
-        if (b.y > canvas.height + b.radius) b.y = -b.radius;
-        if (b.y < -b.radius) b.y = canvas.height + b.radius;
+        // إعادة الدخول من الجانب الآخر
+        if (c.x > canvas.width + c.radius) c.x = -c.radius;
+        if (c.x < -c.radius) c.x = canvas.width + c.radius;
+        if (c.y > canvas.height + c.radius) c.y = -c.radius;
+        if (c.y < -c.radius) c.y = canvas.height + c.radius;
       }
-
+      
+      ctx.globalAlpha = 1;
       animationId = requestAnimationFrame(animate);
     };
 
     resize();
-    createBubbles();
+    createCircles();
     animate();
 
     window.addEventListener("resize", () => {
       resize();
-      createBubbles();
+      createCircles();
     });
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas
@@ -92,8 +87,8 @@ const ParticlesBackground = () => {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: -2,
-        background: "#020617", // الخلفية الأساسية (سيتم تغطيتها بالتدرج من CSS)
+        zIndex: -1,
+        background: theme === "dark" ? "#020617" : "#f8fafc",
       }}
     />
   );

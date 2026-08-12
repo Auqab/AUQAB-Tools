@@ -234,3 +234,59 @@ textarea { width: 100%; height: 220px; padding: 20px; border-radius: 20px; borde
   .circle-icon { font-size: 14px; }
   .stats-banner { gap: 30px; }
 }
+/*----------------------------------*/
+
+/* ========== زر تبديل الثيم الدائري ========== */
+.theme-btn-nav {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* ========== دعم الوضع الفاتح ========== */
+[data-theme="light"] body {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+[data-theme="light"] .header {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .logo span {
+  color: #1e293b;
+}
+
+[data-theme="light"] .nav a {
+  color: #1e293b;
+}
+
+[data-theme="light"] .nav a:hover,
+[data-theme="light"] .nav a.active {
+  color: #38bdf8;
+}
+
+[data-theme="light"] .footer {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .footer a {
+  color: #475569;
+}

@@ -7,6 +7,7 @@ import ParticlesBackground from "./components/ParticlesBackground";
 import { ToastProvider } from "./components/Toast";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import PageProgress from "./components/PageProgress";
 import BackToTop from "./components/BackToTop";
 import ScrollToTop from "./components/ScrollToTop";
@@ -132,7 +133,8 @@ const BackgroundGenerator = lazy(() => import("./pages/backgrounds/BackgroundGen
 function App() {
   return (
     <ToastProvider>
-      <LanguageProvider>
+     <ThemeProvider>
+       <LanguageProvider>
         <FavoritesProvider>
           <div className="app">
             <ParticlesBackground />
@@ -250,8 +252,9 @@ function App() {
             <Footer />
             <BackToTop />
           </div>
-        </FavoritesProvider>
-      </LanguageProvider>
+          </FavoritesProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </ToastProvider>
   );
 }
