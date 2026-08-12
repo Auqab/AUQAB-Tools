@@ -27,24 +27,12 @@ function Navbar() {
         <small>Tools</small>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <button
-          onClick={toggleLang}
-          style={{
-            background: "transparent",
-            color: "#38bdf8",
-            border: "1px solid #38bdf8",
-            borderRadius: 8,
-            padding: "4px 10px",
-            cursor: "pointer",
-            fontSize: 14,
-          }}
-        >
+      <div className="nav-controls">
+        <button onClick={toggleLang} className="lang-btn-nav">
           {lang === "en" ? "AR" : "EN"}
         </button>
-
         <button className="menu-btn" onClick={() => setOpen(!open)}>
-          <span className="dots">&#8942;</span>
+          &#8942;
         </button>
       </div>
 
