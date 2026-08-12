@@ -7,7 +7,7 @@ function SEO({ title, description, image, url }) {
   const currentUrl = url || `${siteUrl}${location.pathname}`;
   const ogImage = image || `${siteUrl}/og-image.png`; // يمكنك إضافة صورة 1200x630 لاحقاً
   const defaultTitle = "AUQAB Tools - Free Online Tools for Everyone";
-  const defaultDesc = "70+ free online tools. QR, PDF, AI, Security, Media, Developer, and more.";
+  const defaultDesc = "85+ free online tools. QR, PDF, AI, Security, Media, Developer, and more.";
 
   useEffect(() => {
     document.title = title || defaultTitle;
