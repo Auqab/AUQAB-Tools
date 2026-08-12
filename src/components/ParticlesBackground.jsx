@@ -88,7 +88,7 @@ const ParticlesBackground = () => {
         width: "100%",
         height: "100%",
         zIndex: -1,
-        background: theme === "dark" ? "#020617" : "#f8fafc",
+	background: theme === "dark" ? "#020617" : "#e2e8f0",
       }}
     />
   );
