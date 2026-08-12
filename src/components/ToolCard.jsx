@@ -15,7 +15,7 @@ function ToolCard({ id, title, description, path, category }) {
         }}
         title={fav ? "Remove from favorites" : "Add to favorites"}
       >
-        {fav ? "★" : "☆"}
+        {fav ? "●" : "○"}
       </button>
 
       <span className="category">{category}</span>
