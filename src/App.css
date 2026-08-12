@@ -416,3 +416,31 @@ textarea { width: 100%; height: 220px; padding: 20px; border-radius: 20px; borde
 [data-theme="light"] .nav a {
   color: #1e293b;
 }
+
+/*_________________________________________*/
+
+/* ========== اقتراحات إضافية للوضعين ========== */
+[data-theme="light"] .tool-card:hover,
+[data-theme="light"] .password-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn-nav {
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+[data-theme="light"] .theme-btn-nav {
+  border-color: #1e293b;
+  color: #1e293b;
+}
+
+[data-theme="light"] .cat-btn {
+  border-color: rgba(0,0,0,0.2);
+  color: #1e293b;
+}
+
+[data-theme="light"] .cat-btn.active {
+  background: #38bdf8;
+  color: white;
+}
