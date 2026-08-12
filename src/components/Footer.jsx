@@ -1,35 +1,42 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="footer">
       <div>
         <h3>AUQAB Tools</h3>
-        <p>Free online utilities for everyone.</p>
+        <p>{t.footerTagline}</p>
       </div>
+
       <div>
-        <h4>Tools</h4>
-        <Link to="/tools">All Tools</Link>
-        <Link to="/tools/qr-generator">QR Generator</Link>
-        <Link to="/tools/password-generator">Password Generator</Link>
-        <Link to="/tools/json-formatter">JSON Formatter</Link>
+        <h4>{t.tools}</h4>
+        <Link to="/tools">{t.allTools}</Link>
+        <Link to="/tools/qr-generator">{t.qrGenerator}</Link>
+        <Link to="/tools/password-generator">{t.passwordGenerator}</Link>
+        <Link to="/tools/json-formatter">{t.jsonFormatter}</Link>
       </div>
+
       <div>
-        <h4>Company</h4>
-        <Link to="/about">About</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/pricing">Pricing</Link>
-        <Link to="/contact">Contact</Link>
-	<Link to="/changelog">Changelog</Link>
+        <h4>{t.company}</h4>
+        <Link to="/about">{t.about}</Link>
+        <Link to="/services">{t.services}</Link>
+        <Link to="/pricing">{t.pricing}</Link>
+        <Link to="/contact">{t.contact}</Link>
+        <Link to="/changelog">{t.changelog}</Link>
       </div>
+
       <div>
-        <h4>Legal</h4>
-        <Link to="/privacy">Privacy</Link>
-        <Link to="/terms">Terms</Link>
-        <Link to="/cookies">Cookies</Link>
+        <h4>{t.legal}</h4>
+        <Link to="/privacy">{t.privacy}</Link>
+        <Link to="/terms">{t.terms}</Link>
+        <Link to="/cookies">{t.cookies}</Link>
       </div>
+
       <div className="footer-bottom">
-        <p>© 2026 AUQAB Tools. All rights reserved.</p>
+        <p>{t.rights}</p>
       </div>
     </footer>
   );

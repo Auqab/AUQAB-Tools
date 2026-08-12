@@ -1,8 +1,10 @@
 import { useState } from "react";
 import ToolCard from "../components/ToolCard";
 import toolsData from "../tools/toolsData";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Tools() {
+  const { t } = useLanguage();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
 
@@ -17,14 +19,14 @@ function Tools() {
   return (
     <section className="tools-section-new">
       <div className="tools-header-new">
-        <h1 className="tools-title">All Tools</h1>
-        <p className="tools-subtitle">{toolsData.length} free online tools available</p>
+        <h1 className="tools-title">{t.allToolsTitle}</h1>
+        <p className="tools-subtitle">{toolsData.length} {t.toolsAvailable}</p>
       </div>
 
       <div className="tools-search-wrapper">
         <input
           type="text"
-          placeholder="Search tools..."
+          placeholder={t.searchTools}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="tools-search-input"
@@ -43,7 +45,7 @@ function Tools() {
         ))}
       </div>
 
-      <p className="tools-count">Showing {filteredTools.length} tools</p>
+      <p className="tools-count">{t.showingTools.replace("{count}", filteredTools.length)}</p>
 
       <div className="cards">
         {filteredTools.map((tool) => (
@@ -52,7 +54,7 @@ function Tools() {
       </div>
 
       {filteredTools.length === 0 && (
-        <p className="tools-empty">No tools found. Try a different search or category.</p>
+        <p className="tools-empty">{t.noToolsFound}</p>
       )}
     </section>
   );
