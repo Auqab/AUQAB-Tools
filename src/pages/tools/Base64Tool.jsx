@@ -1,53 +1,51 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function Base64Tool() {
   const [text, setText] = useState("");
   const [result, setResult] = useState("");
-  const [copied, setCopied] = useState(false);
 
   const textSize = text.length;
   const resultSize = result.length;
 
-  // ترميز Base64 بطريقة حديثة
-  function encode() {
+  const encode = () => {
     if (!text) return;
     try {
       const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(text)));
       setResult(encoded);
+      showToast("Text encoded to Base64!");
       trackEvent("base64_encode", { tool: "base64_tool" });
-    } catch (e) {
-      setResult("❌ Encoding error. Check your input.");
+    } catch {
+      setResult("Encoding error. Check your input.");
     }
-  }
+  };
 
-  // فك ترميز Base64 بطريقة حديثة
-  function decode() {
+  const decode = () => {
     if (!text) return;
     try {
       const decoded = new TextDecoder().decode(
         Uint8Array.from(atob(text), (c) => c.charCodeAt(0))
       );
       setResult(decoded);
+      showToast("Base64 decoded to text!");
       trackEvent("base64_decode", { tool: "base64_tool" });
-    } catch (e) {
-      setResult("❌ Invalid Base64 string.");
+    } catch {
+      setResult("Invalid Base64 string.");
     }
-  }
+  };
 
-  function copyResult() {
-    if (!result || result.startsWith("❌")) return;
+  const copyResult = () => {
+    if (!result || result.startsWith("Error") || result.startsWith("Invalid")) return;
     navigator.clipboard.writeText(result);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
+    showToast("Result copied!");
+  };
 
-  function clearAll() {
+  const clearAll = () => {
     setText("");
     setResult("");
-    setCopied(false);
-  }
+  };
 
   return (
     <>
@@ -58,16 +56,15 @@ function Base64Tool() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔐 Base64 Encoder / Decoder</h1>
+          <h1>Base64 Encoder / Decoder</h1>
           <p className="tool-description">
             Convert text to Base64 and decode Base64 data instantly.
             Useful for developers, APIs, and web projects.
           </p>
 
-          {/* إدخال */}
           <div className="json-section">
             <label className="json-label">
-              📥 Input
+              Input
               {textSize > 0 && <span className="size-hint">({textSize} chars)</span>}
             </label>
             <textarea
@@ -82,48 +79,44 @@ function Base64Tool() {
             />
           </div>
 
-          {/* أزرار */}
           <div className="base64-actions">
             <button className="generate" onClick={encode}>
-              🔒 Encode to Base64
+              Encode to Base64
             </button>
             <button className="minify-btn" onClick={decode}>
-              🔓 Decode from Base64
+              Decode from Base64
             </button>
           </div>
 
-          {/* نتيجة */}
           {result && (
             <div className="json-section">
               <label className="json-label">
-                📤 Output
+                Output
                 <span className="size-hint">({resultSize} chars)</span>
               </label>
               <textarea
                 rows="8"
                 readOnly
                 value={result}
-                className={`output-textarea ${result.startsWith("❌") ? "json-error-textarea" : ""}`}
+                className={`output-textarea ${result.startsWith("Error") || result.startsWith("Invalid") ? "json-error-textarea" : ""}`}
                 spellCheck={false}
               />
               <button
                 className="copy-btn-json"
                 onClick={copyResult}
-                disabled={result.startsWith("❌")}
+                disabled={result.startsWith("Error") || result.startsWith("Invalid")}
               >
-                {copied ? "✅ Copied!" : "📋 Copy Result"}
+                Copy Result
               </button>
             </div>
           )}
 
-          {/* مسح */}
           {(text || result) && (
             <button className="clear-btn" onClick={clearAll}>
-              ✕ Clear All
+              Clear All
             </button>
           )}
 
-          {/* معلومات */}
           <div className="info-section">
             <h2>How to use Base64 Tool?</h2>
             <p>Enter your text, then choose <strong>Encode</strong> to convert it to Base64, or <strong>Decode</strong> to revert Base64 back to plain text.</p>
@@ -135,12 +128,6 @@ function Base64Tool() {
               <li>No data is stored or uploaded</li>
               <li>Fast, modern and simple</li>
             </ul>
-
-            <h2>Frequently Asked Questions</h2>
-            <h3>What is Base64?</h3>
-            <p>Base64 is an encoding method that represents binary data as ASCII text. It's commonly used in data URLs, APIs, and email attachments.</p>
-            <h3>Is Base64 encryption?</h3>
-            <p>No. Base64 is encoding, not encryption. Anyone can decode it back. Do not use Base64 for securing sensitive data.</p>
           </div>
         </div>
       </section>

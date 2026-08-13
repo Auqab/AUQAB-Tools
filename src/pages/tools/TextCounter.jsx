@@ -1,13 +1,12 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function TextCounter() {
   const [text, setText] = useState("");
-  const [copied, setCopied] = useState(false);
   const hasTracked = useRef(false);
 
-  // تتبع الاستخدام مرة واحدة فقط عند أول إدخال فعلي
   const handleTextChange = (e) => {
     const newText = e.target.value;
     setText(newText);
@@ -32,17 +31,16 @@ function TextCounter() {
     : 0;
   const readingTime = Math.ceil(words / 200);
 
-  function clearText() {
+  const clearText = () => {
     setText("");
     hasTracked.current = false;
-  }
+  };
 
-  function copyText() {
+  const copyText = () => {
     if (!text) return;
     navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
+    showToast("Text copied!");
+  };
 
   return (
     <>
@@ -53,7 +51,7 @@ function TextCounter() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>📝 Text & Word Counter</h1>
+          <h1>Text & Word Counter</h1>
           <p className="tool-description">
             Analyze your text instantly. Count words, characters, sentences, lines, and estimated reading time.
           </p>
@@ -67,27 +65,22 @@ function TextCounter() {
 
           <div className="stats">
             <div className="stat-item">
-              <span className="stat-icon">🔤</span>
               <span className="stat-label">Characters</span>
               <strong>{characters}</strong>
             </div>
             <div className="stat-item">
-              <span className="stat-icon">📝</span>
               <span className="stat-label">Words</span>
               <strong>{words}</strong>
             </div>
             <div className="stat-item">
-              <span className="stat-icon">✍️</span>
               <span className="stat-label">Sentences</span>
               <strong>{sentences}</strong>
             </div>
             <div className="stat-item">
-              <span className="stat-icon">📄</span>
               <span className="stat-label">Lines</span>
               <strong>{lines}</strong>
             </div>
             <div className="stat-item">
-              <span className="stat-icon">⏱️</span>
               <span className="stat-label">Reading Time</span>
               <strong>{readingTime} min</strong>
             </div>
@@ -95,10 +88,10 @@ function TextCounter() {
 
           <div className="buttons">
             <button className="generate" onClick={copyText}>
-              {copied ? "✅ Copied!" : "📋 Copy Text"}
+              Copy Text
             </button>
             <button className="clear" onClick={clearText}>
-              ✕ Clear
+              Clear
             </button>
           </div>
         </div>

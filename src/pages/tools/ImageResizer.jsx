@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function ImageResizer() {
@@ -15,7 +16,7 @@ function ImageResizer() {
   const [result, setResult] = useState("");
   const imgRef = useRef(null);
 
-  function loadImage(e) {
+  const loadImage = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setImage(file);
@@ -24,7 +25,6 @@ function ImageResizer() {
     const url = URL.createObjectURL(file);
     setPreview(url);
 
-    // قراءة الأبعاد الأصلية
     const img = new Image();
     img.src = url;
     img.onload = () => {
@@ -33,27 +33,25 @@ function ImageResizer() {
       setWidth(img.width);
       setHeight(img.height);
     };
-  }
+  };
 
-  // عند تغيير العرض مع الحفاظ على النسبة
-  function handleWidthChange(newWidth) {
+  const handleWidthChange = (newWidth) => {
     setWidth(newWidth);
     if (keepAspect && originalWidth > 0) {
       const ratio = originalHeight / originalWidth;
       setHeight(Math.round(newWidth * ratio));
     }
-  }
+  };
 
-  // عند تغيير الارتفاع مع الحفاظ على النسبة
-  function handleHeightChange(newHeight) {
+  const handleHeightChange = (newHeight) => {
     setHeight(newHeight);
     if (keepAspect && originalHeight > 0) {
       const ratio = originalWidth / originalHeight;
       setWidth(Math.round(newHeight * ratio));
     }
-  }
+  };
 
-  function resizeImage() {
+  const resizeImage = () => {
     if (!image || !preview) return;
 
     const img = new Image();
@@ -70,42 +68,36 @@ function ImageResizer() {
 
       const dataUrl = canvas.toDataURL(mimeType, qualityValue);
       setResult(dataUrl);
-
+      showToast("Image resized successfully!");
       trackEvent("image_resize", { tool: "image_resizer" });
     };
-  }
+  };
 
-  function download() {
+  const download = () => {
     if (!result) return;
     const extension = format === "image/png" ? "png" : format === "image/webp" ? "webp" : "jpg";
     const link = document.createElement("a");
     link.href = result;
-    link.download = `AUQAB-resized-image.${extension}`;
+    link.download = `resized-image.${extension}`;
     link.click();
+    showToast("Download started!");
     trackEvent("image_resize_download", { tool: "image_resizer" });
-  }
+  };
 
   return (
     <>
       <SEO
-        title="Free Image Resizer Online - AUQAB Tools"
+        title="Image Resizer - AUQAB Tools"
         description="Resize images online easily. Change image dimensions, keep aspect ratio, and download resized photos."
       />
-
       <section className="tool-page">
         <div className="password-card">
-          <h1>📷 Image Resizer</h1>
+          <h1>Image Resizer</h1>
           <p className="tool-description">
-            Resize images quickly while keeping good quality.
-            Your images are processed locally in your browser.
+            Resize images quickly while keeping good quality. Processed locally in your browser.
           </p>
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={loadImage}
-            className="file-input"
-          />
+          <input type="file" accept="image/*" onChange={loadImage} className="file-input" />
 
           {preview && (
             <div className="resizer-preview">
@@ -172,24 +164,24 @@ function ImageResizer() {
               </div>
 
               <button className="generate" onClick={resizeImage}>
-                🔄 Resize Image
+                Resize Image
               </button>
             </div>
           )}
 
           {result && (
             <div className="resizer-result">
-              <h2>Result: {width} × {height} px</h2>
+              <h3>Result: {width} × {height} px</h3>
               <img src={result} alt="Resized result" className="preview-img" />
               <button className="download-btn" onClick={download}>
-                ⬇ Download Resized Image
+                Download Resized Image
               </button>
             </div>
           )}
 
           <div className="info-section">
             <h2>How to resize an image?</h2>
-            <p>Upload an image, choose the new dimensions, optionally keep the aspect ratio, then download the resized file.</p>
+            <p>Upload an image, choose the new dimensions, optionally keep aspect ratio, then download the resized file.</p>
 
             <h2>Why use AUQAB Image Resizer?</h2>
             <ul>
@@ -198,10 +190,6 @@ function ImageResizer() {
               <li>No image upload to server</li>
               <li>Works on mobile and desktop</li>
             </ul>
-
-            <h2>Frequently Asked Questions</h2>
-            <h3>Are my images stored?</h3>
-            <p>No. Images are processed locally in your browser and never leave your device.</p>
           </div>
         </div>
       </section>

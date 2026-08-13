@@ -15,7 +15,6 @@ function BookScanner() {
   const [stream, setStream] = useState(null);
   const [loadingOCR, setLoadingOCR] = useState(false);
 
-  // 1. فتح الكاميرا
   async function openCamera() {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -24,12 +23,11 @@ function BookScanner() {
       videoRef.current.srcObject = mediaStream;
       setStream(mediaStream);
       setStep("camera");
-    } catch (err) {
-      showToast("⚠️ Unable to access camera. Please allow camera permissions.", "error");
+    } catch {
+      showToast("Unable to access camera. Please allow camera permissions.", "error");
     }
   }
 
-  // 2. إيقاف الكاميرا
   function stopCamera() {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
@@ -37,7 +35,6 @@ function BookScanner() {
     }
   }
 
-  // 3. التقاط صورة
   function capturePhoto() {
     const video = videoRef.current;
     const canvas = canvasRef.current;
@@ -52,7 +49,6 @@ function BookScanner() {
     trackEvent("book_scanner_capture", { tool: "book_scanner" });
   }
 
-  // 4. اختيار صورة من المعرض
   function selectFromGallery(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -64,7 +60,6 @@ function BookScanner() {
     reader.readAsDataURL(file);
   }
 
-  // 5. تحسين الصورة (تباين عالي – أبيض وأسود)
   function enhanceImage(imageSrc) {
     const img = new Image();
     img.src = imageSrc;
@@ -94,7 +89,6 @@ function BookScanner() {
     };
   }
 
-  // 6. استخراج النص باستخدام Tesseract.js (OCR حقيقي)
   async function extractText() {
     if (!processedImage) return;
     setLoadingOCR(true);
@@ -105,13 +99,12 @@ function BookScanner() {
       setExtractedText(text.trim());
       showToast("Text extracted successfully!");
       trackEvent("book_scanner_ocr", { tool: "book_scanner" });
-    } catch (error) {
+    } catch {
       showToast("OCR failed. Try again with a clearer image.", "error");
     }
     setLoadingOCR(false);
   }
 
-  // 7. تحميل TXT
   function downloadTXT() {
     if (!extractedText) return;
     const blob = new Blob([extractedText], { type: "text/plain" });
@@ -128,7 +121,6 @@ function BookScanner() {
     if (!extractedText) return;
     navigator.clipboard.writeText(extractedText);
     showToast("Text copied!");
-    trackEvent("book_scanner_copy", { tool: "book_scanner" });
   }
 
   function reset() {
@@ -148,59 +140,55 @@ function BookScanner() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>📖 Book Scanner</h1>
+          <h1>Book Scanner</h1>
           <p className="tool-description">
             Scan book pages using your camera or upload an image. Enhance, then extract text with AI.
           </p>
 
-          {/* الخطوة: الصفحة الرئيسية */}
           {step === "home" && (
             <div className="scanner-home">
               <button className="generate" onClick={openCamera}>
-                📷 Open Camera
+                Open Camera
               </button>
               <label className="gallery-btn">
-                🖼️ Choose from Gallery
+                Choose from Gallery
                 <input type="file" accept="image/*" onChange={selectFromGallery} hidden />
               </label>
             </div>
           )}
 
-          {/* الخطوة: الكاميرا */}
           {step === "camera" && (
             <div className="scanner-camera">
               <video ref={videoRef} autoPlay playsInline className="scanner-media" />
               <div className="scanner-actions">
                 <button className="generate" onClick={capturePhoto}>
-                  📸 Capture
+                  Capture
                 </button>
                 <button className="clear-btn" onClick={reset}>
-                  ✕ Cancel
+                  Cancel
                 </button>
               </div>
             </div>
           )}
 
-          {/* الخطوة: الصورة الملتقطة + تحسين */}
           {step === "crop" && capturedImage && (
             <div className="scanner-preview">
-              <h3>📷 Captured Image</h3>
+              <h3>Captured Image</h3>
               <img src={capturedImage} alt="Captured" className="scanner-media" />
               <div className="scanner-actions">
                 <button className="generate" onClick={() => enhanceImage(capturedImage)}>
-                  ✨ Enhance Image
+                  Enhance Image
                 </button>
                 <button className="clear-btn" onClick={reset}>
-                  📷 Retake
+                  Retake
                 </button>
               </div>
             </div>
           )}
 
-          {/* الخطوة: النتيجة مع OCR */}
           {step === "result" && processedImage && (
             <div className="scanner-result">
-              <h3>🔍 Enhanced Image</h3>
+              <h3>Enhanced Image</h3>
               <img src={processedImage} alt="Enhanced" className="scanner-media" />
 
               <button
@@ -209,7 +197,7 @@ function BookScanner() {
                 disabled={loadingOCR}
                 style={{ margin: "15px 0" }}
               >
-                {loadingOCR ? "⏳ Extracting Text..." : "🧠 Extract Text with AI"}
+                {loadingOCR ? "Extracting Text..." : "Extract Text with AI"}
               </button>
 
               <textarea
@@ -222,16 +210,16 @@ function BookScanner() {
               {extractedText && (
                 <div className="scanner-actions">
                   <button className="generate" onClick={copyText}>
-                    📋 Copy Text
+                    Copy Text
                   </button>
                   <button className="download-btn" onClick={downloadTXT}>
-                    ⬇ Download TXT
+                    Download TXT
                   </button>
                 </div>
               )}
 
               <button className="clear-btn" onClick={reset} style={{ marginTop: 15 }}>
-                🔄 Start New Scan
+                Start New Scan
               </button>
             </div>
           )}

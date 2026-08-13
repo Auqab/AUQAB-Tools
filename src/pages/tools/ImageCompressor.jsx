@@ -51,7 +51,7 @@ function ImageCompressor() {
           const url = URL.createObjectURL(blob);
           setCompressed(url);
           setCompressedSize(blob.size);
-          showToast("Image compressed!");
+          showToast("Image compressed successfully!");
           trackEvent("image_compress", { tool: "image_compressor" });
         },
         mimeType,
@@ -63,10 +63,20 @@ function ImageCompressor() {
   const reductionPercent = originalSize > 0 ? Math.round((1 - compressedSize / originalSize) * 100) : 0;
 
   const downloadCompressed = () => {
+    if (!compressed) return;
     const link = document.createElement("a");
     link.href = compressed;
     link.download = `compressed.${format.split("/")[1]}`;
     link.click();
+    showToast("Download started!");
+  };
+
+  const clearAll = () => {
+    setImage(null);
+    setPreview("");
+    setCompressed("");
+    setOriginalSize(0);
+    setCompressedSize(0);
   };
 
   return (
@@ -108,7 +118,13 @@ function ImageCompressor() {
             <div className="compressor-controls">
               <div className="setting">
                 <label>Quality: <strong>{quality}%</strong></label>
-                <input type="range" min="10" max="100" value={quality} onChange={(e) => setQuality(Number(e.target.value))} />
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  value={quality}
+                  onChange={(e) => setQuality(Number(e.target.value))}
+                />
               </div>
               <div className="option-group">
                 <label>Format</label>
@@ -137,6 +153,10 @@ function ImageCompressor() {
                   Download Compressed Image
                 </button>
               )}
+
+              <button className="clear-btn" onClick={clearAll}>
+                Clear All
+              </button>
             </div>
           )}
         </div>

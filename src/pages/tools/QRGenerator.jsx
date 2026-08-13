@@ -6,25 +6,20 @@ import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function QRGenerator() {
-  // === حالة التبويب ===
-  const [tab, setTab] = useState("generate"); // generate | scan
-
-  // === حالة التوليد ===
+  const [tab, setTab] = useState("generate");
   const [text, setText] = useState("");
   const [size, setSize] = useState(220);
   const [color, setColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
-  const [logo, setLogo] = useState(null); // شعار اختياري
+  const [logo, setLogo] = useState(null);
   const qrRef = useRef(null);
 
-  // === حالة المسح ===
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [scanResult, setScanResult] = useState("");
   const [cameraStream, setCameraStream] = useState(null);
   const [scanning, setScanning] = useState(false);
 
-  // === تنظيف الكاميرا عند الخروج ===
   useEffect(() => {
     return () => {
       if (cameraStream) {
@@ -33,7 +28,6 @@ function QRGenerator() {
     };
   }, [cameraStream]);
 
-  // ========== دوال التوليد ==========
   const downloadQR = () => {
     const canvas = qrRef.current?.querySelector("canvas");
     if (!canvas) return;
@@ -42,7 +36,7 @@ function QRGenerator() {
     link.href = image;
     link.download = "AUQAB-QR.png";
     link.click();
-    showToast("QR downloaded!");
+    showToast("QR code downloaded!");
     trackEvent("qr_download", { tool: "qr_generator" });
   };
 
@@ -51,7 +45,6 @@ function QRGenerator() {
     setLogo(null);
   };
 
-  // معالجة رفع الشعار
   const handleLogoUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -60,7 +53,6 @@ function QRGenerator() {
     reader.readAsDataURL(file);
   };
 
-  // ========== دوال المسح ==========
   const startScanner = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -71,7 +63,7 @@ function QRGenerator() {
       setScanning(true);
       scanLoop();
     } catch {
-      showToast("⚠️ Camera access denied.", "error");
+      showToast("Camera access denied.", "error");
     }
   };
 
@@ -99,7 +91,7 @@ function QRGenerator() {
         if (code) {
           setScanResult(code.data);
           stopScanner();
-          showToast("QR Code scanned!");
+          showToast("QR code scanned!");
           trackEvent("qr_scan", { tool: "qr_generator" });
           return;
         }
@@ -123,28 +115,26 @@ function QRGenerator() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔳 QR Generator & Scanner</h1>
+          <h1>QR Generator & Scanner</h1>
           <p className="tool-description">
             Create custom QR codes or scan existing ones with your camera.
           </p>
 
-          {/* أزرار التبويب */}
           <div className="qr-tabs">
             <button
               className={`tab-btn ${tab === "generate" ? "active" : ""}`}
               onClick={() => { setTab("generate"); stopScanner(); }}
             >
-              ✨ Generate
+              Generate
             </button>
             <button
               className={`tab-btn ${tab === "scan" ? "active" : ""}`}
               onClick={() => { setTab("scan"); }}
             >
-              📷 Scan
+              Scan
             </button>
           </div>
 
-          {/* ========== تبويب التوليد ========== */}
           {tab === "generate" && (
             <div className="qr-generate-tab">
               <input
@@ -215,26 +205,25 @@ function QRGenerator() {
               {text && (
                 <div className="tool-actions">
                   <button className="download-btn" onClick={downloadQR}>
-                    ⬇ Download QR
+                    Download QR
                   </button>
                   <button className="clear-btn" onClick={clearQR}>
-                    ✕ Clear
+                    Clear
                   </button>
                 </div>
               )}
             </div>
           )}
 
-          {/* ========== تبويب المسح ========== */}
           {tab === "scan" && (
             <div className="qr-scan-tab">
               {!scanning ? (
                 <button className="generate" onClick={startScanner}>
-                  📷 Open Camera
+                  Open Camera
                 </button>
               ) : (
                 <button className="clear-btn" onClick={stopScanner}>
-                  ⏹️ Stop Camera
+                  Stop Camera
                 </button>
               )}
 
@@ -247,10 +236,10 @@ function QRGenerator() {
                   <textarea rows="4" readOnly value={scanResult} />
                   <div className="tool-actions">
                     <button className="generate" onClick={copyScanResult}>
-                      📋 Copy
+                      Copy
                     </button>
                     <button className="clear-btn" onClick={() => setScanResult("")}>
-                      ✕ Clear
+                      Clear
                     </button>
                   </div>
                 </div>
@@ -258,7 +247,6 @@ function QRGenerator() {
             </div>
           )}
 
-          {/* معلومات */}
           <div className="info-section">
             <h2>How to use?</h2>
             <p>Generate: Enter text, customize colors/size, add optional logo, then download.</p>

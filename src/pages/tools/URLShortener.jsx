@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SEO from "../../components/SEO";
 import { QRCodeCanvas } from "qrcode.react";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function URLShortener() {
@@ -15,7 +16,6 @@ function URLShortener() {
   });
   const [showQRFor, setShowQRFor] = useState(null);
 
-  // حفظ في localStorage عند التغيير
   useEffect(() => {
     localStorage.setItem("auqab_links", JSON.stringify(savedLinks));
   }, [savedLinks]);
@@ -31,7 +31,7 @@ function URLShortener() {
 
   function addLink() {
     if (!url || !isValidUrl(url)) {
-      alert("Please enter a valid URL (including http:// or https://)");
+      showToast("Please enter a valid URL (including http:// or https://)", "error");
       return;
     }
 
@@ -45,21 +45,36 @@ function URLShortener() {
     setSavedLinks((prev) => [newLink, ...prev]);
     setUrl("");
     setLabel("");
+    showToast("Link saved!");
     trackEvent("url_save", { tool: "url_manager" });
   }
 
   function copyToClipboard(text) {
     navigator.clipboard.writeText(text);
+    showToast("Link copied!");
   }
 
   function deleteLink(id) {
     setSavedLinks((prev) => prev.filter((link) => link.id !== id));
+    showToast("Link removed");
   }
 
   function clearAll() {
-    if (confirm("Delete all saved links?")) {
+    if (window.confirm("Delete all saved links?")) {
       setSavedLinks([]);
+      showToast("All links cleared");
     }
+  }
+
+  function downloadQR(link) {
+    const canvas = document.querySelector(`.qr-inline canvas`);
+    if (!canvas) return;
+    const img = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = img;
+    a.download = "AUQAB-QR.png";
+    a.click();
+    showToast("QR code downloaded!");
   }
 
   return (
@@ -71,13 +86,11 @@ function URLShortener() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔗 URL Manager</h1>
+          <h1>URL Manager</h1>
           <p className="tool-description">
             Save your important links with labels, generate QR codes instantly, and access them anytime.
-            All data is stored locally in your browser.
           </p>
 
-          {/* إضافة رابط جديد */}
           <div className="url-form">
             <input
               type="url"
@@ -94,15 +107,14 @@ function URLShortener() {
               className="url-label-input"
             />
             <button className="generate" onClick={addLink}>
-              💾 Save Link
+              Save Link
             </button>
           </div>
 
-          {/* قائمة الروابط المحفوظة */}
           {savedLinks.length > 0 && (
             <div className="url-history">
               <div className="history-header">
-                <h2>📋 Saved Links ({savedLinks.length})</h2>
+                <h2>Saved Links ({savedLinks.length})</h2>
                 <button className="clear-btn" onClick={clearAll}>
                   Clear All
                 </button>
@@ -122,49 +134,36 @@ function URLShortener() {
                       onClick={() => copyToClipboard(link.original)}
                       title="Copy original URL"
                     >
-                      📋
+                      Copy
                     </button>
                     <button
                       className="icon-btn small"
                       onClick={() => window.open(link.original, "_blank")}
                       title="Open in new tab"
                     >
-                      ↗️
+                      Open
                     </button>
                     <button
                       className="icon-btn small"
                       onClick={() => setShowQRFor(showQRFor === link.id ? null : link.id)}
                       title="Show QR Code"
                     >
-                      🔳
+                      QR
                     </button>
                     <button
                       className="icon-btn small delete"
                       onClick={() => deleteLink(link.id)}
                       title="Delete link"
                     >
-                      🗑️
+                      Delete
                     </button>
                   </div>
 
-                  {/* QR Code */}
                   {showQRFor === link.id && (
                     <div className="qr-inline">
                       <QRCodeCanvas value={link.original} size={120} />
-                      <button
-                        className="download-btn small"
-                        onClick={() => {
-                          const canvas = document.querySelector(`.qr-inline canvas`);
-                          if (canvas) {
-                            const img = canvas.toDataURL("image/png");
-                            const a = document.createElement("a");
-                            a.href = img;
-                            a.download = "AUQAB-QR.png";
-                            a.click();
-                          }
-                        }}
-                      >
-                        ⬇ Download QR
+                      <button className="download-btn small" onClick={() => downloadQR(link)}>
+                        Download QR
                       </button>
                     </div>
                   )}
@@ -173,7 +172,6 @@ function URLShortener() {
             </div>
           )}
 
-          {/* معلومات */}
           <div className="info-section">
             <h2>How to use URL Manager?</h2>
             <p>1. Paste any URL and add an optional label.</p>

@@ -21,7 +21,6 @@ function PasswordGenerator() {
     symbols: true,
   });
 
-  // توليد كلمة مرور
   const generatePassword = useCallback(() => {
     let chars = "";
     if (options.upper) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -46,7 +45,6 @@ function PasswordGenerator() {
     generatePassword();
   }, [generatePassword]);
 
-  // نسخ كلمة المرور
   const copyPassword = () => {
     if (!password) return;
     navigator.clipboard.writeText(password);
@@ -54,7 +52,6 @@ function PasswordGenerator() {
     trackEvent("password_copy", { tool: "password_generator" });
   };
 
-  // نطق كلمة المرور
   const speakPassword = () => {
     if (!password || !window.speechSynthesis) return;
     const utterance = new SpeechSynthesisUtterance(password);
@@ -63,7 +60,6 @@ function PasswordGenerator() {
     showToast("Speaking...");
   };
 
-  // تطبيق قالب محدد
   const applyPreset = (presetName) => {
     const preset = PRESETS[presetName];
     if (!preset) return;
@@ -77,7 +73,6 @@ function PasswordGenerator() {
     showToast(`Preset applied: ${presetName}`);
   };
 
-  // قوة كلمة المرور
   const getStrength = () => {
     if (!password) return { label: "None", level: 0 };
     const types = [options.upper, options.lower, options.numbers, options.symbols].filter(Boolean).length;
@@ -91,7 +86,7 @@ function PasswordGenerator() {
   return (
     <>
       <SEO
-        title="Password Generator - Create Strong Secure Passwords"
+        title="Password Generator - AUQAB Tools"
         description="Generate strong random passwords online with AUQAB Password Generator. Customize length and characters."
       />
 
@@ -116,13 +111,13 @@ function PasswordGenerator() {
               onClick={() => setShowPassword(!showPassword)}
               title={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? "🙈" : "👁️"}
+              {showPassword ? "Hide" : "Show"}
             </button>
             <button className="icon-btn copy-pass" onClick={copyPassword} title="Copy password">
-              📋
+              Copy
             </button>
             <button className="icon-btn speak-pass" onClick={speakPassword} title="Speak password">
-              🔊
+              Speak
             </button>
           </div>
 
@@ -189,7 +184,7 @@ function PasswordGenerator() {
                 checked={options.symbols}
                 onChange={() => setOptions({ ...options, symbols: !options.symbols })}
               />
-              !@#
+              Symbols
             </label>
           </div>
 
