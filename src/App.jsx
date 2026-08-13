@@ -144,6 +144,8 @@ function App() {
               <Suspense fallback={<Loading />}>
                 <ScrollToTop />
                 <Routes>
+		  <Route path="/backgrounds" element={<Backgrounds />} />
+		  <Route path="/backgrounds/generator" element={<BackgroundGenerator />} />
 		  <Route path="/backgrounds" element={<BackgroundGenerator />} />
                   <Route path="/games" element={<Games />} />
                   <Route path="/changelog" element={<Changelog />} />
