@@ -1,4 +1,5 @@
-const CACHE_NAME = "auqab-tools-v3";
+cat > public/sw.js << 'EOF'
+const CACHE_NAME = "auqab-tools-v4";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
@@ -36,4 +37,4 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))))
   );
 });
-
+EOF
