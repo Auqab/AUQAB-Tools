@@ -28,6 +28,11 @@ jobs:
           npm run build
           npx cap sync android
 
+      - name: Force update AGP version
+        run: |
+          sed -i "s/com.android.tools.build:gradle:8.7.3/com.android.tools.build:gradle:8.9.1/" android/build.gradle
+          sed -i "s/com.android.tools.build:gradle:8.7.3/com.android.tools.build:gradle:8.9.1/" android/app/build.gradle
+
       - name: Build APK
         run: |
           cd android
