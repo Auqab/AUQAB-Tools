@@ -1,4 +1,4 @@
-nano import { useState } from "react";
+import { useState } from "react";
 import SEO from "../../components/SEO";
 import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
