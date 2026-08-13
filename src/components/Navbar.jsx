@@ -1,10 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTheme } from "../contexts/ThemeContext";
 
 function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
@@ -12,21 +13,18 @@ function Navbar() {
   const { t, lang, toggleLang } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
-  // منطق إخفاء/إظهار الشريط عند التمرير
+  // إخفاء/إظهار الشريط عند التمرير
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY > 100 && currentScrollY > lastScrollY.current) {
-        // سحب لأسفل -> إخفاء
         setHidden(true);
         setOpen(false);
       } else {
-        // سحب لأعلى أو في القمة -> إظهار
         setHidden(false);
       }
       lastScrollY.current = currentScrollY;
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -43,6 +41,7 @@ function Navbar() {
   }, []);
 
   const isActive = (path) => (location.pathname === path ? "active" : "");
+  const showBackButton = location.pathname !== "/";
 
   return (
     <header className={`header ${hidden ? "nav-hidden" : ""}`} ref={navRef}>
@@ -52,6 +51,11 @@ function Navbar() {
       </div>
 
       <div className="nav-controls">
+        {showBackButton && (
+          <button className="back-btn" onClick={() => navigate(-1)} title="Back">
+            ‹
+          </button>
+        )}
         <button onClick={toggleTheme} className="theme-btn-nav" title="Toggle theme">
           {theme === "dark" ? t.lightMode : t.darkMode}
         </button>
