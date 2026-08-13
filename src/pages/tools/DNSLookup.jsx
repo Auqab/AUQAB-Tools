@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function DNSLookup() {
@@ -10,33 +11,53 @@ function DNSLookup() {
   const lookup = async () => {
     if (!domain) return;
     setLoading(true);
+    setRecords(null);
     try {
       const res = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=A`);
       const data = await res.json();
       setRecords(data.Answer || []);
+      showToast("DNS lookup complete!");
       trackEvent("dns_lookup", { tool: "dns_lookup" });
     } catch {
       setRecords([]);
+      showToast("Lookup failed.", "error");
     }
     setLoading(false);
   };
 
   return (
     <>
-      <SEO title="DNS Lookup - AUQAB Tools" description="Retrieve DNS records for any domain." />
+      <SEO
+        title="DNS Lookup - AUQAB Tools"
+        description="Retrieve DNS records for any domain."
+      />
       <section className="tool-page">
         <div className="password-card">
-          <h1>📚 DNS Lookup</h1>
+          <h1>DNS Lookup</h1>
           <p className="tool-description">Fetch A, AAAA, CNAME, and other DNS records.</p>
-          <input type="text" placeholder="example.com" value={domain} onChange={(e) => setDomain(e.target.value)} className="url-input" />
+
+          <input
+            type="text"
+            placeholder="example.com"
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+            className="url-input"
+          />
           <button className="generate" style={{ margin: "15px 0" }} onClick={lookup} disabled={loading}>
-            {loading ? "⏳ Looking up..." : "🔎 Lookup"}
+            {loading ? "Looking up..." : "Lookup"}
           </button>
+
           {records && (
             <div className="ssl-result">
-              {records.length > 0 ? records.map((r, i) => (
-                <p key={i}><strong>{r.type}</strong>: {r.data} (TTL: {r.TTL})</p>
-              )) : <p>No records found.</p>}
+              {records.length > 0 ? (
+                records.map((r, i) => (
+                  <p key={i}>
+                    <strong>{r.type}</strong>: {r.data} (TTL: {r.TTL})
+                  </p>
+                ))
+              ) : (
+                <p>No records found.</p>
+              )}
             </div>
           )}
         </div>

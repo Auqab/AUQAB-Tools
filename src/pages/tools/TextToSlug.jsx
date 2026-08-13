@@ -1,31 +1,33 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function TextToSlug() {
   const [text, setText] = useState("");
   const [slug, setSlug] = useState("");
   const [separator, setSeparator] = useState("-");
-  const [copied, setCopied] = useState(false);
 
   const generateSlug = () => {
     const slugified = text
       .toString()
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // إزالة علامات التشكيل
+      .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, separator) // مسافات إلى فاصل
-      .replace(/[^\w-]+/g, "") // إزالة الأحرف غير المرغوبة
-      .replace(new RegExp(`${separator}+`, "g"), separator); // فاصل مكرر
+      .replace(/\s+/g, separator)
+      .replace(/[^\w-]+/g, "")
+      .replace(new RegExp(`${separator}+`, "g"), separator);
+
     setSlug(slugified);
+    showToast("Slug generated!");
     trackEvent("slug_generate", { tool: "text_to_slug" });
   };
 
   const copySlug = () => {
+    if (!slug) return;
     navigator.clipboard.writeText(slug);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    showToast("Slug copied!");
   };
 
   return (
@@ -37,7 +39,7 @@ function TextToSlug() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔗 Text to Slug</h1>
+          <h1>Text to Slug</h1>
           <p className="tool-description">
             Create clean, readable slugs for URLs, filenames, or IDs.
           </p>
@@ -59,7 +61,7 @@ function TextToSlug() {
               </select>
             </div>
             <button className="generate" onClick={generateSlug}>
-              ⚡ Generate Slug
+              Generate Slug
             </button>
           </div>
 
@@ -68,7 +70,7 @@ function TextToSlug() {
               <div className="uuid-row">
                 <code>{slug}</code>
                 <button className="copy-btn-mini" onClick={copySlug}>
-                  {copied ? "✅" : "📋"}
+                  Copy
                 </button>
               </div>
             </div>

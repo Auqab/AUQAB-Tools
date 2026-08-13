@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CryptoJS from "crypto-js";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function AESEncryption() {
@@ -8,7 +9,6 @@ function AESEncryption() {
   const [secret, setSecret] = useState("");
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState("encrypt");
-  const [copied, setCopied] = useState(false);
 
   const process = () => {
     if (!text || !secret) return;
@@ -19,19 +19,21 @@ function AESEncryption() {
       } else {
         const bytes = CryptoJS.AES.decrypt(text, secret);
         result = bytes.toString(CryptoJS.enc.Utf8);
-        if (!result) throw new Error();
+        if (!result) throw new Error("Invalid key or corrupted ciphertext.");
       }
       setOutput(result);
+      showToast(mode === "encrypt" ? "Text encrypted!" : "Text decrypted!");
       trackEvent("aes_process", { tool: "aes_encryption", mode });
     } catch {
       setOutput("Invalid key or corrupted ciphertext.");
+      showToast("Operation failed", "error");
     }
   };
 
-  const copy = () => {
+  const copyOutput = () => {
+    if (!output || output.startsWith("Invalid")) return;
     navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    showToast("Copied!");
   };
 
   return (
@@ -42,16 +44,26 @@ function AESEncryption() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔐 AES Encryption</h1>
+          <h1>AES Encryption</h1>
           <p className="tool-description">Encrypt or decrypt text using a secret passphrase.</p>
 
           <div className="diff-mode">
             <label>
-              <input type="radio" value="encrypt" checked={mode === "encrypt"} onChange={() => setMode("encrypt")} />
+              <input
+                type="radio"
+                value="encrypt"
+                checked={mode === "encrypt"}
+                onChange={() => setMode("encrypt")}
+              />
               Encrypt
             </label>
             <label>
-              <input type="radio" value="decrypt" checked={mode === "decrypt"} onChange={() => setMode("decrypt")} />
+              <input
+                type="radio"
+                value="decrypt"
+                checked={mode === "decrypt"}
+                onChange={() => setMode("decrypt")}
+              />
               Decrypt
             </label>
           </div>
@@ -73,15 +85,15 @@ function AESEncryption() {
           />
 
           <button className="generate" onClick={process}>
-            {mode === "encrypt" ? "🔒 Encrypt" : "🔓 Decrypt"}
+            {mode === "encrypt" ? "Encrypt" : "Decrypt"}
           </button>
 
           {output && (
             <div className="hash-result" style={{ marginTop: 20 }}>
               <div className="uuid-row">
                 <code style={{ wordBreak: "break-all" }}>{output}</code>
-                <button className="copy-btn-mini" onClick={copy}>
-                  {copied ? "✅" : "📋"}
+                <button className="copy-btn-mini" onClick={copyOutput}>
+                  Copy
                 </button>
               </div>
             </div>

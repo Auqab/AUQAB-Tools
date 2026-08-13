@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function RegexTester() {
@@ -27,15 +28,16 @@ function RegexTester() {
         if (!flags.includes("g")) break;
       }
       setMatches(results);
+      showToast("Test completed!");
       trackEvent("regex_test", { tool: "regex_tester" });
     } catch (e) {
       setError(e.message);
+      showToast("Invalid regex", "error");
     }
   };
 
   const highlightMatches = () => {
     if (!matches || matches.length === 0) return testText;
-    // تجميع النص مع تمييز المطابقات
     let lastIndex = 0;
     const parts = [];
     matches.forEach((m) => {
@@ -60,7 +62,7 @@ function RegexTester() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔍 Regex Tester</h1>
+          <h1>Regex Tester</h1>
           <p className="tool-description">
             Write a regular expression, add flags, and test it against any text.
           </p>
@@ -94,7 +96,7 @@ function RegexTester() {
           />
 
           <button className="generate" onClick={handleTest} style={{ margin: "15px 0" }}>
-            🧪 Test Regex
+            Test Regex
           </button>
 
           {error && <div className="json-error">{error}</div>}
@@ -109,10 +111,7 @@ function RegexTester() {
                     <div key={idx} className="match-item">
                       <strong>Match {idx + 1}:</strong> <code>{m.full}</code>
                       {m.groups.length > 0 && (
-                        <span className="groups">
-                          {" "}
-                          Groups: {m.groups.join(", ")}
-                        </span>
+                        <span className="groups"> Groups: {m.groups.join(", ")}</span>
                       )}
                       <span className="index"> at index {m.index}</span>
                     </div>

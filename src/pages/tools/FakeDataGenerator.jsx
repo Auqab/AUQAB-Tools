@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 const generatorsList = [
@@ -11,7 +12,6 @@ function FakeDataGenerator() {
   const [selected, setSelected] = useState("Full Name");
   const [count, setCount] = useState(5);
   const [results, setResults] = useState([]);
-  const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const generate = async () => {
@@ -38,28 +38,28 @@ function FakeDataGenerator() {
         items.push(genMap[selected]());
       }
       setResults(items);
+      showToast("Data generated!");
       trackEvent("fake_data", { tool: "fake_data_generator" });
-    } catch (err) {
-      console.error(err);
+    } catch {
+      showToast("Failed to generate data", "error");
     }
     setLoading(false);
   };
 
   const copyAll = () => {
     navigator.clipboard.writeText(results.join("\n"));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    showToast("Data copied!");
   };
 
   return (
     <>
       <SEO
         title="Fake Data Generator - AUQAB Tools"
-        description="Generate realistic fake data for testing."
+        description="Generate realistic fake data for testing and development."
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>👤 Fake Data Generator</h1>
+          <h1>Fake Data Generator</h1>
           <p className="tool-description">
             Generate names, emails, addresses, and more for your projects.
           </p>
@@ -75,7 +75,7 @@ function FakeDataGenerator() {
               <input type="number" min="1" max="20" value={count} onChange={(e) => setCount(+e.target.value)} />
             </div>
             <button className="generate" onClick={generate} disabled={loading}>
-              {loading ? "⏳ Loading..." : "✨ Generate"}
+              {loading ? "Generating..." : "Generate"}
             </button>
           </div>
 
@@ -89,7 +89,7 @@ function FakeDataGenerator() {
                 ))}
               </div>
               <button className="generate" onClick={copyAll}>
-                {copied ? "✅ Copied!" : "📋 Copy All"}
+                Copy All
               </button>
             </div>
           )}

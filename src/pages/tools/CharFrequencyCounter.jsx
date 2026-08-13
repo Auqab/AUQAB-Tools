@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function CharFrequencyCounter() {
@@ -11,16 +12,14 @@ function CharFrequencyCounter() {
   const analyze = () => {
     if (!text) return;
 
-    // تردد الأحرف
     const chars = caseSensitive ? text.split("") : text.toLowerCase().split("");
     const charMap = {};
     chars.forEach((ch) => {
-      if (ch.trim() === "") return; // تجاهل المسافات الفارغة
+      if (ch.trim() === "") return;
       charMap[ch] = (charMap[ch] || 0) + 1;
     });
     const charArray = Object.entries(charMap).sort((a, b) => b[1] - a[1]);
 
-    // تردد الكلمات
     const words = caseSensitive
       ? text.split(/\s+/)
       : text.toLowerCase().split(/\s+/);
@@ -33,6 +32,7 @@ function CharFrequencyCounter() {
 
     setFreq(charArray);
     setWordFreq(wordArray);
+    showToast("Analysis complete!");
     trackEvent("char_frequency", { tool: "char_frequency_counter" });
   };
 
@@ -45,7 +45,7 @@ function CharFrequencyCounter() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔢 Character Frequency Counter</h1>
+          <h1>Character Frequency Counter</h1>
           <p className="tool-description">
             Paste your text and see how often each character and word appears.
           </p>
@@ -67,7 +67,7 @@ function CharFrequencyCounter() {
               Case Sensitive
             </label>
             <button className="generate" onClick={analyze}>
-              📊 Analyze
+              Analyze
             </button>
           </div>
 
@@ -82,9 +82,7 @@ function CharFrequencyCounter() {
                       <div className="bar-track">
                         <div
                           className="bar-fill"
-                          style={{
-                            width: `${(count / freq[0][1]) * 100}%`,
-                          }}
+                          style={{ width: `${(count / freq[0][1]) * 100}%` }}
                         />
                       </div>
                       <span className="freq-count">{count}</span>
@@ -103,9 +101,7 @@ function CharFrequencyCounter() {
                         <div className="bar-track">
                           <div
                             className="bar-fill word-fill"
-                            style={{
-                              width: `${(count / wordFreq[0][1]) * 100}%`,
-                            }}
+                            style={{ width: `${(count / wordFreq[0][1]) * 100}%` }}
                           />
                         </div>
                         <span className="freq-count">{count}</span>
@@ -123,4 +119,3 @@ function CharFrequencyCounter() {
 }
 
 export default CharFrequencyCounter;
-

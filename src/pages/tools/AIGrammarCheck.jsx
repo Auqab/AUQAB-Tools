@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function AIGrammarCheck() {
@@ -8,8 +9,12 @@ function AIGrammarCheck() {
   const [loading, setLoading] = useState(false);
 
   const checkGrammar = async () => {
-    if (!text) return;
+    if (!text) {
+      showToast("Please enter text to check.", "error");
+      return;
+    }
     setLoading(true);
+    setMatches(null);
     try {
       const res = await fetch("https://api.languagetool.org/v2/check", {
         method: "POST",
@@ -18,9 +23,10 @@ function AIGrammarCheck() {
       });
       const data = await res.json();
       setMatches(data.matches || []);
+      showToast("Grammar check complete!");
       trackEvent("ai_grammar_check", { tool: "ai_grammar_check" });
     } catch {
-      alert("Error checking grammar.");
+      showToast("Error checking grammar.", "error");
     }
     setLoading(false);
   };
@@ -33,16 +39,26 @@ function AIGrammarCheck() {
 
   return (
     <>
-      <SEO title="AI Grammar Check - AUQAB Tools" description="Free AI-powered grammar checker." />
+      <SEO
+        title="AI Grammar Check - AUQAB Tools"
+        description="Free AI-powered grammar checker."
+      />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🧠 AI Grammar Check</h1>
+          <h1>AI Grammar Check</h1>
           <p className="tool-description">Paste your text and let AI find grammar mistakes.</p>
-          <textarea rows="6" value={text} onChange={(e) => setText(e.target.value)} placeholder="Write or paste text..." />
+
+          <textarea
+            rows="6"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Write or paste text..."
+          />
           <button className="generate" style={{ margin: "15px 0" }} onClick={checkGrammar} disabled={loading}>
-            {loading ? "Checking..." : "🔎 Check Grammar"}
+            {loading ? "Checking..." : "Check Grammar"}
           </button>
-          {matches && matches.length === 0 && <p style={{ color: "#22c55e" }}>No errors found! 🎉</p>}
+
+          {matches && matches.length === 0 && <p style={{ color: "#22c55e" }}>No errors found!</p>}
           {matches && matches.length > 0 && (
             <div className="ssl-result">
               <ul>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function ImagesToPDF() {
@@ -15,12 +16,10 @@ function ImagesToPDF() {
     setCreating(true);
     try {
       const { PDFDocument } = await import("pdf-lib");
-
       const pdfDoc = await PDFDocument.create();
 
       for (const file of images) {
         const arrayBuffer = await file.arrayBuffer();
-        // تحديد نوع الصورة
         let image;
         if (file.type === "image/jpeg") {
           image = await pdfDoc.embedJpg(arrayBuffer);
@@ -48,9 +47,10 @@ function ImagesToPDF() {
       link.click();
       URL.revokeObjectURL(link.href);
 
+      showToast("PDF created successfully!");
       trackEvent("images_to_pdf", { tool: "images_to_pdf" });
     } catch {
-      alert("Failed to create PDF. Check your images.");
+      showToast("Failed to create PDF. Check your images.", "error");
     }
     setCreating(false);
   };
@@ -63,7 +63,7 @@ function ImagesToPDF() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🖼️➡️📄 Images to PDF</h1>
+          <h1>Images to PDF</h1>
           <p className="tool-description">
             Select images and combine them into a single PDF document.
           </p>
@@ -87,7 +87,7 @@ function ImagesToPDF() {
             disabled={images.length === 0 || creating}
             style={{ marginTop: 15 }}
           >
-            {creating ? "⏳ Creating PDF..." : "📄 Create PDF"}
+            {creating ? "Creating PDF..." : "Create PDF"}
           </button>
         </div>
       </section>

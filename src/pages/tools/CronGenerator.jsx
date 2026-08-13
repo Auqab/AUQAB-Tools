@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 const presets = [
@@ -17,29 +18,32 @@ function CronGenerator() {
   const [dayMonth, setDayMonth] = useState("*");
   const [month, setMonth] = useState("*");
   const [dayWeek, setDayWeek] = useState("*");
-  const [copied, setCopied] = useState(false);
 
   const expression = `${minute} ${hour} ${dayMonth} ${month} ${dayWeek}`;
 
   const copyExpression = () => {
     navigator.clipboard.writeText(expression);
-    setCopied(true);
+    showToast("Cron expression copied!");
     trackEvent("cron_copy", { tool: "cron_generator" });
-    setTimeout(() => setCopied(false), 1500);
   };
 
   const selectPreset = (value) => {
     const [mi, h, dm, mo, dw] = value.split(" ");
     setMinute(mi); setHour(h); setDayMonth(dm); setMonth(mo); setDayWeek(dw);
+    showToast("Preset applied");
     trackEvent("cron_preset", { tool: "cron_generator" });
   };
 
   return (
     <>
-      <SEO title="Cron Expression Generator - AUQAB Tools" description="Build cron schedule expressions visually." />
+      <SEO
+        title="Cron Expression Generator - AUQAB Tools"
+        description="Build cron schedule expressions visually."
+      />
+
       <section className="tool-page">
         <div className="password-card">
-          <h1>⏱️ Cron Expression Generator</h1>
+          <h1>Cron Expression Generator</h1>
           <p className="tool-description">Create cron schedule expressions easily.</p>
 
           <div className="cron-fields">
@@ -68,7 +72,7 @@ function CronGenerator() {
           <div className="cron-output">
             <code>{expression}</code>
             <button className="copy-btn-mini" onClick={copyExpression}>
-              {copied ? "✅" : "📋"}
+              Copy
             </button>
           </div>
 

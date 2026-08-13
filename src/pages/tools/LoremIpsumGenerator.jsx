@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 import { LoremIpsum } from "lorem-ipsum";
 
@@ -11,20 +12,18 @@ const generator = new LoremIpsum({
 function LoremIpsumGenerator() {
   const [paragraphs, setParagraphs] = useState(3);
   const [output, setOutput] = useState("");
-  const [copied, setCopied] = useState(false);
 
   const generate = () => {
     const text = generator.generateParagraphs(paragraphs);
     setOutput(text);
+    showToast("Lorem Ipsum generated!");
     trackEvent("lorem_generate", { tool: "lorem_generator" });
-    setCopied(false);
   };
 
   const copyOutput = () => {
     if (!output) return;
     navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    showToast("Copied!");
   };
 
   return (
@@ -36,7 +35,7 @@ function LoremIpsumGenerator() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>📜 Lorem Ipsum Generator</h1>
+          <h1>Lorem Ipsum Generator</h1>
           <p className="tool-description">
             Generate classic dummy text in paragraphs. Useful for mockups and layouts.
           </p>
@@ -55,7 +54,7 @@ function LoremIpsumGenerator() {
               />
             </div>
             <button className="generate" onClick={generate}>
-              🪄 Generate Lorem Ipsum
+              Generate Lorem Ipsum
             </button>
           </div>
 
@@ -63,7 +62,7 @@ function LoremIpsumGenerator() {
             <div className="lorem-output">
               <textarea readOnly rows="12" value={output} />
               <button className="generate" onClick={copyOutput} style={{ marginTop: 10 }}>
-                {copied ? "✅ Copied!" : "📋 Copy Text"}
+                Copy Text
               </button>
             </div>
           )}

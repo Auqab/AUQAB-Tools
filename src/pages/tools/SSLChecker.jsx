@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function SSLChecker() {
@@ -14,16 +15,17 @@ function SSLChecker() {
     setError("");
     setResult(null);
     try {
-      // نستخدم CORS proxy عام للوصول إلى SSL Checker API
-      const proxy = "https://corsproxy.io/?"; // وكيل مجاني
+      const proxy = "https://corsproxy.io/?";
       const apiUrl = `https://ssl-checker.io/api/v1/check/${encodeURIComponent(domain)}`;
       const res = await fetch(proxy + encodeURIComponent(apiUrl));
       if (!res.ok) throw new Error("Failed to fetch SSL data");
       const data = await res.json();
       setResult(data);
+      showToast("SSL check completed!");
       trackEvent("ssl_check", { tool: "ssl_checker" });
-    } catch (e) {
+    } catch {
       setError("Could not check SSL. Make sure the domain is correct and you are online.");
+      showToast("SSL check failed", "error");
     }
     setLoading(false);
   };
@@ -41,7 +43,7 @@ function SSLChecker() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔒 SSL Checker</h1>
+          <h1>SSL Checker</h1>
           <p className="tool-description">Enter a domain to inspect its SSL certificate.</p>
 
           <input
@@ -52,7 +54,7 @@ function SSLChecker() {
             className="url-input"
           />
           <button className="generate" style={{ margin: "15px 0" }} onClick={checkSSL} disabled={loading}>
-            {loading ? "⏳ Checking..." : "🔍 Check SSL"}
+            {loading ? "Checking..." : "Check SSL"}
           </button>
 
           {error && <div className="json-error">{error}</div>}

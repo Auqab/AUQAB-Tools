@@ -12,7 +12,6 @@ function PrivacyVault() {
       return [];
     }
   });
-
   const [masterKey, setMasterKey] = useState("");
   const [showEntries, setShowEntries] = useState(false);
   const [newLabel, setNewLabel] = useState("");
@@ -22,12 +21,8 @@ function PrivacyVault() {
     localStorage.setItem("auqab_vault", JSON.stringify(vault));
   }, [vault]);
 
-  // تشفير البيانات
-  const encrypt = (text) => {
-    return CryptoJS.AES.encrypt(text, masterKey).toString();
-  };
+  const encrypt = (text) => CryptoJS.AES.encrypt(text, masterKey).toString();
 
-  // فك التشفير
   const decrypt = (ciphertext) => {
     try {
       const bytes = CryptoJS.AES.decrypt(ciphertext, masterKey);
@@ -37,9 +32,11 @@ function PrivacyVault() {
     }
   };
 
-  // إضافة عنصر جديد
   const addEntry = () => {
-    if (!newLabel || !newSecret || !masterKey) return;
+    if (!newLabel || !newSecret || !masterKey) {
+      showToast("Please fill in all fields and master password.", "error");
+      return;
+    }
     const encrypted = encrypt(newSecret);
     setVault([...vault, { id: Date.now(), label: newLabel, secret: encrypted }]);
     setNewLabel("");
@@ -48,18 +45,38 @@ function PrivacyVault() {
     trackEvent("vault_add", { tool: "privacy_vault" });
   };
 
-  // حذف عنصر
   const removeEntry = (id) => {
     setVault(vault.filter((e) => e.id !== id));
     showToast("Entry removed");
   };
 
-  // مسح الخزنة بالكامل
   const clearVault = () => {
-    if (confirm("Delete all entries?")) {
+    if (window.confirm("Delete all entries?")) {
       setVault([]);
       showToast("Vault cleared");
     }
+  };
+
+  const copySecret = (ciphertext) => {
+    const decrypted = decrypt(ciphertext);
+    if (decrypted.startsWith("[Cannot")) {
+      showToast("Unable to decrypt with current key", "error");
+      return;
+    }
+    navigator.clipboard.writeText(decrypted);
+    showToast("Secret copied!");
+  };
+
+  const unlock = () => {
+    if (!masterKey) {
+      showToast("Please enter master password.", "error");
+      return;
+    }
+    setShowEntries(true);
+  };
+
+  const lock = () => {
+    setShowEntries(false);
   };
 
   return (
@@ -70,7 +87,7 @@ function PrivacyVault() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔐 Privacy Vault</h1>
+          <h1>Privacy Vault</h1>
           <p className="tool-description">
             Store notes and passwords encrypted with AES. All data stays in your browser.
           </p>
@@ -84,18 +101,13 @@ function PrivacyVault() {
                 onChange={(e) => setMasterKey(e.target.value)}
                 className="url-input"
               />
-              <button
-                className="generate"
-                style={{ margin: "15px 0" }}
-                onClick={() => setShowEntries(true)}
-                disabled={!masterKey}
-              >
-                🔓 Unlock Vault
+              <button className="generate" style={{ margin: "15px 0" }} onClick={unlock}>
+                Unlock Vault
               </button>
             </div>
           ) : (
             <>
-              <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
                 <input
                   type="text"
                   placeholder="Label (e.g. Gmail)"
@@ -111,50 +123,36 @@ function PrivacyVault() {
                   className="url-input"
                 />
                 <button className="generate" onClick={addEntry}>
-                  ➕ Add
+                  Add Entry
                 </button>
               </div>
 
               {vault.length > 0 ? (
                 <div className="uuid-list">
-                  {vault.map((entry) => {
-                    const decrypted = decrypt(entry.secret);
-                    const isVisible = false; // يمكنك إضافة زر للإظهار/الإخفاء لاحقًا
-                    return (
-                      <div key={entry.id} className="uuid-row" style={{ justifyContent: "space-between" }}>
-                        <span>
-                          <strong>{entry.label}</strong>: ••••••••••
-                        </span>
-                        <button
-                          className="copy-btn-mini"
-                          onClick={() => {
-                            navigator.clipboard.writeText(decrypted);
-                            showToast("Copied!");
-                          }}
-                        >
-                          📋
-                        </button>
-                        <button className="copy-btn-mini" onClick={() => removeEntry(entry.id)}>
-                          🗑️
-                        </button>
-                      </div>
-                    );
-                  })}
+                  {vault.map((entry) => (
+                    <div key={entry.id} className="uuid-row" style={{ justifyContent: "space-between" }}>
+                      <span style={{ flex: 1, textAlign: "left" }}>
+                        <strong>{entry.label}</strong>: ••••••••••
+                      </span>
+                      <button className="copy-btn-mini" onClick={() => copySecret(entry.secret)}>
+                        Copy
+                      </button>
+                      <button className="copy-btn-mini" onClick={() => removeEntry(entry.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  ))}
                 </div>
               ) : (
-                <p>No entries yet. Add your first secret.</p>
+                <p style={{ color: "#94a3b8" }}>No entries yet. Add your first secret.</p>
               )}
 
-              <div style={{ marginTop: 20 }}>
-                <button className="clear-btn" onClick={clearVault}>
+              <div style={{ marginTop: 20, display: "flex", gap: 10, justifyContent: "center" }}>
+                <button className="clear-btn" style={{ marginLeft: 0 }} onClick={clearVault}>
                   Clear Vault
                 </button>
-                <button
-                  className="clear-btn"
-                  style={{ marginLeft: 10 }}
-                  onClick={() => setShowEntries(false)}
-                >
-                  🔒 Lock
+                <button className="clear-btn" style={{ marginLeft: 0 }} onClick={lock}>
+                  Lock
                 </button>
               </div>
             </>

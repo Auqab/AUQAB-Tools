@@ -1,10 +1,11 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 const scripts = {
   clean_temp: {
-    name: "🧹 Clean Temporary Files",
+    name: "Clean Temporary Files",
     desc: "Removes temporary files from the system.",
     bat: `@echo off
 echo Cleaning temporary files...
@@ -20,7 +21,7 @@ rm -rf /tmp/*
 echo "Done."`,
   },
   system_info: {
-    name: "📊 System Information",
+    name: "System Information",
     desc: "Displays detailed system and hardware information.",
     bat: `@echo off
 systeminfo
@@ -32,7 +33,7 @@ lscpu
 free -h`,
   },
   network_check: {
-    name: "🌐 Network Check",
+    name: "Network Check",
     desc: "Checks network connectivity and configuration.",
     bat: `@echo off
 ipconfig
@@ -43,7 +44,7 @@ pause`,
 ping -c 4 google.com`,
   },
   disk_cleanup: {
-    name: "💾 Disk Cleanup",
+    name: "Disk Cleanup",
     desc: "Cleans disk by removing cache and logs.",
     bat: `@echo off
 cleanmgr /sagerun:1
@@ -55,7 +56,7 @@ sudo apt clean
 sudo journalctl --vacuum-time=3d`,
   },
   process_list: {
-    name: "📋 Process List",
+    name: "Process List",
     desc: "Lists all running processes with details.",
     bat: `@echo off
 tasklist
@@ -65,7 +66,7 @@ pause`,
 ps aux`,
   },
   firewall_status: {
-    name: "🔥 Firewall Status",
+    name: "Firewall Status",
     desc: "Checks firewall status and rules.",
     bat: `@echo off
 netsh advfirewall show allprofiles
@@ -75,7 +76,7 @@ pause`,
 sudo ufw status verbose`,
   },
   backup_files: {
-    name: "📁 Backup Script",
+    name: "Backup Script",
     desc: "Creates a backup of specified folder.",
     bat: `@echo off
 xcopy "C:\\Source" "D:\\Backup" /E /I /Y
@@ -86,7 +87,7 @@ pause`,
 cp -r /home/user/source /home/user/backup`,
   },
   restart_service: {
-    name: "🔄 Restart Service",
+    name: "Restart Service",
     desc: "Restarts a specified system service.",
     bat: `@echo off
 net stop "Spooler"
@@ -108,14 +109,16 @@ function ScriptGenerator() {
   function generate() {
     const generated = scripts[selected]?.[type] || "";
     setScript(generated);
-    trackEvent("script_generate", { tool: "script_generator", script: selected, os: type });
     setCopied(false);
+    showToast("Script generated!");
+    trackEvent("script_generate", { tool: "script_generator", script: selected, os: type });
   }
 
   function copyScript() {
     if (!script) return;
     navigator.clipboard.writeText(script);
     setCopied(true);
+    showToast("Script copied!");
     setTimeout(() => setCopied(false), 2000);
   }
 
@@ -129,6 +132,7 @@ function ScriptGenerator() {
     link.download = "auqab-script" + extension;
     link.click();
     URL.revokeObjectURL(url);
+    showToast("Download started!");
   }
 
   const currentScript = scripts[selected];
@@ -142,13 +146,12 @@ function ScriptGenerator() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>💻 Script Generator</h1>
+          <h1>Script Generator</h1>
           <p className="tool-description">
             Create useful automation scripts for Windows, PowerShell and Linux.
             Select a template, choose your platform, and get a ready-to-use script.
           </p>
 
-          {/* اختيار السكربت */}
           <div className="script-select">
             <label>Choose Script:</label>
             <select value={selected} onChange={(e) => { setSelected(e.target.value); setScript(""); }}>
@@ -163,22 +166,19 @@ function ScriptGenerator() {
             )}
           </div>
 
-          {/* اختيار النظام */}
           <div className="script-select">
             <label>Platform:</label>
             <select value={type} onChange={(e) => { setType(e.target.value); setScript(""); }}>
-              <option value="bat">🪟 Windows Batch (.bat)</option>
-              <option value="ps1">💙 PowerShell (.ps1)</option>
-              <option value="sh">🐧 Linux Shell (.sh)</option>
+              <option value="bat">Windows Batch (.bat)</option>
+              <option value="ps1">PowerShell (.ps1)</option>
+              <option value="sh">Linux Shell (.sh)</option>
             </select>
           </div>
 
-          {/* زر التوليد */}
           <button className="generate" onClick={generate}>
-            ⚡ Generate Script
+            Generate Script
           </button>
 
-          {/* عرض السكربت */}
           {script && (
             <div className="script-output">
               <textarea
@@ -190,10 +190,10 @@ function ScriptGenerator() {
               />
               <div className="script-actions">
                 <button className="generate" onClick={copyScript}>
-                  {copied ? "✅ Copied!" : "📋 Copy Script"}
+                  {copied ? "Copied!" : "Copy Script"}
                 </button>
                 <button className="download-btn" onClick={download}>
-                  ⬇ Download Script
+                  Download Script
                 </button>
               </div>
             </div>
@@ -205,9 +205,9 @@ function ScriptGenerator() {
 
             <h2>Supported Platforms</h2>
             <ul>
-              <li>🪟 Windows Batch (.bat)</li>
-              <li>💙 PowerShell (.ps1)</li>
-              <li>🐧 Linux Shell (.sh)</li>
+              <li>Windows Batch (.bat)</li>
+              <li>PowerShell (.ps1)</li>
+              <li>Linux Shell (.sh)</li>
             </ul>
 
             <h2>Frequently Asked Questions</h2>

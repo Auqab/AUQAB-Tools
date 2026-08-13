@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function AudioRecorder() {
@@ -23,6 +24,7 @@ function AudioRecorder() {
         const url = URL.createObjectURL(blob);
         setAudioUrl(url);
         stream.getTracks().forEach((track) => track.stop());
+        showToast("Recording finished!");
         trackEvent("audio_record", { tool: "audio_recorder" });
       };
 
@@ -30,7 +32,7 @@ function AudioRecorder() {
       setRecording(true);
       setAudioUrl(null);
     } catch {
-      alert("Microphone access denied or not available.");
+      showToast("Microphone access denied or not available.", "error");
     }
   };
 
@@ -42,10 +44,12 @@ function AudioRecorder() {
   };
 
   const downloadAudio = () => {
+    if (!audioUrl) return;
     const link = document.createElement("a");
     link.href = audioUrl;
     link.download = "recording.webm";
     link.click();
+    showToast("Download started!");
   };
 
   return (
@@ -56,7 +60,7 @@ function AudioRecorder() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🎙️ Audio Recorder</h1>
+          <h1>Audio Recorder</h1>
           <p className="tool-description">
             Record audio clips directly from your microphone.
           </p>
@@ -64,11 +68,11 @@ function AudioRecorder() {
           <div className="recorder-controls">
             {!recording ? (
               <button className="generate" onClick={startRecording}>
-                🔴 Start Recording
+                Start Recording
               </button>
             ) : (
               <button className="clear-btn" onClick={stopRecording}>
-                ⏹️ Stop Recording
+                Stop Recording
               </button>
             )}
           </div>
@@ -77,7 +81,7 @@ function AudioRecorder() {
             <div className="audio-preview">
               <audio controls src={audioUrl} style={{ width: "100%", margin: "15px 0" }} />
               <button className="download-btn" onClick={downloadAudio}>
-                ⬇ Download Recording
+                Download Recording
               </button>
             </div>
           )}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function RandomNumberGenerator() {
@@ -19,11 +20,13 @@ function RandomNumberGenerator() {
       nums.push(rand);
     }
     setResults(nums);
+    showToast("Numbers generated!");
     trackEvent("random_number", { tool: "random_number_generator" });
   };
 
   const copyAll = () => {
     navigator.clipboard.writeText(results.join(", "));
+    showToast("Copied!");
   };
 
   return (
@@ -34,7 +37,7 @@ function RandomNumberGenerator() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🎲 Random Number Generator</h1>
+          <h1>Random Number Generator</h1>
           <p className="tool-description">
             Pick a range, choose count, and get random numbers instantly.
           </p>
@@ -59,7 +62,7 @@ function RandomNumberGenerator() {
             Include decimals
           </label>
 
-          <button className="generate" onClick={generate}>🎲 Generate</button>
+          <button className="generate" onClick={generate}>Generate</button>
 
           {results.length > 0 && (
             <div className="random-results">
@@ -70,7 +73,7 @@ function RandomNumberGenerator() {
                   </div>
                 ))}
               </div>
-              <button className="generate" onClick={copyAll}>📋 Copy All</button>
+              <button className="generate" onClick={copyAll}>Copy All</button>
             </div>
           )}
         </div>

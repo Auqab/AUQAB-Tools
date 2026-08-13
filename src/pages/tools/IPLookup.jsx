@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function IPLookup() {
@@ -10,28 +11,42 @@ function IPLookup() {
   const lookup = async () => {
     if (!ip) return;
     setLoading(true);
+    setData(null);
     try {
       const res = await fetch(`https://ipapi.co/${ip}/json/`);
       const result = await res.json();
       setData(result);
+      showToast("IP lookup complete!");
       trackEvent("ip_lookup", { tool: "ip_lookup" });
     } catch {
       setData({ error: "Lookup failed." });
+      showToast("Lookup failed.", "error");
     }
     setLoading(false);
   };
 
   return (
     <>
-      <SEO title="IP Lookup - AUQAB Tools" description="Get detailed information about any IP address." />
+      <SEO
+        title="IP Lookup - AUQAB Tools"
+        description="Get detailed information about any IP address."
+      />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🌍 IP Lookup</h1>
+          <h1>IP Lookup</h1>
           <p className="tool-description">Enter an IP address to see its geographic location and ISP.</p>
-          <input type="text" placeholder="e.g. 8.8.8.8" value={ip} onChange={(e) => setIp(e.target.value)} className="url-input" />
+
+          <input
+            type="text"
+            placeholder="e.g. 8.8.8.8"
+            value={ip}
+            onChange={(e) => setIp(e.target.value)}
+            className="url-input"
+          />
           <button className="generate" style={{ margin: "15px 0" }} onClick={lookup} disabled={loading}>
-            {loading ? "⏳ Looking up..." : "🔍 Lookup IP"}
+            {loading ? "Looking up..." : "Lookup IP"}
           </button>
+
           {data && !data.error && (
             <div className="ssl-result">
               <ul>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 // تحويل HEX إلى RGB
@@ -40,10 +41,9 @@ function generatePalette(hex) {
   const { h, s, l } = rgbToHsl(...Object.values(hexToRgb(hex)));
   const palette = [];
 
-  // تدرج بالإضاءة والتشبع
   palette.push(`hsl(${h}, ${s}%, ${Math.min(l + 20, 95)}%)`);
   palette.push(`hsl(${h}, ${Math.min(s + 20, 100)}%, ${l}%)`);
-  palette.push(hex); // اللون الأصلي
+  palette.push(hex);
   palette.push(`hsl(${h}, ${Math.max(s - 20, 0)}%, ${Math.max(l - 15, 5)}%)`);
   palette.push(`hsl(${(h + 30) % 360}, ${s}%, ${l}%)`);
 
@@ -55,7 +55,6 @@ function ColorPicker() {
   const [rgb, setRgb] = useState("");
   const [hsl, setHsl] = useState("");
   const [palette, setPalette] = useState([]);
-  const [copied, setCopied] = useState(null);
 
   useEffect(() => {
     const { r, g, b } = hexToRgb(color);
@@ -67,9 +66,8 @@ function ColorPicker() {
 
   const copy = (text, type) => {
     navigator.clipboard.writeText(text);
-    setCopied(type);
+    showToast(`${type} copied!`);
     trackEvent("color_copy", { tool: "color_picker", type });
-    setTimeout(() => setCopied(null), 1500);
   };
 
   return (
@@ -81,12 +79,11 @@ function ColorPicker() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🎨 Color Picker & Palette</h1>
+          <h1>Color Picker & Palette</h1>
           <p className="tool-description">
             Choose a color and get its HEX, RGB & HSL values. Instantly generate a harmonious palette.
           </p>
 
-          {/* منتقي اللون */}
           <div className="color-picker-area">
             <input
               type="color"
@@ -99,35 +96,33 @@ function ColorPicker() {
             </div>
           </div>
 
-          {/* صيغ اللون */}
           <div className="color-formats">
             <div className="format-row">
               <span className="format-label">HEX</span>
               <code>{color}</code>
-              <button className="copy-btn-mini" onClick={() => copy(color, "hex")}>
-                {copied === "hex" ? "✓" : "📋"}
+              <button className="copy-btn-mini" onClick={() => copy(color, "HEX")}>
+                Copy
               </button>
             </div>
             <div className="format-row">
               <span className="format-label">RGB</span>
               <code>{rgb}</code>
-              <button className="copy-btn-mini" onClick={() => copy(rgb, "rgb")}>
-                {copied === "rgb" ? "✓" : "📋"}
+              <button className="copy-btn-mini" onClick={() => copy(rgb, "RGB")}>
+                Copy
               </button>
             </div>
             <div className="format-row">
               <span className="format-label">HSL</span>
               <code>{hsl}</code>
-              <button className="copy-btn-mini" onClick={() => copy(hsl, "hsl")}>
-                {copied === "hsl" ? "✓" : "📋"}
+              <button className="copy-btn-mini" onClick={() => copy(hsl, "HSL")}>
+                Copy
               </button>
             </div>
           </div>
 
-          {/* لوحة الألوان */}
           {palette.length > 0 && (
             <div className="palette-section">
-              <h3>🎯 Generated Palette</h3>
+              <h3>Generated Palette</h3>
               <div className="palette">
                 {palette.map((c, i) => (
                   <div

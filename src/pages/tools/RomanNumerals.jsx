@@ -1,8 +1,9 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
-// دالة تحويل عدد صحيح إلى روماني
+// تحويل عدد صحيح إلى روماني
 function toRoman(num) {
   const map = [
     [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
@@ -19,7 +20,7 @@ function toRoman(num) {
   return result;
 }
 
-// دالة تحويل روماني إلى عدد صحيح
+// تحويل روماني إلى عدد صحيح
 function fromRoman(str) {
   const map = { M: 1000, D: 500, C: 100, L: 50, X: 10, V: 5, I: 1 };
   let result = 0;
@@ -38,7 +39,7 @@ function fromRoman(str) {
 
 function RomanNumerals() {
   const [input, setInput] = useState("");
-  const [mode, setMode] = useState("toRoman"); // toRoman | fromRoman
+  const [mode, setMode] = useState("toRoman");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
 
@@ -50,6 +51,7 @@ function RomanNumerals() {
         const num = parseInt(input, 10);
         if (isNaN(num) || num < 1 || num > 3999) {
           setError("Enter a number between 1 and 3999.");
+          showToast("Invalid number", "error");
           return;
         }
         setOutput(toRoman(num));
@@ -57,15 +59,23 @@ function RomanNumerals() {
         const roman = input.toUpperCase().trim();
         if (!/^[MDCLXVI]+$/i.test(roman)) {
           setError("Invalid Roman numeral.");
+          showToast("Invalid Roman numeral", "error");
           return;
         }
-        const num = fromRoman(roman);
-        setOutput(num.toString());
+        setOutput(fromRoman(roman).toString());
       }
+      showToast("Conversion complete!");
       trackEvent("roman_convert", { tool: "roman_numerals", mode });
-    } catch (e) {
+    } catch {
       setError("Conversion error.");
+      showToast("Conversion error", "error");
     }
+  };
+
+  const copyOutput = () => {
+    if (!output) return;
+    navigator.clipboard.writeText(output);
+    showToast("Copied!");
   };
 
   return (
@@ -76,17 +86,17 @@ function RomanNumerals() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🏛️ Roman Numerals Converter</h1>
+          <h1>Roman Numerals Converter</h1>
           <p className="tool-description">Convert between Arabic numbers and Roman numerals.</p>
 
           <div className="diff-mode">
             <label>
               <input type="radio" value="toRoman" checked={mode === "toRoman"} onChange={() => setMode("toRoman")} />
-              Number → Roman
+              Number to Roman
             </label>
             <label>
               <input type="radio" value="fromRoman" checked={mode === "fromRoman"} onChange={() => setMode("fromRoman")} />
-              Roman → Number
+              Roman to Number
             </label>
           </div>
 
@@ -100,7 +110,7 @@ function RomanNumerals() {
           />
 
           <button className="generate" onClick={convert}>
-            ⚡ Convert
+            Convert
           </button>
 
           {error && <div className="json-error">{error}</div>}
@@ -108,6 +118,7 @@ function RomanNumerals() {
           {output && (
             <div className="converter-result" style={{ marginTop: 20 }}>
               <h2>{output}</h2>
+              <button className="open-tool-btn" onClick={copyOutput}>Copy Result</button>
             </div>
           )}
         </div>

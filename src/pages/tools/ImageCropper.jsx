@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function ImageCropper() {
@@ -22,13 +23,18 @@ function ImageCropper() {
 
   const handleMouseDown = (e) => {
     setDragging(true);
-    setDragStart({ x: e.nativeEvent.offsetX - crop.x, y: e.nativeEvent.offsetY - crop.y });
+    setDragStart({
+      x: e.nativeEvent.offsetX - crop.x,
+      y: e.nativeEvent.offsetY - crop.y,
+    });
   };
 
   const handleMouseMove = (e) => {
-    if (!dragging) return;
-    const x = Math.min(Math.max(e.nativeEvent.offsetX - dragStart.x, 0), imgRef.current.naturalWidth - crop.w);
-    const y = Math.min(Math.max(e.nativeEvent.offsetY - dragStart.y, 0), imgRef.current.naturalHeight - crop.h);
+    if (!dragging || !imgRef.current) return;
+    const maxX = imgRef.current.naturalWidth - crop.w;
+    const maxY = imgRef.current.naturalHeight - crop.h;
+    const x = Math.min(Math.max(e.nativeEvent.offsetX - dragStart.x, 0), maxX);
+    const y = Math.min(Math.max(e.nativeEvent.offsetY - dragStart.y, 0), maxY);
     setCrop({ ...crop, x, y });
   };
 
@@ -43,24 +49,31 @@ function ImageCropper() {
     ctx.drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
     const dataUrl = canvas.toDataURL(format, 0.9);
     setCropped(dataUrl);
+    showToast("Image cropped!");
     trackEvent("image_crop", { tool: "image_cropper" });
   };
 
   const download = () => {
+    if (!cropped) return;
     const link = document.createElement("a");
     link.href = cropped;
     link.download = `cropped.${format.split("/")[1]}`;
     link.click();
+    showToast("Download started!");
   };
 
   return (
     <>
-      <SEO title="Image Cropper - AUQAB Tools" description="Crop images online with mouse and download the result." />
-
+      <SEO
+        title="Image Cropper - AUQAB Tools"
+        description="Crop images online with mouse and download the result."
+      />
       <section className="tool-page">
         <div className="password-card">
-          <h1>✂️ Image Cropper</h1>
-          <p className="tool-description">Upload an image, drag the crop area, adjust size, and download.</p>
+          <h1>Image Cropper</h1>
+          <p className="tool-description">
+            Upload an image, drag the crop area, adjust size, and download.
+          </p>
 
           <input type="file" accept="image/*" onChange={handleImage} className="file-input" />
 
@@ -93,11 +106,19 @@ function ImageCropper() {
               <div className="crop-settings">
                 <div className="dimension-input">
                   <label>Width</label>
-                  <input type="number" value={crop.w} onChange={(e) => setCrop({ ...crop, w: +e.target.value })} />
+                  <input
+                    type="number"
+                    value={crop.w}
+                    onChange={(e) => setCrop({ ...crop, w: +e.target.value })}
+                  />
                 </div>
                 <div className="dimension-input">
                   <label>Height</label>
-                  <input type="number" value={crop.h} onChange={(e) => setCrop({ ...crop, h: +e.target.value })} />
+                  <input
+                    type="number"
+                    value={crop.h}
+                    onChange={(e) => setCrop({ ...crop, h: +e.target.value })}
+                  />
                 </div>
                 <div className="option-group">
                   <label>Format</label>
@@ -107,7 +128,9 @@ function ImageCropper() {
                     <option value="image/webp">WebP</option>
                   </select>
                 </div>
-                <button className="generate" onClick={applyCrop}>✂️ Crop</button>
+                <button className="generate" onClick={applyCrop}>
+                  Crop
+                </button>
               </div>
             </div>
           )}
@@ -116,7 +139,9 @@ function ImageCropper() {
             <div className="crop-result">
               <h3>Result</h3>
               <img src={cropped} alt="cropped" className="scanner-media" />
-              <button className="download-btn" onClick={download}>⬇️ Download</button>
+              <button className="download-btn" onClick={download}>
+                Download
+              </button>
             </div>
           )}
         </div>

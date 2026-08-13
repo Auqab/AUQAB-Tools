@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 const EXCHANGE_API = "https://api.exchangerate-api.com/v4/latest/USD";
@@ -20,7 +21,10 @@ function CurrencyConverter() {
         setLoading(false);
         trackEvent("currency_rates_loaded", { tool: "currency_converter" });
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setLoading(false);
+        showToast("Failed to load exchange rates", "error");
+      });
   }, []);
 
   const convert = () => {
@@ -28,7 +32,13 @@ function CurrencyConverter() {
     const baseAmount = amount / rates[fromCurrency];
     const converted = baseAmount * rates[toCurrency];
     setResult(converted.toFixed(2));
+    showToast("Conversion complete!");
     trackEvent("currency_convert", { tool: "currency_converter" });
+  };
+
+  const swapCurrencies = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
   };
 
   const currencies = Object.keys(rates);
@@ -41,7 +51,7 @@ function CurrencyConverter() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>💱 Currency Converter</h1>
+          <h1>Currency Converter</h1>
           <p className="tool-description">
             Live exchange rates. Select currencies and amount.
           </p>
@@ -66,11 +76,7 @@ function CurrencyConverter() {
                     ))}
                   </select>
                 </div>
-                <span className="swap-icon" onClick={() => {
-                  const temp = fromCurrency;
-                  setFromCurrency(toCurrency);
-                  setToCurrency(temp);
-                }}>⇄</span>
+                <button className="swap-btn" onClick={swapCurrencies}>Swap</button>
                 <div className="unit-select">
                   <label>To</label>
                   <select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)}>
@@ -82,7 +88,7 @@ function CurrencyConverter() {
               </div>
 
               <button className="generate" style={{ marginTop: 20 }} onClick={convert}>
-                💱 Convert
+                Convert
               </button>
 
               {result && (

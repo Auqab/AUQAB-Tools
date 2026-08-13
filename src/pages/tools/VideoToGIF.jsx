@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function VideoToGIF() {
@@ -33,20 +34,17 @@ function VideoToGIF() {
 
       const fps = 10;
       const frameCount = Math.floor(maxDuration * fps);
-      const frames = [];
 
       for (let i = 0; i < frameCount; i++) {
         await new Promise((r) => {
           video.currentTime = i / fps;
           video.onseeked = () => {
-            ctx.drawImage(video, 0, 0);
-            frames.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             r();
           };
         });
       }
 
-      // استخدم gif.js من النافذة العامة
       const gif = new window.GIF({
         workers: 2,
         quality: 10,
@@ -54,46 +52,57 @@ function VideoToGIF() {
         height: canvas.height,
       });
 
-      frames.forEach(() => {
+      for (let i = 0; i < frameCount; i++) {
         gif.addFrame(canvas, { delay: 1000 / fps, copy: true });
-      });
+      }
 
       gif.on("finished", (blob) => {
         setGifUrl(URL.createObjectURL(blob));
+        showToast("GIF created successfully!");
         trackEvent("video_to_gif", { tool: "video_to_gif" });
         setConverting(false);
       });
 
       gif.render();
-    } catch (e) {
-      alert("Conversion failed. Try a shorter video.");
+    } catch {
+      showToast("Conversion failed. Try a shorter video.", "error");
       setConverting(false);
     }
   };
 
   const downloadGif = () => {
+    if (!gifUrl) return;
     const link = document.createElement("a");
     link.href = gifUrl;
     link.download = "animated.gif";
     link.click();
+    showToast("Download started!");
   };
 
   return (
     <>
-      <SEO title="Video to GIF - AUQAB Tools" description="Convert short videos to GIF animations." />
+      <SEO
+        title="Video to GIF - AUQAB Tools"
+        description="Convert short videos to GIF animations."
+      />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🎥 Video to GIF</h1>
+          <h1>Video to GIF</h1>
           <p className="tool-description">Upload a short video clip and convert it to an animated GIF.</p>
 
           <input type="file" accept="video/*" onChange={handleVideo} className="file-input" />
 
           {videoSrc && (
-            <video ref={videoRef} src={videoSrc} controls style={{ maxWidth: "100%", borderRadius: 15, margin: "15px 0" }} />
+            <video
+              ref={videoRef}
+              src={videoSrc}
+              controls
+              style={{ maxWidth: "100%", borderRadius: 15, margin: "15px 0" }}
+            />
           )}
 
           <button className="generate" onClick={convertToGif} disabled={!videoSrc || converting}>
-            {converting ? "⏳ Converting..." : "🔄 Convert to GIF"}
+            {converting ? "Converting..." : "Convert to GIF"}
           </button>
 
           <canvas ref={canvasRef} style={{ display: "none" }} />
@@ -103,7 +112,7 @@ function VideoToGIF() {
               <img src={gifUrl} alt="GIF" style={{ maxWidth: "100%", borderRadius: 15 }} />
               <br />
               <button className="download-btn" onClick={downloadGif} style={{ marginTop: 10 }}>
-                ⬇ Download GIF
+                Download GIF
               </button>
             </div>
           )}

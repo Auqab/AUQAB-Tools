@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function PDFToImage() {
@@ -38,9 +39,10 @@ function PDFToImage() {
       }
 
       setImages(pageImages);
+      showToast("PDF converted to images successfully!");
       trackEvent("pdf_to_image", { tool: "pdf_to_image" });
-    } catch (e) {
-      alert("Conversion failed. PDF may be corrupted or library not loaded.");
+    } catch {
+      showToast("Conversion failed. PDF may be corrupted or library not loaded.", "error");
     }
     setLoading(false);
   };
@@ -50,6 +52,7 @@ function PDFToImage() {
     link.href = dataUrl;
     link.download = `page_${index + 1}.jpg`;
     link.click();
+    showToast(`Page ${index + 1} downloaded!`);
   };
 
   return (
@@ -60,7 +63,7 @@ function PDFToImage() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🖼️ PDF to Image</h1>
+          <h1>PDF to Image</h1>
           <p className="tool-description">
             Convert each page of a PDF into a separate image.
           </p>
@@ -73,7 +76,7 @@ function PDFToImage() {
             disabled={!file || loading}
             style={{ margin: "15px 0" }}
           >
-            {loading ? "⏳ Converting..." : "🖼️ Convert to Images"}
+            {loading ? "Converting..." : "Convert to Images"}
           </button>
 
           <canvas ref={canvasRef} style={{ display: "none" }} />
@@ -84,7 +87,7 @@ function PDFToImage() {
                 <div key={idx} className="image-item">
                   <img src={img} alt={`Page ${idx + 1}`} style={{ maxWidth: "100%", borderRadius: 10 }} />
                   <button className="download-btn small" onClick={() => downloadImage(img, idx)}>
-                    ⬇ Page {idx + 1}
+                    Download Page {idx + 1}
                   </button>
                 </div>
               ))}

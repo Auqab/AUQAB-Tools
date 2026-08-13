@@ -1,13 +1,12 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function generateUUID() {
-  // استخدم crypto.randomUUID إن وُجدت، وإلا fallback رياضي
   if (crypto?.randomUUID) {
     return crypto.randomUUID();
   }
-  // fallback (متوافق مع المتصفحات القديمة)
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;
     return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
@@ -17,7 +16,6 @@ function generateUUID() {
 function UUIDGenerator() {
   const [uuids, setUuids] = useState([generateUUID()]);
   const [count, setCount] = useState(1);
-  const [copied, setCopied] = useState(null);
 
   const generateNew = () => {
     const newUuids = [];
@@ -25,22 +23,18 @@ function UUIDGenerator() {
       newUuids.push(generateUUID());
     }
     setUuids(newUuids);
-    setCopied(null);
+    showToast("UUIDs generated!");
     trackEvent("uuid_generate", { tool: "uuid_generator", count });
   };
 
-  const copySingle = (uuid, idx) => {
+  const copySingle = (uuid) => {
     navigator.clipboard.writeText(uuid);
-    setCopied(idx);
-    trackEvent("uuid_copy", { tool: "uuid_generator" });
-    setTimeout(() => setCopied(null), 1500);
+    showToast("UUID copied!");
   };
 
   const copyAll = () => {
     navigator.clipboard.writeText(uuids.join("\n"));
-    setCopied("all");
-    trackEvent("uuid_copy_all", { tool: "uuid_generator" });
-    setTimeout(() => setCopied(null), 1500);
+    showToast("All UUIDs copied!");
   };
 
   return (
@@ -52,7 +46,7 @@ function UUIDGenerator() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🆔 UUID / GUID Generator</h1>
+          <h1>UUID / GUID Generator</h1>
           <p className="tool-description">
             Generate random UUIDs (v4) instantly. Perfect for developers, APIs, and database keys.
           </p>
@@ -71,7 +65,7 @@ function UUIDGenerator() {
               />
             </div>
             <button className="generate" onClick={generateNew}>
-              🔄 Generate {count > 1 ? `${count} UUIDs` : "UUID"}
+              Generate {count > 1 ? `${count} UUIDs` : "UUID"}
             </button>
           </div>
 
@@ -79,11 +73,8 @@ function UUIDGenerator() {
             {uuids.map((uuid, idx) => (
               <div key={idx} className="uuid-row">
                 <code>{uuid}</code>
-                <button
-                  className="copy-btn-mini"
-                  onClick={() => copySingle(uuid, idx)}
-                >
-                  {copied === idx ? "✅" : "📋"}
+                <button className="copy-btn-mini" onClick={() => copySingle(uuid)}>
+                  Copy
                 </button>
               </div>
             ))}
@@ -91,7 +82,7 @@ function UUIDGenerator() {
 
           {uuids.length > 1 && (
             <button className="generate" onClick={copyAll} style={{ marginTop: 15 }}>
-              {copied === "all" ? "✅ Copied All!" : "📋 Copy All UUIDs"}
+              Copy All UUIDs
             </button>
           )}
         </div>

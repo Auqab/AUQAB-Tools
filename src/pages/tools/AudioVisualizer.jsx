@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function AudioVisualizer() {
@@ -8,10 +9,12 @@ function AudioVisualizer() {
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const animationRef = useRef(null);
+  const streamRef = useRef(null);
 
   const startVisualizer = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
       analyserRef.current = audioContextRef.current.createAnalyser();
@@ -19,16 +22,21 @@ function AudioVisualizer() {
       source.connect(analyserRef.current);
       setRunning(true);
       draw();
+      showToast("Visualizer started!");
       trackEvent("visualizer_start", { tool: "audio_visualizer" });
-    } catch (e) {
-      alert("Microphone access denied.");
+    } catch {
+      showToast("Microphone access denied.", "error");
     }
   };
 
   const stopVisualizer = () => {
     if (animationRef.current) cancelAnimationFrame(animationRef.current);
     if (audioContextRef.current) audioContextRef.current.close();
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop());
+    }
     setRunning(false);
+    showToast("Visualizer stopped.");
   };
 
   const draw = () => {
@@ -68,19 +76,31 @@ function AudioVisualizer() {
 
   return (
     <>
-      <SEO title="Audio Visualizer - AUQAB Tools" description="See live audio frequencies from your microphone." />
+      <SEO
+        title="Audio Visualizer - AUQAB Tools"
+        description="See live audio frequencies from your microphone."
+      />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🎵 Audio Visualizer</h1>
+          <h1>Audio Visualizer</h1>
           <p className="tool-description">Watch your voice or any sound come alive as colorful bars!</p>
 
-          <canvas ref={canvasRef} width={600} height={200} style={{ width: "100%", borderRadius: 15, background: "#0f172a" }} />
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={200}
+            style={{ width: "100%", borderRadius: 15, background: "#0f172a" }}
+          />
 
           <div style={{ margin: "15px 0" }}>
             {!running ? (
-              <button className="generate" onClick={startVisualizer}>▶️ Start</button>
+              <button className="generate" onClick={startVisualizer}>
+                Start
+              </button>
             ) : (
-              <button className="clear-btn" onClick={stopVisualizer}>⏹️ Stop</button>
+              <button className="clear-btn" onClick={stopVisualizer}>
+                Stop
+              </button>
             )}
           </div>
         </div>

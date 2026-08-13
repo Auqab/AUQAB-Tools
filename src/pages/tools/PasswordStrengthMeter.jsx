@@ -34,7 +34,7 @@ function PasswordStrengthMeter() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🟢 Password Strength Meter</h1>
+          <h1>Password Strength Meter</h1>
           <p className="tool-description">Enter a password to see its strength score.</p>
 
           <input

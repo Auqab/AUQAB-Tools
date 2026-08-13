@@ -1,11 +1,11 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function TextCaseConverter() {
   const [text, setText] = useState("");
   const [result, setResult] = useState("");
-  const [copied, setCopied] = useState(false);
   const [active, setActive] = useState("");
 
   function applyCase(type) {
@@ -53,8 +53,7 @@ function TextCaseConverter() {
   function copyResult() {
     if (!result) return;
     navigator.clipboard.writeText(result);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    showToast("Result copied!");
   }
 
   function clearAll() {
@@ -72,12 +71,11 @@ function TextCaseConverter() {
 
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔤 Text Case Converter</h1>
+          <h1>Text Case Converter</h1>
           <p className="tool-description">
             Change text format instantly. Uppercase, lowercase, sentence case, and more creative styles.
           </p>
 
-          {/* إدخال النص */}
           <textarea
             rows="8"
             placeholder="Enter your text here..."
@@ -89,47 +87,27 @@ function TextCaseConverter() {
             }}
           />
 
-          {/* أزرار العمليات */}
           <div className="case-buttons">
-            <button
-              className={`case-btn ${active === "upper" ? "active-case" : ""}`}
-              onClick={() => applyCase("upper")}
-            >
+            <button className={`case-btn ${active === "upper" ? "active-case" : ""}`} onClick={() => applyCase("upper")}>
               UPPERCASE
             </button>
-            <button
-              className={`case-btn ${active === "lower" ? "active-case" : ""}`}
-              onClick={() => applyCase("lower")}
-            >
+            <button className={`case-btn ${active === "lower" ? "active-case" : ""}`} onClick={() => applyCase("lower")}>
               lowercase
             </button>
-            <button
-              className={`case-btn ${active === "capitalize" ? "active-case" : ""}`}
-              onClick={() => applyCase("capitalize")}
-            >
+            <button className={`case-btn ${active === "capitalize" ? "active-case" : ""}`} onClick={() => applyCase("capitalize")}>
               Capitalize Words
             </button>
-            <button
-              className={`case-btn ${active === "sentence" ? "active-case" : ""}`}
-              onClick={() => applyCase("sentence")}
-            >
+            <button className={`case-btn ${active === "sentence" ? "active-case" : ""}`} onClick={() => applyCase("sentence")}>
               Sentence case
             </button>
-            <button
-              className={`case-btn ${active === "alternating" ? "active-case" : ""}`}
-              onClick={() => applyCase("alternating")}
-            >
+            <button className={`case-btn ${active === "alternating" ? "active-case" : ""}`} onClick={() => applyCase("alternating")}>
               aLtErNaTiNg
             </button>
-            <button
-              className={`case-btn ${active === "inverse" ? "active-case" : ""}`}
-              onClick={() => applyCase("inverse")}
-            >
+            <button className={`case-btn ${active === "inverse" ? "active-case" : ""}`} onClick={() => applyCase("inverse")}>
               iNVERSE cASE
             </button>
           </div>
 
-          {/* نتيجة */}
           {result && (
             <div className="result-section">
               <textarea
@@ -141,20 +119,18 @@ function TextCaseConverter() {
               />
               <div className="result-actions">
                 <button className="generate" onClick={copyResult}>
-                  {copied ? "✅ Copied!" : "📋 Copy Result"}
+                  Copy Result
                 </button>
               </div>
             </div>
           )}
 
-          {/* مسح */}
           {(text || result) && (
             <button className="clear-btn" onClick={clearAll}>
-              ✕ Clear All
+              Clear All
             </button>
           )}
 
-          {/* معلومات */}
           <div className="info-section">
             <h2>Available Transformations</h2>
             <ul>
@@ -165,20 +141,6 @@ function TextCaseConverter() {
               <li><strong>aLtErNaTiNg cAsE</strong> – alternates letter by letter</li>
               <li><strong>iNVERSE cASE</strong> – flips capitalization</li>
             </ul>
-
-            <h2>Why use AUQAB Text Case Converter?</h2>
-            <ul>
-              <li>Free online tool</li>
-              <li>Instant text conversion</li>
-              <li>Works on mobile and desktop</li>
-              <li>Your text is processed in your browser</li>
-            </ul>
-
-            <h2>Frequently Asked Questions</h2>
-            <h3>Is my text saved?</h3>
-            <p>No. Your text is not uploaded or stored.</p>
-            <h3>Who needs this tool?</h3>
-            <p>Writers, students, developers and content creators.</p>
           </div>
         </div>
       </section>

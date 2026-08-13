@@ -1,5 +1,6 @@
-import { useState } from "react";
+nano import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 const timezones = Intl.supportedValuesOf("timeZone");
@@ -28,10 +29,17 @@ function TimeZoneConverter() {
       }).format(toDate);
 
       setResult({ from: fromFormatted, to: toFormatted, fromTZ, toTZ });
+      showToast("Conversion complete!");
       trackEvent("timezone_convert", { tool: "timezone_converter" });
-    } catch (e) {
+    } catch {
       setResult({ error: "Invalid date/time" });
+      showToast("Invalid date/time", "error");
     }
+  };
+
+  const swapTimeZones = () => {
+    setFromTZ(toTZ);
+    setToTZ(fromTZ);
   };
 
   return (
@@ -42,7 +50,7 @@ function TimeZoneConverter() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🕒 Time Zone Converter</h1>
+          <h1>Time Zone Converter</h1>
           <p className="tool-description">
             Pick a date and time, then convert it between any two time zones.
           </p>
@@ -63,7 +71,7 @@ function TimeZoneConverter() {
                 ))}
               </select>
             </div>
-            <span className="swap-icon" onClick={() => { const t = fromTZ; setFromTZ(toTZ); setToTZ(t); }}>⇄</span>
+            <button className="swap-btn" onClick={swapTimeZones}>Swap</button>
             <div className="unit-select">
               <label>To</label>
               <select value={toTZ} onChange={(e) => setToTZ(e.target.value)}>
@@ -75,7 +83,7 @@ function TimeZoneConverter() {
           </div>
 
           <button className="generate" style={{ margin: "20px 0" }} onClick={convert}>
-            ⚡ Convert
+            Convert
           </button>
 
           {result && !result.error && (

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CryptoJS from "crypto-js";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 const ALGOS = ["MD5", "SHA1", "SHA256", "SHA512"];
@@ -9,7 +10,6 @@ function HashGenerator() {
   const [text, setText] = useState("");
   const [algo, setAlgo] = useState("SHA256");
   const [hash, setHash] = useState("");
-  const [copied, setCopied] = useState(false);
 
   const generate = () => {
     if (!text) return;
@@ -19,15 +19,17 @@ function HashGenerator() {
       case "SHA1": result = CryptoJS.SHA1(text).toString(); break;
       case "SHA256": result = CryptoJS.SHA256(text).toString(); break;
       case "SHA512": result = CryptoJS.SHA512(text).toString(); break;
+      default: return;
     }
     setHash(result);
+    showToast("Hash generated!");
     trackEvent("hash_generate", { tool: "hash_generator", algo });
   };
 
-  const copy = () => {
+  const copyHash = () => {
+    if (!hash) return;
     navigator.clipboard.writeText(hash);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    showToast("Hash copied!");
   };
 
   return (
@@ -38,7 +40,7 @@ function HashGenerator() {
       />
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔐 Hash Generator</h1>
+          <h1>Hash Generator</h1>
           <p className="tool-description">Enter text and choose an algorithm to compute the hash.</p>
 
           <textarea
@@ -54,15 +56,17 @@ function HashGenerator() {
                 <option key={a} value={a}>{a}</option>
               ))}
             </select>
-            <button className="generate" onClick={generate}>🔒 Generate Hash</button>
+            <button className="generate" onClick={generate}>
+              Generate Hash
+            </button>
           </div>
 
           {hash && (
             <div className="hash-result">
               <div className="uuid-row">
                 <code>{hash}</code>
-                <button className="copy-btn-mini" onClick={copy}>
-                  {copied ? "✅" : "📋"}
+                <button className="copy-btn-mini" onClick={copyHash}>
+                  Copy
                 </button>
               </div>
             </div>

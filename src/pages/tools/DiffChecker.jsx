@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import { showToast } from "../../components/Toast";
 import { trackEvent } from "../../utils/analytics";
 
 function DiffChecker() {
@@ -17,6 +18,7 @@ function DiffChecker() {
       diff = diffWords(text1, text2);
     }
     setDiffResult(diff);
+    showToast("Comparison complete!");
     trackEvent("diff_compare", { tool: "diff_checker", mode });
   };
 
@@ -30,7 +32,15 @@ function DiffChecker() {
     return diff.map((part, idx) => {
       const color = part.added ? "#22c55e" : part.removed ? "#ef4444" : "transparent";
       return (
-        <span key={idx} style={{ backgroundColor: color, color: part.added || part.removed ? "white" : "inherit", padding: "1px 3px", borderRadius: "3px" }}>
+        <span
+          key={idx}
+          style={{
+            backgroundColor: color,
+            color: part.added || part.removed ? "white" : "inherit",
+            padding: "1px 3px",
+            borderRadius: "3px",
+          }}
+        >
           {part.value}
         </span>
       );
@@ -39,25 +49,49 @@ function DiffChecker() {
 
   return (
     <>
-      <SEO title="Free Diff Checker - AUQAB Tools" description="Compare two texts and see the differences." />
+      <SEO
+        title="Diff Checker - AUQAB Tools"
+        description="Compare two texts and see the differences line by line or word by word."
+      />
+
       <section className="tool-page">
         <div className="password-card">
-          <h1>🔍 Diff Checker</h1>
-          <p className="tool-description">Compare two texts side by side and highlight the differences.</p>
+          <h1>Diff Checker</h1>
+          <p className="tool-description">
+            Compare two texts side by side and highlight the differences.
+          </p>
 
           <div className="diff-mode">
-            <label><input type="radio" value="lines" checked={mode === "lines"} onChange={() => setMode("lines")} /> Lines</label>
-            <label><input type="radio" value="words" checked={mode === "words"} onChange={() => setMode("words")} /> Words</label>
+            <label>
+              <input type="radio" value="lines" checked={mode === "lines"} onChange={() => setMode("lines")} />
+              Lines
+            </label>
+            <label>
+              <input type="radio" value="words" checked={mode === "words"} onChange={() => setMode("words")} />
+              Words
+            </label>
           </div>
 
           <div className="diff-inputs">
-            <textarea placeholder="Original text..." value={text1} onChange={(e) => setText1(e.target.value)} />
-            <textarea placeholder="Changed text..." value={text2} onChange={(e) => setText2(e.target.value)} />
+            <textarea
+              placeholder="Original text..."
+              value={text1}
+              onChange={(e) => setText1(e.target.value)}
+            />
+            <textarea
+              placeholder="Changed text..."
+              value={text2}
+              onChange={(e) => setText2(e.target.value)}
+            />
           </div>
 
           <div className="diff-actions">
-            <button className="generate" onClick={handleCompare}>⚡ Compare</button>
-            <button className="clear-btn" onClick={clearAll}>✕ Clear</button>
+            <button className="generate" onClick={handleCompare}>
+              Compare
+            </button>
+            <button className="clear-btn" onClick={clearAll}>
+              Clear
+            </button>
           </div>
 
           {diffResult && (
