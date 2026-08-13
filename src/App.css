@@ -500,3 +500,158 @@ textarea { width: 100%; height: 220px; padding: 20px; border-radius: 20px; borde
   border-color: #1e293b;
   color: #1e293b;
 }
+
+/* توحيد المدخلات داخل صفحات الأدوات */
+.tool-page input[type="text"],
+.tool-page input[type="number"],
+.tool-page input[type="url"],
+.tool-page input[type="password"],
+.tool-page input[type="search"],
+.tool-page select,
+.tool-page textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 15px;
+}
+
+.tool-page input:focus,
+.tool-page select:focus,
+.tool-page textarea:focus {
+  border-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* في الوضع الفاتح */
+[data-theme="light"] .tool-page input,
+[data-theme="light"] .tool-page select,
+[data-theme="light"] .tool-page textarea {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #1e293b;
+}
+
+[data-theme="light"] .tool-page input:focus,
+[data-theme="light"] .tool-page select:focus,
+[data-theme="light"] .tool-page textarea:focus {
+  border-color: #38bdf8;
+  background: white;
+}
+
+/* توحيد الأزرار داخل صفحات الأدوات */
+.tool-page button,
+.tool-page .btn-primary,
+.tool-page .download-btn,
+.tool-page .generate,
+.tool-page .clear-btn,
+.tool-page .open-tool-btn,
+.tool-page .big-card-open-btn,
+.tool-page .minify-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid transparent;
+  margin: 5px;
+}
+
+/* زر أساسي */
+.tool-page .generate,
+.tool-page .btn-primary {
+  background: #38bdf8;
+  color: #020617;
+}
+
+.tool-page .generate:hover,
+.tool-page .btn-primary:hover {
+  background: #7dd3fc;
+  transform: translateY(-2px);
+}
+
+/* زر تحميل */
+.tool-page .download-btn {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.tool-page .download-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* زر مسح */
+.tool-page .clear-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.tool-page .clear-btn:hover {
+  background: rgba(239, 68, 68, 0.4);
+  color: white;
+}
+
+/* توحيد صناديق النتائج */
+.tool-page .output-textarea,
+.tool-page .converter-result,
+.tool-page .uuid-row,
+.tool-page .json-section,
+.tool-page .diff-output {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  padding: 15px;
+  color: white;
+}
+
+/* في الوضع الفاتح */
+[data-theme="light"] .tool-page .output-textarea,
+[data-theme="light"] .tool-page .converter-result,
+[data-theme="light"] .tool-page .uuid-row,
+[data-theme="light"] .tool-page .json-section,
+[data-theme="light"] .tool-page .diff-output {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #1e293b;
+}
+/* توحيد أزرار الفلاتر */
+.tool-page .cat-btn,
+.tool-page .case-btn,
+.tool-page .preset-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 4px;
+}
+
+.tool-page .cat-btn:hover,
+.tool-page .case-btn:hover,
+.tool-page .preset-btn:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.tool-page .cat-btn.active,
+.tool-page .case-btn.active,
+.tool-page .preset-btn.active {
+  background: #38bdf8;
+  color: #020617;
+  border-color: #38bdf8;
+}
